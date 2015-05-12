@@ -1,0 +1,22 @@
+{
+  "name": "Yemeksepeti Joker",
+  "description": "Yemeksepeti Joker Notifier",
+  "manifest_version": 2,
+  "author": "Farhad Safarov",
+  "version": "0.1.0",
+  "background":{
+    "scripts": ["js/jquery-1.11.3.min.js", "js/joker_notifier.js", "js/background.js"]
+  },
+  "browser_action": {
+    "default_icon": "img/16x16.png",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "img/16x16.png"
+  },
+  "permissions": [
+    "cookies",
+    "notifications",
+    "*://*.yemeksepeti.com/"
+  ]
+}
