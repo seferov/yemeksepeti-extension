@@ -51,9 +51,17 @@ var jokerNotifier = {
       var table = $('<table/>');
 
       $.each(data.OfferItems, function(index, offer){
-        var row = $('<tr/>');
+        var row = $('<tr/>', {
+          'data-href': 'http://www.yemeksepeti.com' + offer.Restaurant.RestaurantUrl
+        });
+
+        row.append($('<td/>').html($('<img />', {
+          src: 'http:'+offer.Restaurant.JokerImageUrl,
+          alt: offer.Restaurant.DisplayName,
+          width: 60
+        })));
         row.append($('<td/>').text(offer.Restaurant.DisplayName));
-        row.append($('<td/>').text(offer.Restaurant.AveragePoint));
+        row.append($('<td/>').html('<b>'+offer.Restaurant.AveragePoint+'</b>'));
         table.append(row);
       });
 
