@@ -3,7 +3,7 @@
   "description": "Yemeksepeti Joker Notifier",
   "manifest_version": 2,
   "author": "Farhad Safarov",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "background":{
     "scripts": ["js/jquery-1.11.3.min.js", "js/joker_notifier.js", "js/background.js"]
   },
