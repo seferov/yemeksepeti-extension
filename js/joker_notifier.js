@@ -50,13 +50,12 @@ var jokerNotifier = {
     if (data.OfferItems && data.OfferItems.length) {
       var table = $('<table/>');
 
-      for (var i = data.OfferItems.length - 1; i >= 0; i--) {
-        var restaurant = data.OfferItems[i].Restaurant,
-          row = $('<tr/>');
-        row.append($('<td/>').text(restaurant.DisplayName));
-        row.append($('<td/>').text(restaurant.AveragePoint));
+      $.each(data.OfferItems, function(index, offer){
+        var row = $('<tr/>');
+        row.append($('<td/>').text(offer.Restaurant.DisplayName));
+        row.append($('<td/>').text(offer.Restaurant.AveragePoint));
         table.append(row);
-      };
+      });
 
       $('.result').html(table);
 
