@@ -47,10 +47,24 @@ var jokerNotifier = {
   },
 
   displayResult: function(data) {
+    var resultArea = $('.result');
+
     if (data.OfferItems && data.OfferItems.length) {
+      if (typeof(startTimer) === typeof(Function)) {
+        // Remaining duration
+        var duration = $('<div/>', {
+          'id': 'duration',
+          'class': 'strong'
+        });
+
+        resultArea.append(duration);
+
+        startTimer(data.RemainingDuration/1000, duration);
+      }
+
       var table = $('<table/>');
 
-      $.each(data.OfferItems, function(index, offer){
+      $.each(data.OfferItems, function(index, offer) {
         var row = $('<tr/>', {
           'data-href': 'http://www.yemeksepeti.com' + offer.Restaurant.RestaurantUrl
         });
@@ -61,16 +75,16 @@ var jokerNotifier = {
           width: 60
         })));
         row.append($('<td/>').text(offer.Restaurant.DisplayName));
-        row.append($('<td/>').html('<b>'+offer.Restaurant.AveragePoint+'</b>'));
+        row.append($('<td/>', {'class': 'strong'}).html(offer.Restaurant.AveragePoint));
         table.append(row);
       });
 
-      $('.result').html(table);
+      resultArea.append(table);
 
       chrome.browserAction.setBadgeText ( { text: data.OfferItems.length.toString() } );
     }
     else {
-      $('.result').html('Joker yok :(');
+      resultArea.html(data.isValid ? 'Joker yok :(' : data.Message);
       chrome.browserAction.setBadgeText ( { text: '' } );
     }
   }
