@@ -5,24 +5,35 @@ var jokerNotifier = {
   _jokerUrl: 'https://www.yemeksepeti.com/basket/GetNewJokerOffer',
 
   checkJoker: function() {
-    var _this = this;
-    chrome.cookies.getAll({'name': 'loginToken'}, function(data) {
-      _this._fetchResult(data[0]['value'])
+    var _this = this,
+      ysRequest = {
+        'Culture': 'tr-TR',
+        'LanguageId': 'tr-TR'
+      };
+
+    chrome.cookies.getAll({}, function(data) {
+      $.each(data, function(index, cookie){
+        switch(cookie.name) {
+          case 'catalogName':
+            ysRequest['CatalogName'] = cookie.value;
+            break;
+          case 'loginToken':
+            ysRequest['Token'] = cookie.value;
+            break;
+        }
+      });
+
+      _this._fetchResult(ysRequest);
     })
   },
 
-  _fetchResult: function(token) {
+  _fetchResult: function(ysRequest) {
     var _this = this;
     $.ajax({
       url: this._jokerUrl,
       type: 'post',
       data: {
-        'ysRequest': {
-          'Token': token,
-          'CatalogName': 'TR_ISTANBUL',
-          'Culture': 'tr-TR',
-          'LanguageId': 'tr-TR'
-        }
+        'ysRequest': ysRequest
       },
       headers: {
         'Content-Type': 'application/json;charset=UTF-8',
