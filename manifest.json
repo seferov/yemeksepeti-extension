@@ -1,9 +1,10 @@
 {
-  "name": "Yemeksepeti Joker",
-  "description": "Yemeksepeti Joker Notifier",
+  "name": "Yemeksepeti Joker Bekçisi",
+  "short_name": "Joker Bekçisi",
+  "description": "Yemeksepeti Joker Bekçisi",
   "manifest_version": 2,
   "author": "Farhad Safarov",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "background":{
     "scripts": ["js/jquery-1.11.3.min.js", "js/joker_notifier.js", "js/background.js"]
   },
