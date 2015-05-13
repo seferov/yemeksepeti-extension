@@ -37,13 +37,13 @@ var jokerNotifier = {
 
   displayResult: function(data) {
     if (data.OfferItems && data.OfferItems.length) {
-      var table = $("<table/>");
+      var table = $('<table/>');
 
       for (var i = data.OfferItems.length - 1; i >= 0; i--) {
         var restaurant = data.OfferItems[i].Restaurant,
-          row = $("<tr/>");
-        row.append($("<td/>").text(restaurant.DisplayName));
-        row.append($("<td/>").text(restaurant.AveragePoint));
+          row = $('<tr/>');
+        row.append($('<td/>').text(restaurant.DisplayName));
+        row.append($('<td/>').text(restaurant.AveragePoint));
         table.append(row);
       };
 
