@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
   jokerNotifier.checkJoker();
 });
 
-// Check every minutes
+// Check every 5 minutes
 setInterval(function() {
     jokerNotifier.checkJoker()
-}, 60000);
+}, 5 * 60 * 1000);
