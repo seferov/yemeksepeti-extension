@@ -84,7 +84,7 @@ var jokerNotifier = {
       chrome.browserAction.setBadgeText ( { text: data.OfferItems.length.toString() } );
     }
     else {
-      resultArea.html(data.isValid ? 'Joker yok :(' : data.Message);
+      resultArea.html(data.IsValid ? 'Joker yok :(' : data.Message);
       chrome.browserAction.setBadgeText ( { text: '' } );
     }
   }
