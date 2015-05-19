@@ -21,7 +21,11 @@
                     </span>
             </div>
             <div class="col-md-4 campaign-list-access-btn">
-                <a href="{{ url('fango_main_campaign_show', {'id': campaign.id}) }}" class="btn btn-primary btn-lg">Apply</a>
+                {% if userCampaign is null %}
+                    <a href="{{ url('fango_main_campaign_apply', {'id': campaign.id}) }}" class="btn btn-primary btn-lg">Apply</a>
+                {% else %}
+                    <span class="btn btn-default btn-lg disabled">Applied</span>
+                {% endif %}
             </div>
         </div>
     </div>

@@ -1,0 +1,26 @@
+Fango\MainBundle\Entity\UserCampaign:
+    type: entity
+    table: fg_user_campaign
+    repositoryClass: Fango\MainBundle\Entity\UserCampaignRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        uniqueLink: { type: string, length: 255, column: unique_link }
+    manyToOne:
+        user:
+            targetEntity: Fango\UserBundle\Entity\User
+            inversedBy: userCampaigns
+            joinColumn:
+                name: user_id
+                referencedColumnName: id
+        campaign:
+            targetEntity: Fango\MainBundle\Entity\Campaign
+            inversedBy: userCampaigns
+            joinColumn:
+                name: campaign_id
+                referencedColumnName: id
+    lifecycleCallbacks: {  }

@@ -11,4 +11,8 @@ Fango\MainBundle\Entity\Campaign:
     fields:
         name:   { type: string, length: 255 }
         logo:   { type: string, length: 255, nullable: true }
+    oneToMany:
+        userCampaigns:
+            targetEntity: Fango\MainBundle\Entity\UserCampaign
+            mappedBy: campaign
     lifecycleCallbacks: {  }

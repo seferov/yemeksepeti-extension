@@ -10,4 +10,8 @@ Fango\UserBundle\Entity\User:
                 strategy: AUTO
     fields:
         fullname:   { type: string, length: 255, nullable: true }
+    oneToMany:
+        userCampaigns:
+            targetEntity: Fango\MainBundle\Entity\UserCampaign
+            mappedBy: campaign
     lifecycleCallbacks: {  }

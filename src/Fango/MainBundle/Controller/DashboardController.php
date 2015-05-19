@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**
  * Class DashboardController
+ * @author Farhad Safarov <http://ferhad.in>
  * @package Fango\MainBundle\Controller
  */
 class DashboardController extends Controller

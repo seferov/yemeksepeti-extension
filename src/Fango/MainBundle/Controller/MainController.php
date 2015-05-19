@@ -4,6 +4,11 @@ namespace Fango\MainBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
+/**
+ * Class MainController
+ * @author Farhad Safarov <http://ferhad.in>
+ * @package Fango\MainBundle\Controller
+ */
 class MainController extends Controller
 {
     /**

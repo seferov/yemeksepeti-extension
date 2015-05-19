@@ -77,6 +77,13 @@
             <!-- Page Heading -->
             <div class="row">
                 <div class="col-lg-12">
+                    {% for flashMessage in app.session.flashbag.get('notice') %}
+                        <div class="alert alert-info alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            {{ flashMessage }}
+                        </div>
+                    {% endfor %}
+
                     {% block main %}{% endblock %}
                 </div>
             </div>

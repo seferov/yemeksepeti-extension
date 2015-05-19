@@ -51,4 +51,49 @@ class User extends BaseUser
     {
         return $this->fullname;
     }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $userCampaigns;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->userCampaigns = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add userCampaigns
+     *
+     * @param \Fango\MainBundle\Entity\UserCampaign $userCampaigns
+     * @return User
+     */
+    public function addUserCampaign(\Fango\MainBundle\Entity\UserCampaign $userCampaigns)
+    {
+        $this->userCampaigns[] = $userCampaigns;
+
+        return $this;
+    }
+
+    /**
+     * Remove userCampaigns
+     *
+     * @param \Fango\MainBundle\Entity\UserCampaign $userCampaigns
+     */
+    public function removeUserCampaign(\Fango\MainBundle\Entity\UserCampaign $userCampaigns)
+    {
+        $this->userCampaigns->removeElement($userCampaigns);
+    }
+
+    /**
+     * Get userCampaigns
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getUserCampaigns()
+    {
+        return $this->userCampaigns;
+    }
 }
