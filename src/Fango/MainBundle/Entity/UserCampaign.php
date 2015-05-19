@@ -106,4 +106,49 @@ class UserCampaign
     {
         return $this->campaign;
     }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $transactions;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->transactions = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add transactions
+     *
+     * @param \Fango\MainBundle\Entity\Transaction $transactions
+     * @return UserCampaign
+     */
+    public function addTransaction(\Fango\MainBundle\Entity\Transaction $transactions)
+    {
+        $this->transactions[] = $transactions;
+
+        return $this;
+    }
+
+    /**
+     * Remove transactions
+     *
+     * @param \Fango\MainBundle\Entity\Transaction $transactions
+     */
+    public function removeTransaction(\Fango\MainBundle\Entity\Transaction $transactions)
+    {
+        $this->transactions->removeElement($transactions);
+    }
+
+    /**
+     * Get transactions
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTransactions()
+    {
+        return $this->transactions;
+    }
 }

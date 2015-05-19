@@ -1,0 +1,35 @@
+Fango\MainBundle\Entity\Transaction:
+    type: entity
+    table: fg_transaction
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        hash:
+            type: string
+            length: 255
+        ipAddress:
+            type: string
+            length: '50'
+            column: ip_address
+        referer:
+            type: string
+            length: 255
+            nullable: true
+        actionCount:
+            type: integer
+            column: action_count
+        createdAt:
+            type: datetime
+            column: created_at
+    manyToOne:
+        userCampaign:
+            targetEntity: Fango\MainBundle\Entity\UserCampaign
+            inversedBy: transactions
+            joinColumn:
+                name: user_campaign_id
+                referencedColumnName: id
+    lifecycleCallbacks: {  }

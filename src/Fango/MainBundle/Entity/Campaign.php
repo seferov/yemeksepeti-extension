@@ -123,4 +123,60 @@ class Campaign
     {
         return $this->userCampaigns;
     }
+    /**
+     * @var string
+     */
+    private $actionLink;
+
+    /**
+     * @var float
+     */
+    private $cpa;
+
+
+    /**
+     * Set actionLink
+     *
+     * @param string $actionLink
+     * @return Campaign
+     */
+    public function setActionLink($actionLink)
+    {
+        $this->actionLink = $actionLink;
+
+        return $this;
+    }
+
+    /**
+     * Get actionLink
+     *
+     * @return string 
+     */
+    public function getActionLink()
+    {
+        return $this->actionLink;
+    }
+
+    /**
+     * Set cpa
+     *
+     * @param float $cpa
+     * @return Campaign
+     */
+    public function setCpa($cpa)
+    {
+        $this->cpa = $cpa;
+
+        return $this;
+    }
+
+    /**
+     * Get cpa
+     *
+     * @return float 
+     */
+    public function getCpa()
+    {
+        return $this->cpa;
+    }
 }

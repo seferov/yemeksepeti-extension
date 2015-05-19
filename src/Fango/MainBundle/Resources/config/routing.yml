@@ -17,3 +17,7 @@ fango_main_campaign_show:
 fango_main_campaign_apply:
     path:     /campaigns/{id}/apply
     defaults: { _controller: FangoMainBundle:Campaign:apply }
+
+fango_main_short_link:
+    path:     /u/{hash}
+    defaults: { _controller: FangoMainBundle:Campaign:shortLink }

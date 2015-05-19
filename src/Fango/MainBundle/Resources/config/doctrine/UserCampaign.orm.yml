@@ -23,4 +23,8 @@ Fango\MainBundle\Entity\UserCampaign:
             joinColumn:
                 name: campaign_id
                 referencedColumnName: id
+    oneToMany:
+        transactions:
+            targetEntity: Fango\MainBundle\Entity\Transaction
+            mappedBy: userCampaign
     lifecycleCallbacks: {  }

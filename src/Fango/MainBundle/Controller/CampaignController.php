@@ -2,8 +2,10 @@
 
 namespace Fango\MainBundle\Controller;
 
+use Fango\MainBundle\Entity\Transaction;
 use Fango\MainBundle\Entity\UserCampaign;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class CampaignController
@@ -67,7 +69,8 @@ class CampaignController extends Controller
         $userCampaign = new UserCampaign();
         $userCampaign->setCampaign($campaign);
         $userCampaign->setUser($this->getUser());
-        $userCampaign->setUniqueLink('1');
+        $lastUniqueLink = $em->getRepository('FangoMainBundle:UserCampaign')->getLastLink();
+        $userCampaign->setUniqueLink($this->get('fango_main.unique_link_generator')->getNextUniqueLink($lastUniqueLink));
 
         $em->persist($userCampaign);
         $em->flush();
@@ -76,5 +79,33 @@ class CampaignController extends Controller
         $this->addFlash('notice', 'You have successfully applied for this campaign!');
 
         return $this->redirectToRoute('fango_main_campaign_show', ['id' => $id]);
+    }
+
+    public function shortLinkAction($hash, Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        /** @var \Fango\MainBundle\Entity\UserCampaign $userCampaign */
+        $userCampaign = $em->getRepository('FangoMainBundle:UserCampaign')->findOneBy([
+            'uniqueLink' => $hash
+        ]);
+
+        if (!$userCampaign) {
+            throw $this->createNotFoundException();
+        }
+
+        $transaction = new Transaction();
+        $transaction->setCreatedAt(new \DateTime('now'));
+        $transaction->setIpAddress($request->getClientIp());
+        $transaction->setActionCount(0);
+        $transaction->setUserCampaign($userCampaign);
+        $transaction->setReferer($request->headers->get('referer'));
+        $hash = $this->get('fos_user.util.token_generator')->generateToken();
+        $transaction->setHash($hash);
+
+        $em->persist($transaction);
+        $em->flush();
+        $em->clear();
+
+        return $this->redirect($userCampaign->getCampaign()->getActionLink().'?trans='.$hash);
     }
 }
