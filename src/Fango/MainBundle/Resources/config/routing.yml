@@ -21,3 +21,8 @@ fango_main_campaign_apply:
 fango_main_short_link:
     path:     /u/{hash}
     defaults: { _controller: FangoMainBundle:Campaign:shortLink }
+
+fango_main_webhook:
+    path:     /
+    host:     webhook.fango.me
+    defaults: { _controller: FangoMainBundle:Webhook:index }
