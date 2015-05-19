@@ -1,0 +1,13 @@
+Fango\UserBundle\Entity\User:
+    type: entity
+    table: fg_user
+    repositoryClass: Fango\UserBundle\Entity\UserRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        fullname:   { type: string, length: 255, nullable: true }
+    lifecycleCallbacks: {  }

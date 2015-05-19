@@ -1,0 +1,19 @@
+fango_main_homepage:
+    path:     /
+    defaults: { _controller: FangoMainBundle:Main:index }
+
+fango_main_dashboard:
+    path:     /dashboard
+    defaults: { _controller: FangoMainBundle:Dashboard:index }
+
+fango_main_campaign_list:
+    path:     /campaigns
+    defaults: { _controller: FangoMainBundle:Campaign:list }
+
+fango_main_campaign_show:
+    path:     /campaigns/{id}
+    defaults: { _controller: FangoMainBundle:Campaign:show }
+
+fango_main_campaign_apply:
+    path:     /campaigns/{id}/apply
+    defaults: { _controller: FangoMainBundle:Campaign:apply }

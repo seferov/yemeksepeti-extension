@@ -1,0 +1,30 @@
+{% extends '@FangoMain/Dashboard/layout.html.twig' %}
+
+{% block main %}
+    {% for campaign in campaigns %}
+        <div class="block row list-campaign">
+            <div class="col-md-6">
+                <a href="{{ url('fango_main_campaign_show', {'id': campaign.id}) }}" class="col-md-3 avatar" style="background-image: url('{{ campaign.logo }}');">
+                </a>
+                <div class="col-md-9 description">
+                    <h3>{{ campaign.name }}</h3>
+                </div>
+            </div>
+            <div class="col-md-6 stats">
+                <div class="col-md-4 campaign-list-platform">
+                    <h4>
+                        Platforms
+                    </h4>
+                    <span class="social-media">
+                        <i class="fa fa-twitter"></i>
+                        <i class="fa fa-facebook"></i>
+                        <i class="fa fa-instagram"></i>
+                    </span>
+                </div>
+                <div class="col-md-4 campaign-list-access-btn">
+                    <a href="{{ url('fango_main_campaign_show', {'id': campaign.id}) }}" class="btn btn-primary btn-lg">View</a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

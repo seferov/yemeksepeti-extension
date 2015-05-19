@@ -1,0 +1,14 @@
+Fango\MainBundle\Entity\Campaign:
+    type: entity
+    table: fg_campaign
+    repositoryClass: Fango\MainBundle\Entity\CampaignRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:   { type: string, length: 255 }
+        logo:   { type: string, length: 255, nullable: true }
+    lifecycleCallbacks: {  }
