@@ -16,6 +16,10 @@ class MainController extends Controller
      */
     public function indexAction()
     {
+        if ($this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
+            return $this->redirectToRoute('fango_main_dashboard');
+        }
+
         return $this->render('FangoMainBundle::index.html.twig');
     }
 }
