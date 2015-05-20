@@ -1,0 +1,22 @@
+
+#iphone4S-slider,
+#iphone5-slider {
+	margin-left: 0;
+}
+#slider-description {
+	margin-top: 20px;
+}
+#tweet {
+	padding-top: 50px;
+}
+#iphone4S-handslider,
+#iphone5-handslider {
+	margin-left: -121px
+}
+#newsletterform {
+	float: left;
+	margin-left: 148px;
+}
+.rnr-service-box-left .rnr-service-box-icon {
+	right: 100%;
+}

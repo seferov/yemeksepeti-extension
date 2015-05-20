@@ -1,0 +1,35 @@
+.LR-sign-up-label {display: none !important;}
+.LR-site-title-wrapper {display: none;}
+.LR-box-container, .LR-sign-up-container-inner {margin: 0 !important;}
+.LR-box-devices {display: none;}
+.LR-box-left, .LR-site-description {margin: 0 !important;}
+.LR-sign-up, .LR-site-incentive, .LR-share-label {text-align: left !important;}
+.LR-site-tagline {display: none !important;}
+.LR-site-description,
+.LR-sign-up-container, .LR-site-share-container, .LR-site-share-email, .LR-share-label {float: none !important;}
+.LR-site-social-share ul li, .LR-share-link, .LR-connect-icon, .LR-share-email-inner, .LR-live-stats-data {float: left !important;}
+.LR-site-description {width: 100% !important; font-size: 14px !important;}
+.LR-box-left {width: 300px !important}
+.LR-box-wrapper {margin: 0 !important}
+.LR-content {min-width: 0 !important; min-height: 0 !important}
+
+.LR-sign-up-input.signup-email {width: 276px !important; border: none !important;}
+.LR-sign-up-submit {width: 300px !important; margin-top: 10px !important; text-transform: none !important;}
+.LR-sign-up-submit {background-color: #007aff !important;
+  background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 0) rgba(0, 0, 0, 0.2)) !important;
+  background-image: -webkit-gradient(linear, left top, left bottom, from( rgba(255, 255, 255, 0)), to( rgba(0, 0, 0, 0.2))) !important;
+  background-image: -o-linear-gradient(top, rgba(255, 255, 255, 0) rgba(0, 0, 0, 0.2)) !important;
+  background-image: linear-gradient(top, rgba(255, 255, 255, 0) rgba(0, 0, 0, 0.2)) !important;
+  background-image: -ms-linear-gradient(top, rgba(255, 255, 255, 0) rgba(0, 0, 0, 0.2)) !important;
+  background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.2)) !important;
+  border-radius: 3px;
+}
+
+.LR-connect-icon, .LR-live-stats-data {margin-left: 0 !important; margin-right: 2% !important}
+.LR-site-description {margin: 20px 0 !important}
+
+#lr-widget {min-height: 210px}
+.LR-site-incentive {font-size: 15px !important; margin-top: 20px !important}
+.varela-round {font-family: Arial, Helvetica, sans-serif !important;}
+.LR-site-description {text-align: left !important;}
+.LR-sign-up-container {width: 100% !important;}

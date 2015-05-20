@@ -1,0 +1,292 @@
+
+
+@media (max-width: 767px) {
+	body {
+		padding:0 !important;
+	}
+	.container {
+		position: relative;
+	}
+   
+	#slider-container {
+		margin-top: 20px;
+	}
+	#slider-container h2 {
+		font-size:26px;
+	}
+	
+	#slider-container p {
+		width:100%;
+	} 
+	
+	.container .rnr-service-box-center {
+		border:none;
+	}
+	
+	.fullwidth .img-container {
+		float:none;
+	}
+	
+	.rnr-service-box-left .rnr-service-box-content p {
+		width:100%;
+	}
+	
+	.client-image {
+		display: block;
+		width: 100%;
+	}	
+	
+	.client-image img {
+		max-width:50px;
+		float:none;
+	}
+	
+	.client-testimonial {
+		margin-top:0;
+	}
+	
+	.testimonials, .testimonials p {
+		font-size:20px;
+		letter-spacing:-1px;
+		line-height:1.2;
+		padding:5px 0;
+		text-align: center;
+	}
+	
+	.client-testimonial cite {
+		font-size:15px;
+	}
+	
+    .about-team .team-member {
+		width:46%;
+	}
+	
+	.pricing-table > div {
+		width:100% !important;
+		margin:10px 0 !important;
+	}
+	.pricing-column:hover {
+		-webkit-transform: none !important;
+		-moz-transform:  none !important;
+		transform:  none !important;
+	}
+	#tweet {
+		font-size: 14px;
+	}
+	
+	.tweet_list li {
+		line-height: 1.5;
+		padding: 62px 0 5px 0;
+		width: 100%;
+		margin: 0 auto;
+	}	
+	#newsletterform input {
+		width:280px;
+	}
+	a#button-newsletter {
+		width:300px;
+	}
+	
+	.copyright {
+		text-align:center;
+	}
+	
+	.copyright-left, .copyright-right {
+		float:none;
+		display:block;
+		widt:100%;
+		padding:5px 0;
+		line-height:1.8;
+	}	
+	ul.footer-menu {
+		float:none;
+	}
+	
+	ul.footer-menu li {
+		float:none;
+		display:inline-block;
+	}	
+	
+}
+
+/* iPhone landscape */
+@media (min-width: 480px) and (max-width: 767px) {
+	
+	.container {
+		width:320px;
+	}
+	
+	#iphone4S-handslider,
+	#iphone5-handslider {
+	  margin-left: -140px;
+	  margin-top: 0;
+	  overflow: hidden;
+	  height: 414px;
+	  position: absolute;
+	  bottom: 0;
+	  width: 569px;
+	}
+	
+	#iphone5-handslider {
+	  height: 450px;		
+	}
+  #slider-description {
+		margin-top: 25px;
+		margin-bottom: 620px;
+		padding: 0 10px;
+  }	
+	
+
+	#iphone4S-slider,
+	#iphone5-slider	 {
+	  overflow: hidden;
+	  height: 530px;
+	  bottom: 0;	
+	  margin-left: 5px;  
+	  width: 327px;
+	  position: absolute;
+	  margin-top: 36px;
+}		
+}
+
+/* iPhone (portrait) */
+@media (max-width: 479px) {
+	
+	.container {
+		width:320px;
+	}
+	
+	#iphone4S-handslider,
+	#iphone5-handslider {
+	  margin-left: -250px;
+	  margin-top: 0;
+	  overflow: hidden;
+	  height: 414px;
+	  position: absolute;
+	  bottom: 0;
+	  width: 569px;
+	}
+	
+	#iphone5-handslider {
+	  height: 450px;		
+	}
+  #slider-description {
+		margin-top: 20px;
+		margin-bottom: 570px;
+		padding: 0 10px;
+  }	
+	
+
+	#iphone4S-slider,
+	#iphone5-slider	 {
+	  margin-top: 36px;
+	  overflow: hidden;
+	  height: 530px;
+	  position: absolute;
+	  bottom: 0;	
+	  margin-left: 0px;  
+	  width: 327px;
+}		
+}
+
+/* iPad (portrait) */
+@media (min-width: 768px) and (max-width: 959px) {
+
+	#iphone4S-handslider,
+	#iphone5-handslider	 {
+		margin-left: -220px;
+	}
+	
+	#iphone4S-slider,
+	#iphone5-slider	 {
+		margin-left: 80px;
+	}
+	#slider-description {
+		margin-top: 50px;
+	}
+	#slider-container h2 {
+		font-size:26px;
+	}
+	
+	#slider-container p {
+		width:100%;
+	}
+	
+	.pricing-column h3 {
+		font-size:20px !important;
+		
+	}
+	
+	.fullwidth .img-container {
+		float:none;
+	}
+
+
+	
+}
+
+
+@media (min-width: 960px) and (max-width: 979px) {
+
+	#iphone4S-handslider,
+	#iphone5-handslider	 {
+		margin-left: -220px;
+	}
+	#iphone4S-slider,
+	#iphone5-slider	 {
+		margin-left: 80px;
+	}
+	
+	
+	#slider-description {
+		margin-top: 40px;
+	}
+	#slider-container h2 {
+		font-size:32px;
+	}
+	
+	#slider-container p {
+		width:100%;
+	}
+	
+	.pricing-column h3 {
+		font-size:22px !important;
+		
+	}
+
+
+}
+
+
+@media (min-width: 980px) and (max-width: 1200px) {
+
+	#iphone4S-handslider,
+	#iphone5-handslider	 {
+		margin-left: -124px;
+	}
+	#iphone4S-slider,
+	#iphone5-slider	 {
+		margin-left: 188px;
+	}		
+	#slider-description {
+		margin-top: 80px;
+	}
+
+
+
+}
+
+@media (min-width: 0px) and (max-width: 769px) {
+ #bg-video-wrapper {display: none;}
+
+
+
+}
+
+
+@media (min-width: 1200px) {
+	#iphone4S-handslider,
+	#iphone5-handslider	 {
+		margin-left: 8px;
+	}	
+}
