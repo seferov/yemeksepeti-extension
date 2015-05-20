@@ -17,7 +17,7 @@ class User extends BaseUser
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -45,7 +45,7 @@ class User extends BaseUser
     /**
      * Get fullname
      *
-     * @return string 
+     * @return string
      */
     public function getFullname()
     {
@@ -61,6 +61,7 @@ class User extends BaseUser
      */
     public function __construct()
     {
+        parent::__construct();
         $this->userCampaigns = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -90,7 +91,7 @@ class User extends BaseUser
     /**
      * Get userCampaigns
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getUserCampaigns()
     {
