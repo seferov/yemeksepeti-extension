@@ -63,3 +63,12 @@ fos_user:
     db_driver: orm
     firewall_name: main
     user_class: Fango\UserBundle\Entity\User
+
+seferov_deployer:
+    servers:
+        production:
+            connection:
+                host: 45.79.76.44
+                username: root
+                password: %server_password%
+            git: 'git@bitbucket.org:seferov/fango.git'
