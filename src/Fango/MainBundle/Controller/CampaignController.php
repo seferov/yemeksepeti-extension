@@ -96,7 +96,7 @@ class CampaignController extends Controller
         $transaction = new Transaction();
         $transaction->setCreatedAt(new \DateTime('now'));
         $transaction->setIpAddress($request->getClientIp());
-        $transaction->setActionCount(0);
+        $transaction->setAction(false);
         $transaction->setUserCampaign($userCampaign);
         $transaction->setReferer($request->headers->get('referer'));
         $hash = $this->get('fos_user.util.token_generator')->generateToken();
