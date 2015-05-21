@@ -30,11 +30,6 @@ class Transaction
     private $referer;
 
     /**
-     * @var integer
-     */
-    private $actionCount;
-
-    /**
      * @var \DateTime
      */
     private $createdAt;
@@ -43,7 +38,7 @@ class Transaction
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -66,7 +61,7 @@ class Transaction
     /**
      * Get hash
      *
-     * @return string 
+     * @return string
      */
     public function getHash()
     {
@@ -89,7 +84,7 @@ class Transaction
     /**
      * Get ipAddress
      *
-     * @return string 
+     * @return string
      */
     public function getIpAddress()
     {
@@ -112,34 +107,11 @@ class Transaction
     /**
      * Get referer
      *
-     * @return string 
+     * @return string
      */
     public function getReferer()
     {
         return $this->referer;
-    }
-
-    /**
-     * Set actionCount
-     *
-     * @param integer $actionCount
-     * @return Transaction
-     */
-    public function setActionCount($actionCount)
-    {
-        $this->actionCount = $actionCount;
-
-        return $this;
-    }
-
-    /**
-     * Get actionCount
-     *
-     * @return integer 
-     */
-    public function getActionCount()
-    {
-        return $this->actionCount;
     }
 
     /**
@@ -158,7 +130,7 @@ class Transaction
     /**
      * Get createdAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -186,10 +158,38 @@ class Transaction
     /**
      * Get userCampaign
      *
-     * @return \Fango\MainBundle\Entity\UserCampaign 
+     * @return \Fango\MainBundle\Entity\UserCampaign
      */
     public function getUserCampaign()
     {
         return $this->userCampaign;
+    }
+    /**
+     * @var boolean
+     */
+    private $action;
+
+
+    /**
+     * Set action
+     *
+     * @param boolean $action
+     * @return Transaction
+     */
+    public function setAction($action)
+    {
+        $this->action = $action;
+
+        return $this;
+    }
+
+    /**
+     * Get action
+     *
+     * @return boolean
+     */
+    public function getAction()
+    {
+        return $this->action;
     }
 }

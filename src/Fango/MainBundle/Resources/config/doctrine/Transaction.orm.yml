@@ -19,9 +19,8 @@ Fango\MainBundle\Entity\Transaction:
             type: string
             length: 255
             nullable: true
-        actionCount:
-            type: integer
-            column: action_count
+        action:
+            type: boolean
         createdAt:
             type: datetime
             column: created_at
