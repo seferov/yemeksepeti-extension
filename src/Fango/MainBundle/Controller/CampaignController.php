@@ -111,6 +111,10 @@ class CampaignController extends Controller
         $em->flush();
         $em->clear();
 
-        return $this->redirect($userCampaign->getCampaign()->getActionLink().'?trans='.$hash);
+        $url = $userCampaign->getCampaign()->getActionLink();
+        $url .= (parse_url($url, PHP_URL_QUERY)) ? '&' : '?';
+        $url .= http_build_query(['trans' => $hash]);
+
+        return $this->redirect($url);
     }
 }
