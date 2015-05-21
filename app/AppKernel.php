@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new Fango\MainBundle\FangoMainBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new Seferov\DeployerBundle\SeferovDeployerBundle(),
+            new Hip\MandrillBundle\HipMandrillBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -72,3 +72,10 @@ seferov_deployer:
                 username: root
                 password: %server_password%
             git: 'git@bitbucket.org:seferov/fango.git'
+
+hip_mandrill:
+    api_key: nZA2z3sOtEA7umCwofXrgg
+#    disable_delivery: true # useful for dev/test environment. Default value is 'false'
+    default:
+        sender: hello@fango.me
+        sender_name: Fango.me

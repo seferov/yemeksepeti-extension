@@ -1,0 +1,30 @@
+Fango\MainBundle\Entity\Mail:
+    type: entity
+    table: fg_mail
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        email:
+            type: string
+            length: 255
+        activeHour:
+            type: string
+            length: 255
+            column: active_hour
+        status:
+            type: string
+            length: '10'
+        mandrillId:
+            type: string
+            length: '100'
+            column: mandrill_id
+        rejectReason:
+            type: string
+            length: 255
+            column: reject_reason
+            nullable: true
+    lifecycleCallbacks: {  }
