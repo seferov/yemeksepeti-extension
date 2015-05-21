@@ -6,7 +6,32 @@
         <div class="col-xs-12 col-sm-6">
 
             <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
-                {{ form_widget(form) }}
+
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                    {{ form_widget(form.username) }}
+                </div>
+                <span class="help-block"></span>
+
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                    {{ form_widget(form.fullname) }}
+                </div>
+                <span class="help-block"></span>
+
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                    {{ form_widget(form.email) }}
+                </div>
+                <span class="help-block"></span>
+
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                    {{ form_widget(form.plainPassword) }}
+                </div>
+                <span class="help-block"></span>
+
+                {{ form_rest(form) }}
 
                 <input class="btn btn-lg btn-primary btn-block" type="submit" id="_submit" name="_submit" value="Register" />
             </form>

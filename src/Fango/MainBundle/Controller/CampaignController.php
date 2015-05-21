@@ -81,6 +81,11 @@ class CampaignController extends Controller
         return $this->redirectToRoute('fango_main_campaign_show', ['id' => $id]);
     }
 
+    /**
+     * @param $hash
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function shortLinkAction($hash, Request $request)
     {
         $em = $this->getDoctrine()->getManager();

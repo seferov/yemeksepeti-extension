@@ -63,6 +63,9 @@ fos_user:
     db_driver: orm
     firewall_name: main
     user_class: Fango\UserBundle\Entity\User
+    registration:
+        form:
+            type: fango_user_registration
 
 seferov_deployer:
     servers:

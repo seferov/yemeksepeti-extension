@@ -1,0 +1,3 @@
+fos_user_registration_confirmed:
+    pattern: /register/confirmed
+    defaults: { _controller: FrameworkBundle:Redirect:redirect, route: fango_main_dashboard }

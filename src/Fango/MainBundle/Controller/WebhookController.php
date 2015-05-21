@@ -28,11 +28,17 @@ class WebhookController extends Controller
         ]);
 
         if (!$transaction) {
-            return $response->setData(['transaction_id not found']);
+            return $response->setData(['error' => [
+                'code' => 404,
+                'message' => 'Transaction not found'
+            ]]);
         }
 
         if ($transaction->getAction()) {
-            return $response->setData(['duplicate call']);
+            return $response->setData(['error' => [
+                'code' => 187,
+                'message' => 'Duplicate call'
+            ]]);
         }
 
         $transaction->setAction(true);
@@ -41,6 +47,6 @@ class WebhookController extends Controller
         $em->flush();
         $em->clear();
 
-        return $response->setData(['success']);
+        return $response->setData(['success' => true]);
     }
 }

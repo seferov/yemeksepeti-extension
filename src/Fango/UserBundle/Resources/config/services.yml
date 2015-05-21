@@ -1,4 +1,6 @@
 services:
-#    fango_user.example:
-#        class: Fango\UserBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
+    fango_user.registration.form.type:
+        class: Fango\UserBundle\Form\Type\RegistrationFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: fango_user_registration }
