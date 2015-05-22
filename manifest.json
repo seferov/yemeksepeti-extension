@@ -16,6 +16,7 @@
     "16": "img/16x16.png"
   },
   "permissions": [
+    "storage",
     "cookies",
     "notifications",
     "*://*.yemeksepeti.com/"

@@ -24,7 +24,7 @@ var jokerNotifier = {
       });
 
       _this._fetchResult(ysRequest);
-    })
+    });
   },
 
   _fetchResult: function(ysRequest) {

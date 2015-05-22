@@ -4,7 +4,11 @@ document.addEventListener('DOMContentLoaded', function () {
   jokerNotifier.checkJoker();
 });
 
-// Check every 5 minutes
+// Check every 2 minutes
 setInterval(function() {
-    jokerNotifier.checkJoker()
-}, 5 * 60 * 1000);
+  chrome.storage.local.get('check', function(data) {
+    if (data.check) {
+      jokerNotifier.checkJoker();
+    }
+  });
+}, 2 * 60 * 1000);
