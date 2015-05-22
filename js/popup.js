@@ -21,6 +21,10 @@ $(document).ready(function($) {
     chrome.storage.local.set({'check': isActive});
     chrome.browserAction.setIcon({path: icon});
     chrome.browserAction.setBadgeText ({text: ''});
+
+    if (isActive) {
+      jokerNotifier.checkJoker();
+    }
   });
 });
 

@@ -6,9 +6,5 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // Check every 2 minutes
 setInterval(function() {
-  chrome.storage.local.get('check', function(data) {
-    if (data.check) {
-      jokerNotifier.checkJoker();
-    }
-  });
+  jokerNotifier.checkJoker();
 }, 2 * 60 * 1000);

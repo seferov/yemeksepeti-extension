@@ -5,6 +5,15 @@ var jokerNotifier = {
   _jokerUrl: 'https://www.yemeksepeti.com/basket/GetNewJokerOffer',
 
   checkJoker: function() {
+    var _this = this;
+    chrome.storage.local.get('check', function(data) {
+      if (data.check) {
+        _this._check();
+      }
+    });
+  },
+
+  _check: function() {
     var _this = this,
       ysRequest = {
         'Culture': 'tr-TR',
