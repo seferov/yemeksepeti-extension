@@ -15,7 +15,12 @@ $(document).ready(function($) {
   });
 
   onOfSwitch.on('change', function() {
-    chrome.storage.local.set({'check': $(this).is(':checked')});
+    var isActive = $(this).is(':checked'),
+      icon = isActive ? 'img/icon.png' : 'img/icon_off.png';
+
+    chrome.storage.local.set({'check': isActive});
+    chrome.browserAction.setIcon({path: icon});
+    chrome.browserAction.setBadgeText ({text: ''});
   });
 });
 
