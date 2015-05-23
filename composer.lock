@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "890b9b1fc82a02a8378ef31d76c799b8",
+    "hash": "579f71c9334af8e2251c80570472f44e",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1310,16 +1310,16 @@
         },
         {
             "name": "sensiolabs/security-checker",
-            "version": "v2.0.2",
+            "version": "v2.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/security-checker.git",
-                "reference": "cecb1397087dc9c733796eda6e9d121336039cdc"
+                "reference": "cde03c48d490d805ef1349e5108f8b3085981ead"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/security-checker/zipball/cecb1397087dc9c733796eda6e9d121336039cdc",
-                "reference": "cecb1397087dc9c733796eda6e9d121336039cdc",
+                "url": "https://api.github.com/repos/sensiolabs/security-checker/zipball/cde03c48d490d805ef1349e5108f8b3085981ead",
+                "reference": "cde03c48d490d805ef1349e5108f8b3085981ead",
                 "shasum": ""
             },
             "require": {
@@ -1351,7 +1351,7 @@
                 }
             ],
             "description": "A security checker for your composer.lock",
-            "time": "2015-04-21 07:52:05"
+            "time": "2015-05-22 14:21:04"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -1811,6 +1811,110 @@
                 "templating"
             ],
             "time": "2015-04-19 08:30:27"
+        },
+        {
+            "name": "vipx/bot-detect",
+            "version": "v1.1.0",
+            "target-dir": "Vipx/BotDetect",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lennerd/vipx-bot-detect.git",
+                "reference": "f89ba65932bf19fbada191676fcef07156ce965a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lennerd/vipx-bot-detect/zipball/f89ba65932bf19fbada191676fcef07156ce965a",
+                "reference": "f89ba65932bf19fbada191676fcef07156ce965a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "symfony/config": "~2.1",
+                "symfony/yaml": "~2.1"
+            },
+            "require-dev": {
+                "satooshi/php-coveralls": "dev-master"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Vipx\\BotDetect": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Lennart Hildebrandt",
+                    "email": "hello@lennerd.com"
+                }
+            ],
+            "description": "Bot detector library",
+            "homepage": "http://lennerd.com/",
+            "keywords": [
+                "bot"
+            ],
+            "time": "2014-10-13 00:21:09"
+        },
+        {
+            "name": "vipx/bot-detect-bundle",
+            "version": "v2.0.1",
+            "target-dir": "Vipx/BotDetectBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lennerd/VipxBotDetectBundle.git",
+                "reference": "cd4a7889c902d3cb6e94fdf795a98b4876ae2f72"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lennerd/VipxBotDetectBundle/zipball/cd4a7889c902d3cb6e94fdf795a98b4876ae2f72",
+                "reference": "cd4a7889c902d3cb6e94fdf795a98b4876ae2f72",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "symfony/framework-bundle": "~2.1",
+                "symfony/security-bundle": "~2.1",
+                "vipx/bot-detect": "~1.0"
+            },
+            "require-dev": {
+                "satooshi/php-coveralls": "~0.6"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Vipx\\BotDetectBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Lennart Hildebrandt",
+                    "email": "hello@lennerd.com"
+                }
+            ],
+            "description": "Symfony VipxBotDetectBundle",
+            "homepage": "http://lennerd.com/",
+            "keywords": [
+                "bot",
+                "security"
+            ],
+            "time": "2014-10-13 08:29:16"
         }
     ],
     "packages-dev": [

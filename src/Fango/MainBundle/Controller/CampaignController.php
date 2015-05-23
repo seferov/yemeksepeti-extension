@@ -98,6 +98,13 @@ class CampaignController extends Controller
             throw $this->createNotFoundException();
         }
 
+        $url = $userCampaign->getCampaign()->getActionLink();
+
+        if ($this->get('vipx_bot_detect.detector')->detectFromRequest($request)) {
+            return $this->redirect($url, 301);
+        }
+
+        // Add as a new transaction
         $transaction = new Transaction();
         $transaction->setCreatedAt(new \DateTime('now'));
         $transaction->setIpAddress($request->getClientIp());
@@ -111,7 +118,6 @@ class CampaignController extends Controller
         $em->flush();
         $em->clear();
 
-        $url = $userCampaign->getCampaign()->getActionLink();
         $url .= (parse_url($url, PHP_URL_QUERY)) ? '&' : '?';
         $url .= http_build_query(['trans' => $hash]);
 

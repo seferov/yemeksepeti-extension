@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new Seferov\DeployerBundle\SeferovDeployerBundle(),
             new Hip\MandrillBundle\HipMandrillBundle(),
+            new Vipx\BotDetectBundle\VipxBotDetectBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
