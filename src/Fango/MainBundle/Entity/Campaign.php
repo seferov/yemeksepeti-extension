@@ -207,4 +207,42 @@ class Campaign
     {
         return $this->description;
     }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $countries;
+
+
+    /**
+     * Add countries
+     *
+     * @param \Fango\MainBundle\Entity\CampaignCountry $countries
+     * @return Campaign
+     */
+    public function addCountry(\Fango\MainBundle\Entity\CampaignCountry $countries)
+    {
+        $this->countries[] = $countries;
+
+        return $this;
+    }
+
+    /**
+     * Remove countries
+     *
+     * @param \Fango\MainBundle\Entity\CampaignCountry $countries
+     */
+    public function removeCountry(\Fango\MainBundle\Entity\CampaignCountry $countries)
+    {
+        $this->countries->removeElement($countries);
+    }
+
+    /**
+     * Get countries
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCountries()
+    {
+        return $this->countries;
+    }
 }

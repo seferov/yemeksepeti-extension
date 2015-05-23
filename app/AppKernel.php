@@ -22,6 +22,7 @@ class AppKernel extends Kernel
             new Seferov\DeployerBundle\SeferovDeployerBundle(),
             new Hip\MandrillBundle\HipMandrillBundle(),
             new Vipx\BotDetectBundle\VipxBotDetectBundle(),
+            new Bazinga\Bundle\GeocoderBundle\BazingaGeocoderBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -30,7 +30,8 @@
         "friendsofsymfony/user-bundle": "~2.0@dev",
         "seferov/deployer-bundle": "~1",
         "hipaway-travel/mandrill-bundle": "1.0.*",
-        "vipx/bot-detect-bundle": "2.0.1"
+        "vipx/bot-detect-bundle": "2.0.1",
+        "willdurand/geocoder-bundle": "@stable"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

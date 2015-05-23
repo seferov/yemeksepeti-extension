@@ -1,0 +1,19 @@
+Fango\MainBundle\Entity\CampaignCountry:
+    type: entity
+    table: fg_campaign_country
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        country:  { type: string, length: '2' }
+    manyToOne:
+        campaign:
+            targetEntity: Fango\MainBundle\Entity\Campaign
+            inversedBy: countries
+            joinColumn:
+                name: campaign_id
+                referencedColumnName: id
+    lifecycleCallbacks: {  }

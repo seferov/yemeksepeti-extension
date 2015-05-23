@@ -17,7 +17,7 @@ framework:
         engines: ['twig']
     default_locale:  "%locale%"
     trusted_hosts:   ~
-    trusted_proxies: ~
+    trusted_proxies: ['127.0.0.1']
     session:
         handler_id:  ~
     fragments:       ~
@@ -82,3 +82,9 @@ hip_mandrill:
     default:
         sender: hello@fango.me
         sender_name: Fango.me
+
+bazinga_geocoder:
+    providers:
+        data_science_toolkit: ~
+        ip_info_db:
+            api_key: 7515964f3c60f38933aa380b905d1904d6d4c970da02865029ffb1842528bd6a

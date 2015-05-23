@@ -100,8 +100,30 @@ class CampaignController extends Controller
 
         $url = $userCampaign->getCampaign()->getActionLink();
 
+        // Filter bots
         if ($this->get('vipx_bot_detect.detector')->detectFromRequest($request)) {
             return $this->redirect($url, 301);
+        }
+
+        // Geo location support
+        if (count($userCampaign->getCampaign()->getCountries())) {
+            $geoData = $this->container
+                ->get('bazinga_geocoder.geocoder')
+                ->using('ip_info_db')
+                ->geocode($request->server->get('REMOTE_ADDR'));
+
+            $match = false;
+
+            foreach ($userCampaign->getCampaign()->getCountries() as $country) {
+                if ($country->getCountry() == $geoData->getCountryCode()) {
+                    $match = true;
+                    break;
+                }
+            }
+
+            if (!$match) {
+                return $this->redirectToRoute('fango_main_homepage');
+            }
         }
 
         // Add as a new transaction
