@@ -1,0 +1,27 @@
+Fango\MainBundle\Entity\WebhookLog:
+    type: entity
+    table: fg_webhook_log
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        ipAddress:
+            type: string
+            length: '100'
+            column: ip_address
+        userAgent:
+            type: string
+            length: 255
+            column: user_agent
+            nullable: true
+        createdAt:
+            type: datetime
+            column: created_at
+        transaction:
+            type: string
+            length: 255
+            nullable: true
+    lifecycleCallbacks: {  }
