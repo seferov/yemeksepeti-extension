@@ -9,10 +9,11 @@ Fango\MainBundle\Entity\Campaign:
             generator:
                 strategy: AUTO
     fields:
-        name:       { type: string, length: 255 }
-        logo:       { type: string, length: 255, nullable: true }
-        actionLink: { type: string, length: 255, column: action_link }
-        cpa:        { type: float, nullable: true }
+        name:         { type: string, length: 255 }
+        logo:         { type: string, length: 255, nullable: true }
+        description:  { type: text, nullable: true }
+        actionLink:   { type: string, length: 255, column: action_link }
+        cpa:          { type: float, nullable: true }
     oneToMany:
         userCampaigns:
             targetEntity: Fango\MainBundle\Entity\UserCampaign

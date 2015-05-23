@@ -29,10 +29,13 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        {{ campaign.description }}
+    </div>
     {% if userCampaign is not null %}
     <div class="row">
         <div>
-            <a href="{{ url('fango_main_short_link', {'hash': userCampaign.uniqueLink}) }}">
+            <a href="{{ url('fango_main_short_link', {'hash': userCampaign.uniqueLink}) }}" target="_blank">
                 {{ url('fango_main_short_link', {'hash': userCampaign.uniqueLink}) }}
             </a>
         </div>
