@@ -16,7 +16,8 @@ class DashboardController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('@FangoMain/Dashboard/index.html.twig');
+//        return $this->render('@FangoMain/Dashboard/index.html.twig');
+        return $this->redirectToRoute('fango_main_campaign_list');
     }
 
     /**
