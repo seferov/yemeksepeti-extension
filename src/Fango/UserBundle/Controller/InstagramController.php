@@ -42,6 +42,7 @@ class InstagramController extends Controller
         ));
         $userData = $instagram->getOAuthToken($code);
         $userData = json_decode(json_encode($userData), true);
+        $userData = $userData['user'];
 
         if (!array_key_exists('id', $userData)) {
             return $this->redirectToRoute('fos_user_security_login');
