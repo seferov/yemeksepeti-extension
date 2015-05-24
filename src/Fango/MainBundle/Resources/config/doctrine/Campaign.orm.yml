@@ -13,6 +13,7 @@ Fango\MainBundle\Entity\Campaign:
         logo:         { type: string, length: 255, nullable: true }
         description:  { type: text, nullable: true }
         actionLink:   { type: string, length: 255, column: action_link }
+        previewLink:  { type: string, length: 255, column: preview_link }
         cpa:          { type: float, nullable: true }
         status:       { type: string, length: 15, nullable: true }
     oneToMany:

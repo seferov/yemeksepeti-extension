@@ -273,4 +273,32 @@ class Campaign
     {
         return $this->status;
     }
+    /**
+     * @var string
+     */
+    private $previewLink;
+
+
+    /**
+     * Set previewLink
+     *
+     * @param string $previewLink
+     * @return Campaign
+     */
+    public function setPreviewLink($previewLink)
+    {
+        $this->previewLink = $previewLink;
+
+        return $this;
+    }
+
+    /**
+     * Get previewLink
+     *
+     * @return string 
+     */
+    public function getPreviewLink()
+    {
+        return $this->previewLink;
+    }
 }

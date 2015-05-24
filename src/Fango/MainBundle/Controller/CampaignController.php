@@ -181,6 +181,10 @@ class CampaignController extends DashboardBaseController
             $url .= http_build_query(['trans' => $hash]);
         }
 
+        if ($userCampaign->getStatus() == 'preview') {
+            $url = $userCampaign->getCampaign()->getPreviewLink();
+        }
+
         return $this->redirect($url);
     }
 }
