@@ -2,14 +2,12 @@
 
 namespace Fango\MainBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
 /**
  * Class NetworkController
  * @author Farhad Safarov <http://ferhad.in>
  * @package Fango\MainBundle\Controller
  */
-class NetworkController extends Controller
+class NetworkController extends DashboardBaseController
 {
     /**
      * @return \Symfony\Component\HttpFoundation\Response

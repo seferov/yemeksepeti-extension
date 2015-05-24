@@ -4,7 +4,6 @@ namespace Fango\MainBundle\Controller;
 
 use Fango\MainBundle\Entity\Transaction;
 use Fango\MainBundle\Entity\UserCampaign;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -12,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
  * @author Farhad Safarov <http://ferhad.in>
  * @package Fango\MainBundle\Controller
  */
-class CampaignController extends Controller
+class CampaignController extends DashboardBaseController
 {
     /**
      * @return \Symfony\Component\HttpFoundation\Response

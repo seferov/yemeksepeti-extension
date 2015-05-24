@@ -75,7 +75,7 @@ class FacebookController extends Controller
 //        $user = $userManager->findUserBy(['facebookId' => $fbUser['id']]);
 //
         $em = $this->getDoctrine()->getManager();
-        $user = $em->getRepository('FangoUserBundle:User')->getUserByFacebookId($fbUser['id']);
+        $user = $em->getRepository('FangoUserBundle:User')->getUserBySocialId($fbUser['id'], 'facebook');
 
         if (!$user) {
             $user = $userManager->findUserByEmail($fbUser['email']);

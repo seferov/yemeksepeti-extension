@@ -2,14 +2,12 @@
 
 namespace Fango\MainBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
 /**
  * Class DashboardController
  * @author Farhad Safarov <http://ferhad.in>
  * @package Fango\MainBundle\Controller
  */
-class DashboardController extends Controller
+class DashboardController extends DashboardBaseController
 {
     /**
      * @return \Symfony\Component\HttpFoundation\Response

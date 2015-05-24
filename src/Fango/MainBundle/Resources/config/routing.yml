@@ -11,6 +11,10 @@ fango_main_dashboard:
     path:     /dashboard
     defaults: { _controller: FangoMainBundle:Dashboard:index }
 
+fango_main_dashboard_account_entermail:
+    path:     /account/enter_mail
+    defaults: { _controller: FangoMainBundle:Account:enterMail }
+
 fango_main_campaign_list:
     path:     /campaigns
     defaults: { _controller: FangoMainBundle:Campaign:list }

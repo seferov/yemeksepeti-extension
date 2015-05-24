@@ -13,17 +13,18 @@ class UserRepository extends EntityRepository
 {
     /**
      * @param int $id
+     * @param $network
      * @return mixed
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function getUserByFacebookId($id)
+    public function getUserBySocialId($id, $network)
     {
         return $this->createQueryBuilder('u')
             ->join('u.networks', 'n')
             ->where('n.type = :type')
             ->andWhere('n.networkId = :id')
             ->setParameters([
-                'type' => 'facebook',
+                'type' => $network,
                 'id' => $id
             ])
             ->getQuery()

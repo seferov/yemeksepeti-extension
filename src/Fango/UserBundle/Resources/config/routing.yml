@@ -13,3 +13,11 @@ fango_user_facebook_auth:
 fango_user_facebook_check:
     pattern:  /facebook/check
     defaults: { _controller: FangoUserBundle:Facebook:check }
+
+fango_user_twitter_login:
+    pattern:  /twitter/login
+    defaults: { _controller: FangoUserBundle:Twitter:login }
+
+fango_user_twitter_check:
+    pattern:  /twitter/check
+    defaults: { _controller: FangoUserBundle:Twitter:check }

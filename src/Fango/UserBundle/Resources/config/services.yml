@@ -4,3 +4,11 @@ services:
         arguments: [%fos_user.model.user.class%]
         tags:
             - { name: form.type, alias: fango_user_registration }
+
+    fango_user.user_manager:
+        class: Fango\UserBundle\Model\UserManager
+        arguments:
+            - @security.encoder_factory
+            - @fos_user.util.username_canonicalizer
+            - @fos_user.util.email_canonicalizer
+            - @fos_user.entity_manager
