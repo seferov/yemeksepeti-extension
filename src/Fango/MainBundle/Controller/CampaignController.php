@@ -71,9 +71,13 @@ class CampaignController extends DashboardBaseController
             'status' => 'published'
         ]);
 
+        $user = $status == 'preview'
+            ? $em->getRepository('FangoUserBundle:User')->find(11);
+            : $this->getUser();
+
         $userCampaign = $em->getRepository('FangoMainBundle:UserCampaign')->findOneBy([
             'campaign' => $campaign,
-            'user' => $this->getUser(),
+            'user' => $user,
             'status' => $status
         ]);
 
@@ -90,7 +94,7 @@ class CampaignController extends DashboardBaseController
 
         $userCampaign = new UserCampaign();
         $userCampaign->setCampaign($campaign);
-        $userCampaign->setUser($this->getUser());
+        $userCampaign->setUser($user);
         $lastUniqueLink = $em->getRepository('FangoMainBundle:UserCampaign')->getLastLink();
         $userCampaign->setUniqueLink($this->get('fango_main.unique_link_generator')->getNextUniqueLink($lastUniqueLink));
         $userCampaign->setStatus($status);
