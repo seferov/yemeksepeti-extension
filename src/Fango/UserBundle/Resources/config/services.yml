@@ -7,8 +7,4 @@ services:
 
     fango_user.user_manager:
         class: Fango\UserBundle\Model\UserManager
-        arguments:
-            - @security.encoder_factory
-            - @fos_user.util.username_canonicalizer
-            - @fos_user.util.email_canonicalizer
-            - @fos_user.entity_manager
+        arguments: [@security.encoder_factory, @fos_user.util.username_canonicalizer, @fos_user.util.email_canonicalizer, @fos_user.entity_manager, %fos_user.model.user.class%]
