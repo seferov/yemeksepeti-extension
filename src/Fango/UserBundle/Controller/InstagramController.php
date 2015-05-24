@@ -22,7 +22,7 @@ class InstagramController extends Controller
         $instagram = new Instagram(array(
             'apiKey'      => $this->container->getParameter('instagram_client_id'),
             'apiSecret'   => $this->container->getParameter('instagram_client_secret'),
-            'apiCallback' => 'http://fango.me/instagram'
+            'apiCallback' => $this->generateUrl('fango_user_instagram_check', [], true)
         ));
 
         return $this->redirect($instagram->getLoginUrl());
@@ -38,11 +38,11 @@ class InstagramController extends Controller
         $instagram = new Instagram(array(
             'apiKey'      => $this->container->getParameter('instagram_client_id'),
             'apiSecret'   => $this->container->getParameter('instagram_client_secret'),
-            'apiCallback' => 'http://fango.me/instagram'
+            'apiCallback' => $this->generateUrl('fango_user_instagram_check', [], true)
         ));
         $userData = $instagram->getOAuthToken($code);
         $userData = json_decode(json_encode($userData), true);
-//        $userData = $userData['user'];
+        $userData = $userData['user'];
 
         if (!array_key_exists('id', $userData)) {
             return $this->redirectToRoute('fos_user_security_login');
