@@ -48,7 +48,8 @@ class CampaignController extends DashboardBaseController
 
         $userCampaign = $em->getRepository('FangoMainBundle:UserCampaign')->findOneBy([
             'campaign' => $campaign,
-            'user' => $this->getUser()
+            'user' => $this->getUser(),
+            'status' => 'applied'
         ]);
 
         return $this->render('@FangoMain/Campaign/show.html.twig', [
@@ -59,21 +60,30 @@ class CampaignController extends DashboardBaseController
 
     /**
      * @param $id
+     * @param $status
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function applyAction($id)
+    public function applyAction($id, $status)
     {
         $em = $this->getDoctrine()->getManager();
         $campaign = $em->getRepository('FangoMainBundle:Campaign')->findOneBy([
             'id' => $id,
             'status' => 'published'
         ]);
+
         $userCampaign = $em->getRepository('FangoMainBundle:UserCampaign')->findOneBy([
             'campaign' => $campaign,
-            'user' => $this->getUser()
+            'user' => $this->getUser(),
+            'status' => $status
         ]);
 
         if ($userCampaign && $userCampaign instanceof UserCampaign) {
+            if ($userCampaign->getStatus() == 'preview') {
+                return $this->redirectToRoute('fango_main_short_link', [
+                    'hash' => $userCampaign->getUniqueLink()
+                ]);
+            }
+
             $this->addFlash('notice', 'You already have applied for this campaign');
             return $this->redirectToRoute('fango_main_campaign_show', ['id' => $id]);
         }
@@ -83,10 +93,17 @@ class CampaignController extends DashboardBaseController
         $userCampaign->setUser($this->getUser());
         $lastUniqueLink = $em->getRepository('FangoMainBundle:UserCampaign')->getLastLink();
         $userCampaign->setUniqueLink($this->get('fango_main.unique_link_generator')->getNextUniqueLink($lastUniqueLink));
+        $userCampaign->setStatus($status);
 
         $em->persist($userCampaign);
         $em->flush();
         $em->clear();
+
+        if ($status == 'preview') {
+            return $this->redirectToRoute('fango_main_short_link', [
+                'hash' => $userCampaign->getUniqueLink()
+            ]);
+        }
 
         $this->addFlash('notice', 'You have successfully applied for this campaign!');
 
@@ -118,7 +135,7 @@ class CampaignController extends DashboardBaseController
         }
 
         // Geo location support
-        if (count($userCampaign->getCampaign()->getCountries())) {
+        if ($userCampaign->getStatus() != 'preview' && count($userCampaign->getCampaign()->getCountries())) {
             $geoData = $this->container
                 ->get('bazinga_geocoder.geocoder')
                 ->using('ip_info_db')

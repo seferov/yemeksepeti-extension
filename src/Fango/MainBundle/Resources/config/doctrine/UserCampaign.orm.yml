@@ -10,6 +10,7 @@ Fango\MainBundle\Entity\UserCampaign:
                 strategy: AUTO
     fields:
         uniqueLink: { type: string, length: 255, column: unique_link }
+        status:     { type: string, length: 50, nullable: true }
     manyToOne:
         user:
             targetEntity: Fango\UserBundle\Entity\User

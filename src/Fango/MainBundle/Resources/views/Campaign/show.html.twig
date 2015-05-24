@@ -26,6 +26,8 @@
                 {% else %}
                     <span class="btn btn-default btn-lg disabled">Applied</span>
                 {% endif %}
+
+                <a href="{{ url('fango_main_campaign_preview', {'id': campaign.id}) }}" class="btn btn-primary btn-lg" target="_blank">Preview</a>
             </div>
         </div>
     </div>
