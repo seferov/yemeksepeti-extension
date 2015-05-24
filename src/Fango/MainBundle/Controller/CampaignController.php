@@ -134,25 +134,27 @@ class CampaignController extends DashboardBaseController
             return $this->redirect($url, 301);
         }
 
+        $unsupportedLocation = true;
         // Geo location support
-        if ($userCampaign->getStatus() != 'preview' && count($userCampaign->getCampaign()->getCountries())) {
+        if (count($userCampaign->getCampaign()->getCountries())) {
             $geoData = $this->container
                 ->get('bazinga_geocoder.geocoder')
                 ->using('ip_info_db')
                 ->geocode($request->server->get('REMOTE_ADDR'));
 
-            $match = false;
-
             foreach ($userCampaign->getCampaign()->getCountries() as $country) {
                 if ($country->getCountry() == $geoData->getCountryCode()) {
-                    $match = true;
+                    $unsupportedLocation = false;
                     break;
                 }
             }
 
-            if (!$match) {
+            if ($unsupportedLocation && $userCampaign->getStatus() != 'preview') {
                 return $this->redirectToRoute('fango_main_homepage');
             }
+        }
+        else {
+            $unsupportedLocation = false;
         }
 
         // Add as a new transaction
@@ -170,8 +172,10 @@ class CampaignController extends DashboardBaseController
         $em->flush();
         $em->clear();
 
-        $url .= (parse_url($url, PHP_URL_QUERY)) ? '&' : '?';
-        $url .= http_build_query(['trans' => $hash]);
+        if (!$unsupportedLocation) {
+            $url .= (parse_url($url, PHP_URL_QUERY)) ? '&' : '?';
+            $url .= http_build_query(['trans' => $hash]);
+        }
 
         return $this->redirect($url);
     }
