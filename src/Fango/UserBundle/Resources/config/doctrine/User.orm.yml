@@ -12,8 +12,12 @@ Fango\UserBundle\Entity\User:
         fullname:       { type: string, length: 255, nullable: true }
         earnings:       { type: float }
         paid:           { type: float }
+        createdAt:      { type: datetime, column: created_at }
     oneToMany:
         userCampaigns:
             targetEntity: Fango\MainBundle\Entity\UserCampaign
-            mappedBy: campaign
+            mappedBy: user
+        networks:
+            targetEntity: Fango\UserBundle\Entity\Network
+            mappedBy: user
     lifecycleCallbacks: {  }

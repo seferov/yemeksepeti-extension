@@ -20,3 +20,6 @@ parameters:
     secret:            ThisTokenIsNotSoSecretChangeIt
 
     server_password:   'something'
+
+    facebook_app_id: opkokoko
+    facebook_app_secret: sldkmalsdmlak

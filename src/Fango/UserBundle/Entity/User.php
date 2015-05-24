@@ -153,4 +153,70 @@ class User extends BaseUser
     {
         return $this->paid;
     }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $networks;
+
+
+    /**
+     * Add networks
+     *
+     * @param \Fango\UserBundle\Entity\Network $networks
+     * @return User
+     */
+    public function addNetwork(\Fango\UserBundle\Entity\Network $networks)
+    {
+        $this->networks[] = $networks;
+
+        return $this;
+    }
+
+    /**
+     * Remove networks
+     *
+     * @param \Fango\UserBundle\Entity\Network $networks
+     */
+    public function removeNetwork(\Fango\UserBundle\Entity\Network $networks)
+    {
+        $this->networks->removeElement($networks);
+    }
+
+    /**
+     * Get networks
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getNetworks()
+    {
+        return $this->networks;
+    }
+    /**
+     * @var \DateTime
+     */
+    private $createdAt;
+
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     * @return User
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
 }

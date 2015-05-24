@@ -1,0 +1,22 @@
+Fango\UserBundle\Entity\Network:
+    type: entity
+    table: fg_user_network
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        type:       { type: string, length: '50' }
+        networkId:  { type: string, column: network_id, length: 100 }
+        createdAt:  { type: datetime, column: created_at }
+        rest:       { type: text, nullable: true }
+    manyToOne:
+        user:
+            targetEntity: Fango\UserBundle\Entity\User
+            inversedBy: networks
+            joinColumn:
+                name: user_id
+                referencedColumnName: id
+    lifecycleCallbacks: {  }
