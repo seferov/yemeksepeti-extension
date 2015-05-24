@@ -20,7 +20,7 @@ class TwitterController extends Controller
 {
     public function loginAction()
     {
-        $connection = new TwitterOAuth('4VoucgB8MqPBWOUvqAbMVEGyZ', 'W6DTudd36Nki2xyMvosd1fVCtZArmKDa6HKMBq7KeUSOClkBvz');
+        $connection = new TwitterOAuth($this->container->getParameter('twitter_client'), $this->container->getParameter('twitter_secret'));
         $requestToken = $connection->oauth('oauth/request_token', array('oauth_callback' => $this->generateUrl('fango_user_twitter_check', [], true)));
         $url = $connection->url('oauth/authenticate', array('oauth_token' => $requestToken['oauth_token']));
 
@@ -29,7 +29,7 @@ class TwitterController extends Controller
 
     public function checkAction(Request $request)
     {
-        $connection = new TwitterOAuth('4VoucgB8MqPBWOUvqAbMVEGyZ', 'W6DTudd36Nki2xyMvosd1fVCtZArmKDa6HKMBq7KeUSOClkBvz');
+        $connection = new TwitterOAuth($this->container->getParameter('twitter_client'), $this->container->getParameter('twitter_secret'));
         $content = $connection->oauth('oauth/access_token', [
             'oauth_verifier' => $request->get('oauth_verifier'),
             'oauth_token' => $request->get('oauth_token')

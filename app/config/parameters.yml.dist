@@ -23,3 +23,10 @@ parameters:
 
     facebook_app_id: opkokoko
     facebook_app_secret: sldkmalsdmlak
+
+
+    twitter_client: 4VoucgB8MqPBWOUvqAbMVEGyZ
+    twitter_secret: W6DTudd36Nki2xyMvosd1fVCtZArmKDa6HKMBq7KeUSOClkBvz
+
+    instagram_client_id: 1132d5ef93824107a5c19b1b78a80ddd
+    instagram_client_secret: 3989fc5e4c1c414c832107f7123e33ea

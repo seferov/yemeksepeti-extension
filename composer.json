@@ -33,7 +33,8 @@
         "vipx/bot-detect-bundle": "2.0.1",
         "willdurand/geocoder-bundle": "@stable",
         "facebook/php-sdk-v4": "4.0.0",
-        "abraham/twitteroauth": "0.5.2"
+        "abraham/twitteroauth": "0.5.2",
+        "cosenary/instagram": "^2.3"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
