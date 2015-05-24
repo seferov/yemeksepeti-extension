@@ -1,0 +1,18 @@
+{% extends 'FangoMainBundle:Dashboard:layout.html.twig' %}
+
+{% block main %}
+    <div class="row">
+        <div class="col-lg-4 text-center">
+            <h2>${{ app.user.earnings|number_format(2) }}</h2>
+            <span>Earnings</span>
+        </div>
+        <div class="col-lg-4 text-center">
+            <h2>${{ app.user.paid|number_format(2) }}</h2>
+            <span>Paid</span>
+        </div>
+        <div class="col-lg-4 text-center">
+            <h2>${{ (app.user.paid + app.user.earnings)|number_format(2) }}</h2>
+            <span>Total Earnings</span>
+        </div>
+    </div>
+{% endblock %}

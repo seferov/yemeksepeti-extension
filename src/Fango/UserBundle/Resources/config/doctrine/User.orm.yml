@@ -9,7 +9,9 @@ Fango\UserBundle\Entity\User:
             generator:
                 strategy: AUTO
     fields:
-        fullname:   { type: string, length: 255, nullable: true }
+        fullname:       { type: string, length: 255, nullable: true }
+        earnings:       { type: float }
+        paid:           { type: float }
     oneToMany:
         userCampaigns:
             targetEntity: Fango\MainBundle\Entity\UserCampaign

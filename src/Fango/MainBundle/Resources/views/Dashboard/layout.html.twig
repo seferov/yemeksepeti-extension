@@ -1,3 +1,4 @@
+{% set route = app.request.attributes.get('_route') %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,8 +63,11 @@
         <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
-                <li class="active">
+                <li class="{% if 'campaign' in route %}active{% endif %}">
                     <a href="{{ url('fango_main_campaign_list') }}"><i class="fa fa-fw fa-bullhorn"></i> Campaigns</a>
+                </li>
+                <li class="{% if 'earnings' in route %}active{% endif %}">
+                    <a href="{{ url('fango_dashboard_earnings') }}"><i class="fa fa-fw fa-usd"></i> Earnings</a>
                 </li>
             </ul>
         </div>

@@ -97,4 +97,60 @@ class User extends BaseUser
     {
         return $this->userCampaigns;
     }
+
+    /**
+     * @var float
+     */
+    private $earnings;
+
+    /**
+     * @var float
+     */
+    private $paid;
+
+    /**
+     * Set earnings
+     *
+     * @param float $earnings
+     * @return User
+     */
+    public function setEarnings($earnings)
+    {
+        $this->earnings = $earnings;
+
+        return $this;
+    }
+
+    /**
+     * Get earnings
+     *
+     * @return float 
+     */
+    public function getEarnings()
+    {
+        return $this->earnings;
+    }
+
+    /**
+     * Set paid
+     *
+     * @param float $paid
+     * @return User
+     */
+    public function setPaid($paid)
+    {
+        $this->paid = $paid;
+
+        return $this;
+    }
+
+    /**
+     * Get paid
+     *
+     * @return float 
+     */
+    public function getPaid()
+    {
+        return $this->paid;
+    }
 }

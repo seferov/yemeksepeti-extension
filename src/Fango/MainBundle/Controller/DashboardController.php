@@ -18,4 +18,12 @@ class DashboardController extends Controller
     {
         return $this->render('@FangoMain/Dashboard/index.html.twig');
     }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function earningsAction()
+    {
+        return $this->render('@FangoMain/Dashboard/earnings.html.twig');
+    }
 }
