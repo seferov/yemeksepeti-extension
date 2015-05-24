@@ -21,7 +21,9 @@ class CampaignController extends DashboardBaseController
         $campaigns = $this->getDoctrine()
             ->getManager()
             ->getRepository('FangoMainBundle:Campaign')
-            ->findAll();
+            ->findBy([
+                'status' => 'published'
+            ]);
 
         return $this->render('@FangoMain/Campaign/list.html.twig', [
             'campaigns' => $campaigns
@@ -35,7 +37,15 @@ class CampaignController extends DashboardBaseController
     public function showAction($id)
     {
         $em = $this->getDoctrine()->getManager();
-        $campaign = $em->getRepository('FangoMainBundle:Campaign')->find($id);
+        $campaign = $em->getRepository('FangoMainBundle:Campaign')->findOneBy([
+            'id' => $id,
+            'status' => 'published'
+        ]);
+
+        if (!$campaign) {
+            throw $this->createNotFoundException();
+        }
+
         $userCampaign = $em->getRepository('FangoMainBundle:UserCampaign')->findOneBy([
             'campaign' => $campaign,
             'user' => $this->getUser()
@@ -54,7 +64,10 @@ class CampaignController extends DashboardBaseController
     public function applyAction($id)
     {
         $em = $this->getDoctrine()->getManager();
-        $campaign = $em->getRepository('FangoMainBundle:Campaign')->find($id);
+        $campaign = $em->getRepository('FangoMainBundle:Campaign')->findOneBy([
+            'id' => $id,
+            'status' => 'published'
+        ]);
         $userCampaign = $em->getRepository('FangoMainBundle:UserCampaign')->findOneBy([
             'campaign' => $campaign,
             'user' => $this->getUser()
