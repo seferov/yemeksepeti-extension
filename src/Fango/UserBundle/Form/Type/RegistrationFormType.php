@@ -37,7 +37,7 @@ class RegistrationFormType extends AbstractType
             ]])
             ->add('fullname', null, ['label' => 'Fullname', 'attr' => [
                 'class' => 'form-control',
-                'placeholder' => 'Fullname'
+                'placeholder' => 'Full name'
             ]])
             ->add('plainPassword', 'password', ['label' => 'Password', 'attr' => [
                 'class' => 'form-control',
