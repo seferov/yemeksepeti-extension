@@ -130,6 +130,7 @@ class CampaignController extends DashboardBaseController
         $transaction->setCreatedAt(new \DateTime('now'));
         $transaction->setIpAddress($request->getClientIp());
         $transaction->setAction(false);
+        $transaction->setUserAgent($request->headers->get('User-Agent'));
         $transaction->setUserCampaign($userCampaign);
         $transaction->setReferer($request->headers->get('referer'));
         $hash = $this->get('fos_user.util.token_generator')->generateToken();

@@ -192,4 +192,32 @@ class Transaction
     {
         return $this->action;
     }
+    /**
+     * @var string
+     */
+    private $userAgent;
+
+
+    /**
+     * Set userAgent
+     *
+     * @param string $userAgent
+     * @return Transaction
+     */
+    public function setUserAgent($userAgent)
+    {
+        $this->userAgent = $userAgent;
+
+        return $this;
+    }
+
+    /**
+     * Get userAgent
+     *
+     * @return string 
+     */
+    public function getUserAgent()
+    {
+        return $this->userAgent;
+    }
 }

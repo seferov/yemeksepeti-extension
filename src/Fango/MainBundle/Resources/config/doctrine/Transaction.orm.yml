@@ -24,6 +24,11 @@ Fango\MainBundle\Entity\Transaction:
         createdAt:
             type: datetime
             column: created_at
+        userAgent:
+            type: string
+            length: 255
+            column: user_agent
+            nullable: true
     manyToOne:
         userCampaign:
             targetEntity: Fango\MainBundle\Entity\UserCampaign
