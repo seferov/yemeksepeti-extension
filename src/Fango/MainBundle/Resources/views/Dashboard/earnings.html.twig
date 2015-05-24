@@ -1,6 +1,7 @@
 {% extends 'FangoMainBundle:Dashboard:layout.html.twig' %}
 
 {% block main %}
+    <h1>Earnings</h1>
     <div class="row">
         <div class="col-lg-4 text-center">
             <h2>${{ app.user.earnings|number_format(2) }}</h2>

@@ -164,4 +164,32 @@ class Network
     {
         return $this->rest;
     }
+    /**
+     * @var string
+     */
+    private $display;
+
+
+    /**
+     * Set display
+     *
+     * @param string $display
+     * @return Network
+     */
+    public function setDisplay($display)
+    {
+        $this->display = $display;
+
+        return $this;
+    }
+
+    /**
+     * Get display
+     *
+     * @return string 
+     */
+    public function getDisplay()
+    {
+        return $this->display;
+    }
 }

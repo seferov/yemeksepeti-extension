@@ -16,6 +16,13 @@ class NetworkController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('@FangoMain/Networks/index.html.twig');
+        $networks = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('FangoUserBundle:Network')
+            ->findBy(['user' => $this->getUser()]);
+
+        return $this->render('@FangoMain/Networks/index.html.twig', [
+            'networks' => $networks
+        ]);
     }
 }

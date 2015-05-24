@@ -90,6 +90,8 @@ class FacebookController extends Controller
                 $network->setType('facebook');
                 $network->setUser($user);
                 $network->setNetworkId($fbUser['id']);
+                $network->setDisplay($fbUser['first_name'].' '.$fbUser['last_name']);
+                $network->setCreatedAt(new \DateTime('now'));
                 $network->setRest(serialize($fbUser));
 
                 $em->persist($network);
@@ -130,6 +132,7 @@ class FacebookController extends Controller
         $network->setNetworkId($fbUser['id']);
         $network->setRest(serialize($fbUser));
         $network->setCreatedAt(new \DateTime('now'));
+        $network->setDisplay($fbUser['first_name'].' '.$fbUser['last_name']);
         $this->getDoctrine()->getManager()->persist($network);
 
         $user = UserHelper::fillDefaultValues($user);

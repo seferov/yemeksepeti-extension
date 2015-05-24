@@ -10,6 +10,7 @@ Fango\UserBundle\Entity\Network:
     fields:
         type:       { type: string, length: '50' }
         networkId:  { type: string, column: network_id, length: 100 }
+        display:    { type: string, length: 100, nullable: true }
         createdAt:  { type: datetime, column: created_at }
         rest:       { type: text, nullable: true }
     manyToOne:

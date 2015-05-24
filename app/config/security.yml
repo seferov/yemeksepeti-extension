@@ -25,3 +25,4 @@ security:
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/dashboard, role: IS_AUTHENTICATED_FULLY }
         - { path: ^/campaigns, role: IS_AUTHENTICATED_FULLY }
+        - { path: ^/networks, role: IS_AUTHENTICATED_FULLY }
