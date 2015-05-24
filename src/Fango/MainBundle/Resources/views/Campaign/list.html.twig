@@ -1,6 +1,12 @@
 {% extends '@FangoMain/Dashboard/layout.html.twig' %}
 
 {% block main %}
+    <div class="row">
+        <div class="alert alert-info" role="alert">
+            Add more social media accounts to gain access to more campaigns. <a
+                    href="{{ url('fango_dashboard_networks_index') }}">Add account</a>
+        </div>
+    </div>
     {% for campaign in campaigns %}
         <div class="block row list-campaign">
             <div class="col-md-6">

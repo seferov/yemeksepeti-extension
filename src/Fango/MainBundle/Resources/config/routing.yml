@@ -30,3 +30,7 @@ fango_main_short_link:
 fango_dashboard_earnings:
     path:     /earnings
     defaults: { _controller: FangoMainBundle:Dashboard:earnings }
+
+fango_dashboard_networks_index:
+    path:     /networks
+    defaults: { _controller: FangoMainBundle:Network:index }

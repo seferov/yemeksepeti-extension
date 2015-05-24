@@ -69,6 +69,9 @@
                 <li class="{% if 'earnings' in route %}active{% endif %}">
                     <a href="{{ url('fango_dashboard_earnings') }}"><i class="fa fa-fw fa-usd"></i> Earnings</a>
                 </li>
+                <li class="{% if 'networks' in route %}active{% endif %}">
+                    <a href="{{ url('fango_dashboard_networks_index') }}"><i class="fa fa-fw fa-users"></i> Networks</a>
+                </li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
