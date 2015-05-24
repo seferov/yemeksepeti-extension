@@ -7,7 +7,7 @@
     <div class="row omb_row-sm-offset-3">
         <div class="col-xs-12 col-sm-6">
             {% if error %}
-                <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                <div class="alert alert-danger" role="alert">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
             {% endif %}
 
             <form action="{{ path("fos_user_security_check") }}" method="post">
