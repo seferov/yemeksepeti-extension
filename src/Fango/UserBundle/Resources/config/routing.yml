@@ -21,3 +21,11 @@ fango_user_twitter_login:
 fango_user_twitter_check:
     pattern:  /twitter/check
     defaults: { _controller: FangoUserBundle:Twitter:check }
+
+fango_user_instagram_login:
+    pattern:  /instagram/login
+    defaults: { _controller: FangoUserBundle:Instagram:login }
+
+fango_user_instagram_check:
+    pattern:  /instagram
+    defaults: { _controller: FangoUserBundle:Instagram:check }
