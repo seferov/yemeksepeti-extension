@@ -11,25 +11,25 @@
                     <span class="input-group-addon"><i class="fa fa-user"></i></span>
                     {{ form_widget(form.username) }}
                 </div>
-                <span class="help-block"></span>
+                <span class="help-block">{{ form_errors(form.username) }}</span>
 
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-user"></i></span>
                     {{ form_widget(form.fullname) }}
                 </div>
-                <span class="help-block"></span>
+                <span class="help-block">{{ form_errors(form.fullname) }}</span>
 
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
                     {{ form_widget(form.email) }}
                 </div>
-                <span class="help-block"></span>
+                <span class="help-block">{{ form_errors(form.username) }}</span>
 
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-lock"></i></span>
                     {{ form_widget(form.plainPassword) }}
                 </div>
-                <span class="help-block"></span>
+                <span class="help-block">{{ form_errors(form.plainPassword) }}</span>
 
                 {{ form_rest(form) }}
 
