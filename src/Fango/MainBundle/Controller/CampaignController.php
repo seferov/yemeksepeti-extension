@@ -72,7 +72,7 @@ class CampaignController extends DashboardBaseController
         ]);
 
         $user = $status == 'preview'
-            ? $em->getRepository('FangoUserBundle:User')->find(11);
+            ? $em->getRepository('FangoUserBundle:User')->find(11)
             : $this->getUser();
 
         $userCampaign = $em->getRepository('FangoMainBundle:UserCampaign')->findOneBy([
