@@ -30,7 +30,7 @@
         </div>
     </div>
     <div class="row">
-        {{ campaign.description }}
+        {{ campaign.description|raw }}
     </div>
     {% if userCampaign is not null %}
     <div class="row">
