@@ -44,7 +44,7 @@ class MailerCommand extends ContainerAwareCommand
             $version = $versions[array_rand($versions)];
             $message
                 ->setFromEmail('invitation@fango.me')
-                ->setFromName('Fango.me')
+                ->setFromName('Fango')
                 ->addTo($mail->getEmail())
                 ->setSubject(sprintf($version['subject'], $mail->getUsername()))
                 ->setHtml($version['html'])
