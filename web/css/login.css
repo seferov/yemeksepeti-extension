@@ -12,6 +12,9 @@
 .omb_socialButtons a {
     color: white;
     opacity: 0.9;
+    padding-left: 0;
+    padding-right: 0;
+    border-color: rgba(0,0,0,0.2);
 }
 
 .omb_socialButtons a:hover {
@@ -72,4 +75,25 @@
         text-align: right;
         margin-top: 10px;
     }
+}
+
+.line {
+    border-top: #ccc 1px solid;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.line span {
+    display: inline-block;
+    padding: 0 10px;
+    position: relative;
+    top: -10px;
+    background: #FFF;
+    color: #999;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+.omb_loginOrEmail {
+    margin-top: 20px;
 }
