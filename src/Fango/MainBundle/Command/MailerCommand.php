@@ -35,7 +35,7 @@ class MailerCommand extends ContainerAwareCommand
             ]);
 
         $versions = [
-            ['subject' => 'Business Inquiry for %s', 'html' => $this->getContainer()->get('templating')->render('@FangoMain/Email/invitation-a.html.twig')],
+            ['subject' => 'Business inquiry for %s', 'html' => $this->getContainer()->get('templating')->render('@FangoMain/Email/invitation-a.html.twig')],
             ['subject' => 'Sponsored post for %s', 'html' => $this->getContainer()->get('templating')->render('@FangoMain/Email/invitation-b.html.twig')]
         ];
 
