@@ -15,6 +15,13 @@ Fango\MainBundle\Entity\Mail:
             type: string
             length: 255
             column: active_hour
+        username:
+            type: string
+            length: 255
+            nullable: true
+        followerCount:
+            type: integer
+            column: follower_count
         status:
             type: string
             length: '10'

@@ -164,4 +164,60 @@ class Mail
     {
         return $this->rejectReason;
     }
+    /**
+     * @var string
+     */
+    private $username;
+
+    /**
+     * @var integer
+     */
+    private $followerCount;
+
+
+    /**
+     * Set username
+     *
+     * @param string $username
+     * @return Mail
+     */
+    public function setUsername($username)
+    {
+        $this->username = $username;
+
+        return $this;
+    }
+
+    /**
+     * Get username
+     *
+     * @return string 
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    /**
+     * Set followerCount
+     *
+     * @param integer $followerCount
+     * @return Mail
+     */
+    public function setFollowerCount($followerCount)
+    {
+        $this->followerCount = $followerCount;
+
+        return $this;
+    }
+
+    /**
+     * Get followerCount
+     *
+     * @return integer 
+     */
+    public function getFollowerCount()
+    {
+        return $this->followerCount;
+    }
 }

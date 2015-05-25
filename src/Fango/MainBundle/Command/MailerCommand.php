@@ -29,17 +29,25 @@ class MailerCommand extends ContainerAwareCommand
 
         $mails = $em
             ->getRepository('FangoMainBundle:Mail')
-            ->findBy(['status' => 'new']);
+            ->findBy([
+                'status' => 'new',
+                'activeHour' => date('H')
+            ]);
+
+        $versions = [
+            ['subject' => 'Business Inquiry for %s', 'html' => $this->getContainer()->get('templating')->render('@FangoMain/Email/invitation-a.html.twig')],
+            ['subject' => 'Sponsored post for %s', 'html' => $this->getContainer()->get('templating')->render('@FangoMain/Email/invitation-b.html.twig')]
+        ];
 
         foreach ($mails as $mail) {
             $message = new Message();
-
+            $version = $versions[array_rand($versions)];
             $message
-                ->setFromEmail('hello@fango.me')
+                ->setFromEmail('invitation@fango.me')
                 ->setFromName('Fango.me')
                 ->addTo($mail->getEmail())
-                ->setSubject('Test')
-                ->setHtml('<html><body><h1>Some Content</h1></body></html>')
+                ->setSubject(sprintf($version['subject'], $mail->getUsername()))
+                ->setHtml($version['html'])
             ;
 
             $result = $dispatcher->send($message);
