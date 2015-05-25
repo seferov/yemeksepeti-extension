@@ -10,19 +10,12 @@
     <title>Fango. Influencer Marketing Platform</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 
-    <link rel="stylesheet" href="{{ asset('css/homepage/reset.css') }}">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 
     <link rel="stylesheet" href="{{ asset('css/homepage/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/homepage/media.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/homepage/flexslider.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/homepage/launchrock.css') }}">
-    <!--[if lt IE 9]>
-    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <!--[if IE 8]>
-    <link rel="stylesheet" href="{{ asset('css/homepage/ie8.css') }}">
-    <![endif]-->
 
     <!-- favicon -->
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
@@ -31,25 +24,20 @@
 <body>
 
 {% include '@FangoMain/Components/_ga.html.twig' %}
-<!-- BEGIN HEADER -->
-<header id="header" style="background: none">
-    <div id="bg-video-wrapper" style="position: fixed; z-index: -1; width: 100%; height: 100%; ">
+
+    <div id="bg-video-wrapper">
         <iframe id="bg-video" frameborder="0" height="100%" width="100%" src="https://youtube.com/embed/DESaYHsr8Sw?autoplay=1&amp;controls=0&amp;showinfo=0&amp;autohide=1&amp;loop=1&amp;playlist=DESaYHsr8Sw&amp;wmode=transparent&amp;rel=0">
         </iframe>
     </div>
-    <div id="bg-image" style="position: fixed; z-index: -2; width: 100%; height: 100%; background: url('/files/web-bg.jpg') center center no-repeat;
-background-size: cover;
-overflow: hidden;
-background-color: #151515;">
-    </div>
+    <div id="bg-image"></div>
+    <div id="bg-video-overlay"></div>
+
     <div class="container">
-        <div class="row" style="color: #fff; margin-top:100px; font-size:24px; text-shadow: 0px 0px 2px rgba(0,0,0,.9);">
+        <div class="row" id="first-row">
             {% block main %}{% endblock %}
         </div><!-- END ROW -->
     </div><!-- END CONTAINER -->
 
     <div class="clear"></div>
-</header>
-<!-- END HEADER -->
 
 </body></html>
