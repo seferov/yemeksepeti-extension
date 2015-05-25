@@ -10,7 +10,7 @@
             </div>
         </div>
         <div class="col-md-6 stats">
-            <div class="col-md-4 campaign-list-platform">
+            <div class="col-md-6 campaign-list-platform">
                 <h4>
                     Platforms
                 </h4>
@@ -20,27 +20,28 @@
                         <i class="fa fa-instagram"></i>
                     </span>
             </div>
-            <div class="col-md-4 campaign-list-access-btn">
+            <div class="col-md-6 campaign-list-access-btn">
                 {% if userCampaign is null %}
-                    <a href="{{ url('fango_main_campaign_apply', {'id': campaign.id}) }}" class="btn btn-primary btn-lg">Apply</a>
+                    <a href="{{ url('fango_main_campaign_apply', {'id': campaign.id}) }}" class="btn btn-success btn-lg">Apply</a>
                 {% else %}
-                    <span class="btn btn-default btn-lg disabled">Applied</span>
+                    <span class="btn btn-lg disabled hidden">Applied</span>
                 {% endif %}
 
-                <a href="{{ url('fango_main_campaign_preview', {'id': campaign.id}) }}" class="btn btn-primary btn-lg" target="_blank">Preview</a>
+                <a href="{{ url('fango_main_campaign_preview', {'id': campaign.id}) }}" class="btn btn-info btn-lg" target="_blank">Preview</a>
             </div>
         </div>
     </div>
-    <div class="row">
-        {{ campaign.description|raw }}
-    </div>
     {% if userCampaign is not null %}
     <div class="row">
-        <div>
+        <div class="alert alert-info" role="alert">
+            Share your link: 
             <a href="{{ url('fango_main_short_link', {'hash': userCampaign.uniqueLink}) }}" target="_blank">
                 {{ url('fango_main_short_link', {'hash': userCampaign.uniqueLink}) }}
             </a>
         </div>
     </div>
     {% endif %}
+    <div class="row">
+        {{ campaign.description|raw }}
+    </div>
 {% endblock %}
