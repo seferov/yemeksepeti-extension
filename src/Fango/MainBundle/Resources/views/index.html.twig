@@ -1,12 +1,30 @@
 {% extends '@FangoMain/layout.html.twig' %}
 
 {% block main %}
-    <h1 style="font-size: 60px;">FANGO</h1>
-    <p>Influencer Marketing Platform.</p>
-    <p style="margin-top: 30px"><a href="mailto:hello@fango.me" style="color: #fff">hello@fango.me</a></p>
-    <div>
-        <a href="{{ url('fos_user_registration_register') }}">Sign Up</a> |
-        <a href="{{ url('fos_user_security_login') }}">Login</a>
+    <h1>FANGO</h1>
+    <h3>We help social media creators get sponsored by top brands.</h3>
+    <p>&nbsp;</p>
+    <h2>Join over 150,000 creators.</h2>
+    <p>
+      <a href="{{ url('fos_user_registration_register') }}" class="btn btn-lg btn-info">SIGN UP</a>
+      <a href="{{ url('fos_user_security_login') }}" class="btn btn-lg btn-outline-inverse" id="login">LOG IN</a>
+    </p>
+    <div class="row" id="second-row">
+      <div class="col-md-4">
+        <i class="fa fa-star-o fa-5x"></i>
+        <h3>Shine</h3>
+        <p>Get access to great campaigns sponsored by top brands.</p>
+      </div>
+      <div class="col-md-4">
+        <i class="fa fa-line-chart fa-5x"></i>
+        <h3>Promote</h3>
+        <p>Choose your favorites and share with your followers.</p>
+      </div>
+      <div class="col-md-4">
+        <i class="fa fa-dollar fa-5x"></i>
+        <h3>Monetize</h3>
+        <p>Provide value to your followers and monetize easily.</p>
+      </div>
     </div>
-    <p style="font-size: 12px; margin-top: 100px">934 Howard St, San Francisco, CA, 94103, United States</p>
+    <p id="footer-address">934 Howard St, San Francisco, CA, 94103, United States</p>
 {% endblock %}
