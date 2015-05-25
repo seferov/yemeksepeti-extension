@@ -60,7 +60,7 @@ class CampaignController extends DashboardBaseController
 
     /**
      * @param $id
-     * @param $status
+     * @param $status (applied|preview)
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function applyAction($id, $status)
