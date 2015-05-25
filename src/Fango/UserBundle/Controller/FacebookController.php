@@ -69,33 +69,27 @@ class FacebookController extends Controller
 
         $request = new FacebookRequest($session, 'GET', '/me');
         $response = $request->execute();
-        $fbUser = $response->getGraphObject()->asArray();
+        $userData = $response->getGraphObject()->asArray();
 
-        $userManager = $this->get('fos_user.user_manager');
-//        $user = $userManager->findUserBy(['facebookId' => $fbUser['id']]);
-//
         $em = $this->getDoctrine()->getManager();
-        $user = $em->getRepository('FangoUserBundle:User')->getUserBySocialId($fbUser['id'], 'facebook');
+        $user = $em->getRepository('FangoUserBundle:User')->getUserBySocialId($userData['id'], 'facebook');
 
         if (!$user) {
-            $user = $userManager->findUserByEmail($fbUser['email']);
+            $user = $em->getRepository('FangoUserBundle:User')->findOneBy([
+                'email' => $userData['email']
+            ]);
+
             if (!$user) {
-                $user = $this->createUser($fbUser);
+                if ($this->getUser()) {
+                    $user = $this->getUser();
+                }
+                else {
+                    $user = $this->createUser($userData);
+                    $em->persist($user);
+                }
             }
-            else {
-                // User is registered but not by facebook login
-                // Register facebook info as well
 
-                $network = new Network();
-                $network->setType('facebook');
-                $network->setUser($user);
-                $network->setNetworkId($fbUser['id']);
-                $network->setDisplay($fbUser['first_name'].' '.$fbUser['last_name']);
-                $network->setCreatedAt(new \DateTime('now'));
-                $network->setRest(serialize($fbUser));
-
-                $em->persist($network);
-            }
+            $this->createNetwork($userData, $user);
 
             $em->persist($user);
             $em->flush();
@@ -116,24 +110,17 @@ class FacebookController extends Controller
     }
 
     /**
-     * @param array $fbUser
+     * @param array $userData
      * @return User
      */
-    private function createUser(array $fbUser)
+    private function createUser(array $userData)
     {
         $user = new User();
-        $user->setUsername($this->generateUsername($fbUser));
-        $user->setEmail($fbUser['email']);
-        $user->setFullname($fbUser['first_name'].' '.$fbUser['last_name']);
+        $user->setUsername($this->generateUsername($userData));
+        $user->setEmail($userData['email']);
+        $user->setFullname($userData['first_name'].' '.$userData['last_name']);
 
-        $network = new Network();
-        $network->setType('facebook');
-        $network->setUser($user);
-        $network->setNetworkId($fbUser['id']);
-        $network->setRest(serialize($fbUser));
-        $network->setCreatedAt(new \DateTime('now'));
-        $network->setDisplay($fbUser['first_name'].' '.$fbUser['last_name']);
-        $this->getDoctrine()->getManager()->persist($network);
+        $this->createNetwork($userData, $user);
 
         $user = UserHelper::fillDefaultValues($user);
 
@@ -144,13 +131,29 @@ class FacebookController extends Controller
     }
 
     /**
-     * @param array $fbUser
+     * @param array $userData
+     * @param User $user
+     */
+    private function createNetwork(array $userData, User $user)
+    {
+        $network = new Network();
+        $network->setType('facebook');
+        $network->setUser($user);
+        $network->setNetworkId($userData['id']);
+        $network->setRest(serialize($userData));
+        $network->setCreatedAt(new \DateTime('now'));
+        $network->setDisplay($userData['first_name'].' '.$userData['last_name']);
+        $this->getDoctrine()->getManager()->persist($network);
+    }
+
+    /**
+     * @param array $userData
      * @return mixed
      *
      */
-    private function generateUsername(array $fbUser)
+    private function generateUsername(array $userData)
     {
-        $username = str_replace(' ', '', $fbUser['first_name'].$fbUser['last_name'].substr($fbUser['id'], -4));
+        $username = str_replace(' ', '', $userData['first_name'].$userData['last_name'].substr($userData['id'], -4));
 
         return Utils::slugify($username);
     }

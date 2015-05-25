@@ -35,7 +35,7 @@ class TwitterController extends Controller
             'oauth_token' => $request->get('oauth_token')
         ]);
 
-        $connection = new TwitterOAuth('4VoucgB8MqPBWOUvqAbMVEGyZ', 'W6DTudd36Nki2xyMvosd1fVCtZArmKDa6HKMBq7KeUSOClkBvz', $content['oauth_token'], $content['oauth_token_secret']);
+        $connection = new TwitterOAuth($this->container->getParameter('twitter_client'), $this->container->getParameter('twitter_secret'), $content['oauth_token'], $content['oauth_token_secret']);
         $userData = $connection->get("account/verify_credentials");
 
         $userData = json_decode(json_encode($userData), true);
@@ -44,8 +44,15 @@ class TwitterController extends Controller
         $user = $em->getRepository('FangoUserBundle:User')->getUserBySocialId($userData['id'], 'twitter');
 
         if (!$user) {
-            $user = $this->createUser($userData);
-            $em->persist($user);
+            if ($this->getUser()) {
+                $user = $this->getUser();
+                $this->createNetwork($userData, $user);
+            }
+            else {
+                $user = $this->createUser($userData);
+                $em->persist($user);
+            }
+
             $em->flush();
         }
 
@@ -65,6 +72,22 @@ class TwitterController extends Controller
         $user->setEmail('none');
         $user->setFullname($userData['name']);
 
+        $this->createNetwork($userData, $user);
+
+        $user = UserHelper::fillDefaultValues($user);
+
+        $user->setPlainPassword('randomPass');
+        $this->get('fos_user.user_manager')->updateUser($user);
+
+        return $user;
+    }
+
+    /**
+     * @param array $userData
+     * @param User $user
+     */
+    private function createNetwork(array $userData, User $user)
+    {
         $network = new Network();
         $network->setType('twitter');
         $network->setUser($user);
@@ -73,13 +96,6 @@ class TwitterController extends Controller
         $network->setCreatedAt(new \DateTime('now'));
         $network->setDisplay($userData['screen_name']);
         $this->getDoctrine()->getManager()->persist($network);
-
-        $user = UserHelper::fillDefaultValues($user);
-
-        $user->setPlainPassword('randomPass');
-        $this->get('fos_user.user_manager')->updateUser($user);
-
-        return $user;
     }
 
     /**

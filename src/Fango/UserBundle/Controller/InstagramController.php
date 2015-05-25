@@ -52,8 +52,15 @@ class InstagramController extends Controller
         $user = $em->getRepository('FangoUserBundle:User')->getUserBySocialId($userData['id'], 'instagram');
 
         if (!$user) {
-            $user = $this->createUser($userData);
-            $em->persist($user);
+            if ($this->getUser()) {
+                $user = $this->getUser();
+                $this->createNetwork($userData, $user);
+            }
+            else {
+                $user = $this->createUser($userData);
+                $em->persist($user);
+            }
+
             $em->flush();
         }
 
@@ -73,6 +80,22 @@ class InstagramController extends Controller
         $user->setEmail('none');
         $user->setFullname($userData['full_name']);
 
+        $this->createNetwork($userData, $user);
+
+        $user = UserHelper::fillDefaultValues($user);
+
+        $user->setPlainPassword('randomPass');
+        $this->get('fos_user.user_manager')->updateUser($user);
+
+        return $user;
+    }
+
+    /**
+     * @param array $userData
+     * @param User $user
+     */
+    private function createNetwork(array $userData, User $user)
+    {
         $network = new Network();
         $network->setType('instagram');
         $network->setUser($user);
@@ -81,13 +104,6 @@ class InstagramController extends Controller
         $network->setCreatedAt(new \DateTime('now'));
         $network->setDisplay($userData['username']);
         $this->getDoctrine()->getManager()->persist($network);
-
-        $user = UserHelper::fillDefaultValues($user);
-
-        $user->setPlainPassword('randomPass');
-        $this->get('fos_user.user_manager')->updateUser($user);
-
-        return $user;
     }
 
     /**
