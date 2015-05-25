@@ -59,7 +59,7 @@ class MailerCommand extends ContainerAwareCommand
             $em->persist($mail);
             $em->flush();
 
-            sleep(2);
+            sleep(15);
         }
 
         $output->writeLn('Done!');
