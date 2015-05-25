@@ -21,9 +21,9 @@ parameters:
 
     server_password:   'something'
 
-    facebook_app_id: opkokoko
-    facebook_app_secret: sldkmalsdmlak
-
+    # Facebook test app credentials
+    facebook_app_id: 908766299162005
+    facebook_app_secret: a213f2a0c9ba84f5028909ce7db74800
 
     twitter_client: 4VoucgB8MqPBWOUvqAbMVEGyZ
     twitter_secret: W6DTudd36Nki2xyMvosd1fVCtZArmKDa6HKMBq7KeUSOClkBvz
