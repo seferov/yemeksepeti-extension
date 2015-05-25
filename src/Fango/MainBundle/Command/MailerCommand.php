@@ -35,7 +35,7 @@ class MailerCommand extends ContainerAwareCommand
             ]);
 
         $versions = [
-            ['subject' => 'Business Inquiry for %s', 'html' => $this->getContainer()->get('templating')->render('@FangoMain/Email/invitation-a.html.twig')],
+            ['subject' => 'Business inquiry for %s', 'html' => $this->getContainer()->get('templating')->render('@FangoMain/Email/invitation-a.html.twig')],
             ['subject' => 'Sponsored post for %s', 'html' => $this->getContainer()->get('templating')->render('@FangoMain/Email/invitation-b.html.twig')]
         ];
 
@@ -44,7 +44,7 @@ class MailerCommand extends ContainerAwareCommand
             $version = $versions[array_rand($versions)];
             $message
                 ->setFromEmail('invitation@fango.me')
-                ->setFromName('Fango.me')
+                ->setFromName('Fango')
                 ->addTo($mail->getEmail())
                 ->setSubject(sprintf($version['subject'], $mail->getUsername()))
                 ->setHtml($version['html'])
@@ -58,6 +58,8 @@ class MailerCommand extends ContainerAwareCommand
 
             $em->persist($mail);
             $em->flush();
+
+            sleep(15);
         }
 
         $output->writeLn('Done!');
