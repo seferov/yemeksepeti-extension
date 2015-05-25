@@ -18,6 +18,10 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
  */
 class TwitterController extends Controller
 {
+    /**
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \Abraham\TwitterOAuth\TwitterOAuthException
+     */
     public function loginAction()
     {
         $connection = new TwitterOAuth($this->container->getParameter('twitter_client'), $this->container->getParameter('twitter_secret'));
@@ -27,8 +31,16 @@ class TwitterController extends Controller
         return $this->redirect($url);
     }
 
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \Abraham\TwitterOAuth\TwitterOAuthException
+     */
     public function checkAction(Request $request)
     {
+        if ($request->get('denied')) {
+            return $this->redirectToRoute('fos_user_security_login');
+        }
         $connection = new TwitterOAuth($this->container->getParameter('twitter_client'), $this->container->getParameter('twitter_secret'));
         $content = $connection->oauth('oauth/access_token', [
             'oauth_verifier' => $request->get('oauth_verifier'),
