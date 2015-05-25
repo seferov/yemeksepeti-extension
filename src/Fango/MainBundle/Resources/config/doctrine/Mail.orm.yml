@@ -1,6 +1,7 @@
 Fango\MainBundle\Entity\Mail:
     type: entity
     table: fg_mail
+    repositoryClass: Fango\MainBundle\Entity\MailRepository
     id:
         id:
             type: integer
