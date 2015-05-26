@@ -1,5 +1,9 @@
 {% extends '@FangoMain/Dashboard/layout.html.twig' %}
 
+{% block head %}
+    <link href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-social/4.9.0/bootstrap-social.min.css" rel="stylesheet">
+{% endblock %}
+
 {% block main %}
     <div class="block row list-campaign">
         <div class="col-md-6">
@@ -35,8 +39,12 @@
     <div class="row">
         <div class="alert alert-info" role="alert">
             Share your link: 
-            <a href="{{ url('fango_main_short_link', {'hash': userCampaign.uniqueLink}) }}" target="_blank">
-                {{ url('fango_main_short_link', {'hash': userCampaign.uniqueLink}) }}
+            <input type="text" value="{{ url('fango_main_short_link', {'hash': userCampaign.uniqueLink}) }}" onClick="this.select();" readonly="readonly">
+            <a href="https://www.facebook.com/sharer/sharer.php?u={{ url('fango_main_short_link', {'hash': userCampaign.uniqueLink}) }}" target="_blank" class="btn btn-sm btn-social btn-facebook">
+                <i class="fa fa-facebook"></i> Share
+            </a>
+            <a href="https://twitter.com/intent/tweet?url={{ url('fango_main_short_link', {'hash': userCampaign.uniqueLink}) }}" target="_blank" class="btn btn-sm btn-social btn-twitter">
+                <i class="fa fa-twitter"></i> Tweet
             </a>
         </div>
     </div>

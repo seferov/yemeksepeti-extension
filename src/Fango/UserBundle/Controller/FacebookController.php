@@ -39,6 +39,10 @@ class FacebookController extends Controller
      */
     public function authAction(Request $request)
     {
+        if ($request->get('error')) {
+            return $this->redirectToRoute('fos_user_security_login');
+        }
+
         FacebookSession::setDefaultApplication($this->container->getParameter('facebook_app_id'), $this->container->getParameter('facebook_app_secret'));
         $params = array(
             'client_id' => FacebookSession::_getTargetAppId(),

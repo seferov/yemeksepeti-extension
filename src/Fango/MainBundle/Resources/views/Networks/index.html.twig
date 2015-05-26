@@ -7,6 +7,7 @@
 {% block main %}
     <h1>Networks</h1>
 
+    {% if networks|length > 0 %}
     <div class="row">
         <div class="alert alert-info" role="alert">
         {% for network in networks %}
@@ -17,6 +18,7 @@
         {% endfor %}
         </div>
     </div>
+    {% endif %}
 
     <div class="row omb_row-sm-offset-3 omb_socialButtons">
         <div class="col-xs-4 col-sm-2">
@@ -33,7 +35,7 @@
         </div>
         <div class="col-xs-4 col-sm-2">
             <a href="{{ url('fango_user_instagram_login') }}" class="btn btn-lg btn-block omb_btn-instagram">
-                <i class="fa fa-google-plus visible-xs"></i>
+                <i class="fa fa-instagram visible-xs"></i>
                 <span class="hidden-xs">Instagram</span>
             </a>
         </div>

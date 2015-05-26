@@ -27,15 +27,28 @@ class MailerCommand extends ContainerAwareCommand
         $dispatcher = $this->getContainer()->get('hip_mandrill.dispatcher');
         $em = $this->getContainer()->get('doctrine.orm.default_entity_manager');
 
+//        $mails = $em
+//            ->getRepository('FangoMainBundle:Mail')
+//            ->findBy([
+//                'status' => 'raw'
+//            ], ['followerCount' => 'ASC'], 1000);
+//
+//        foreach ($mails as $mail) {
+//            $h = preg_match('/(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})/', $mail->getActiveHour(), $matches);
+//            $mail->setActiveHour($matches[4]);
+//            $mail->setStatus('new');
+//            $em->persist($mail);
+//            $em->flush();
+//        }
+//        exit;
+
+
         $mails = $em
             ->getRepository('FangoMainBundle:Mail')
-            ->findBy([
-                'status' => 'new',
-                'activeHour' => date('H')
-            ]);
+            ->getMails();
 
         $versions = [
-            ['subject' => 'Business Inquiry for %s', 'html' => $this->getContainer()->get('templating')->render('@FangoMain/Email/invitation-a.html.twig')],
+            ['subject' => 'Business inquiry for %s', 'html' => $this->getContainer()->get('templating')->render('@FangoMain/Email/invitation-a.html.twig')],
             ['subject' => 'Sponsored post for %s', 'html' => $this->getContainer()->get('templating')->render('@FangoMain/Email/invitation-b.html.twig')]
         ];
 
@@ -44,7 +57,7 @@ class MailerCommand extends ContainerAwareCommand
             $version = $versions[array_rand($versions)];
             $message
                 ->setFromEmail('invitation@fango.me')
-                ->setFromName('Fango.me')
+                ->setFromName('Fango')
                 ->addTo($mail->getEmail())
                 ->setSubject(sprintf($version['subject'], $mail->getUsername()))
                 ->setHtml($version['html'])

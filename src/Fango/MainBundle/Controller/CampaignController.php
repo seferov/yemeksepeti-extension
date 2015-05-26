@@ -138,7 +138,7 @@ class CampaignController extends DashboardBaseController
             return $this->redirect($url, 301);
         }
 
-        $unsupportedLocation = true;
+        $isLocationSupported = false;
         // Geo location support
         if (count($userCampaign->getCampaign()->getCountries())) {
             $geoData = $this->container
@@ -148,17 +148,17 @@ class CampaignController extends DashboardBaseController
 
             foreach ($userCampaign->getCampaign()->getCountries() as $country) {
                 if ($country->getCountry() == $geoData->getCountryCode()) {
-                    $unsupportedLocation = false;
+                    $isLocationSupported = true;
                     break;
                 }
             }
 
-            if ($unsupportedLocation && $userCampaign->getStatus() != 'preview') {
+            if ($isLocationSupported && $userCampaign->getStatus() != 'preview') {
                 return $this->redirectToRoute('fango_main_homepage');
             }
         }
         else {
-            $unsupportedLocation = false;
+            $isLocationSupported = true;
         }
 
         // Add as a new transaction
@@ -176,12 +176,10 @@ class CampaignController extends DashboardBaseController
         $em->flush();
         $em->clear();
 
-        if (!$unsupportedLocation) {
-            $url .= (parse_url($url, PHP_URL_QUERY)) ? '&' : '?';
-            $url .= http_build_query(['trans' => $hash]);
-        }
+        $url .= (parse_url($url, PHP_URL_QUERY)) ? '&' : '?';
+        $url .= http_build_query(['trans' => $hash]);
 
-        if ($userCampaign->getStatus() == 'preview') {
+        if ($userCampaign->getStatus() == 'preview' && !$isLocationSupported) {
             $url = $userCampaign->getCampaign()->getPreviewLink();
         }
 
