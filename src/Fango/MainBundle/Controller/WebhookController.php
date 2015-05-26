@@ -54,7 +54,7 @@ class WebhookController extends Controller
         }
 
         $transaction->setAction(true);
-        $user = $this->getUser();
+        $user = $transaction->getUserCampaign()->getUser();
         $user->setEarnings($user->getEarnings() + $transaction->getUserCampaign()->getCampaign()->getCpa());
 
         $em->persist($transaction, $user);
