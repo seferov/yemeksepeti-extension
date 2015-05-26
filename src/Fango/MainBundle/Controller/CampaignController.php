@@ -153,7 +153,7 @@ class CampaignController extends DashboardBaseController
                 }
             }
 
-            if ($isLocationSupported && $userCampaign->getStatus() != 'preview') {
+            if (!$isLocationSupported && $userCampaign->getStatus() != 'preview') {
                 return $this->redirectToRoute('fango_main_homepage');
             }
         }
