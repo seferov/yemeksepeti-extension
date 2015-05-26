@@ -26,7 +26,7 @@ class MailerCommand extends ContainerAwareCommand
     {
         $dispatcher = $this->getContainer()->get('hip_mandrill.dispatcher');
         $em = $this->getContainer()->get('doctrine.orm.default_entity_manager');
-
+//
 //        $mails = $em
 //            ->getRepository('FangoMainBundle:Mail')
 //            ->findBy([
@@ -34,33 +34,31 @@ class MailerCommand extends ContainerAwareCommand
 //            ], ['followerCount' => 'ASC'], 1000);
 //
 //        foreach ($mails as $mail) {
-//            $h = preg_match('/(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})/', $mail->getActiveHour(), $matches);
+//            preg_match('/(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})/', $mail->getActiveHour(), $matches);
 //            $mail->setActiveHour($matches[4]);
 //            $mail->setStatus('new');
 //            $em->persist($mail);
 //            $em->flush();
+//            $output->writeln($mail->getEmail());
 //        }
 //        exit;
 
-
-        $mails = $em
-            ->getRepository('FangoMainBundle:Mail')
-            ->getMails();
+        $mails = $em->getRepository('FangoMainBundle:Mail')->getMails();
 
         $versions = [
-            ['subject' => 'Business inquiry for %s', 'html' => $this->getContainer()->get('templating')->render('@FangoMain/Email/invitation-a.html.twig')],
-            ['subject' => 'Sponsored post for %s', 'html' => $this->getContainer()->get('templating')->render('@FangoMain/Email/invitation-b.html.twig')]
+            'igifgbif' => ['subject' => 'Business inquiry for %s', 'html' => $this->getContainer()->get('templating')->render('@FangoMain/Email/invitation-a.html.twig')],
+            'igifgspf' => ['subject' => 'Sponsored post for %s', 'html' => $this->getContainer()->get('templating')->render('@FangoMain/Email/invitation-b.html.twig')]
         ];
 
         foreach ($mails as $mail) {
             $message = new Message();
-            $version = $versions[array_rand($versions)];
+            $version = array_rand($versions);
             $message
                 ->setFromEmail('invitation@fango.me')
                 ->setFromName('Fango')
                 ->addTo($mail->getEmail())
-                ->setSubject(sprintf($version['subject'], $mail->getUsername()))
-                ->setHtml($version['html'])
+                ->setSubject(sprintf($versions[$version]['subject'], $mail->getUsername()))
+                ->setHtml($versions[$version]['html'])
             ;
 
             $result = $dispatcher->send($message);
@@ -68,6 +66,7 @@ class MailerCommand extends ContainerAwareCommand
             $mail->setStatus($result[0]['status']);
             $mail->setMandrillId($result[0]['_id']);
             $mail->setRejectReason($result[0]['reject_reason']);
+            $mail->setMailVersion($version);
 
             $em->persist($mail);
             $em->flush();

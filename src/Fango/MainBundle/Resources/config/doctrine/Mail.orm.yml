@@ -35,4 +35,9 @@ Fango\MainBundle\Entity\Mail:
             length: 255
             column: reject_reason
             nullable: true
+        mailVersion:
+            type: string
+            length: 20
+            column: mail_version
+            nullable: true
     lifecycleCallbacks: {  }

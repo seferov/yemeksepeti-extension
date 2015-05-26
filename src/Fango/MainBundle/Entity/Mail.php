@@ -220,4 +220,32 @@ class Mail
     {
         return $this->followerCount;
     }
+    /**
+     * @var string
+     */
+    private $mailVersion;
+
+
+    /**
+     * Set mailVersion
+     *
+     * @param string $mailVersion
+     * @return Mail
+     */
+    public function setMailVersion($mailVersion)
+    {
+        $this->mailVersion = $mailVersion;
+
+        return $this;
+    }
+
+    /**
+     * Get mailVersion
+     *
+     * @return string 
+     */
+    public function getMailVersion()
+    {
+        return $this->mailVersion;
+    }
 }
