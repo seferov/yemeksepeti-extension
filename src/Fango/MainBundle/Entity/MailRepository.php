@@ -22,6 +22,7 @@ class MailRepository extends EntityRepository
                 'status' => 'new',
                 'activeHour' => date('H')
             ])
+            ->orderBy('m.followerCount', 'asc')
             ->setMaxResults(1)
             ->getQuery()
             ->getResult();
