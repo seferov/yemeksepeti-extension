@@ -11,9 +11,10 @@ use Doctrine\ORM\EntityRepository;
 class MailRepository extends EntityRepository
 {
     /**
+     * @param int $limit
      * @return array
      */
-    public function getMails()
+    public function getMails($limit = 1)
     {
         return $this->createQueryBuilder('m')
             ->where('m.status = :status')
@@ -23,7 +24,7 @@ class MailRepository extends EntityRepository
                 'activeHour' => date('H')
             ])
             ->orderBy('m.followerCount', 'asc')
-            ->setMaxResults(1)
+            ->setMaxResults($limit)
             ->getQuery()
             ->getResult();
     }

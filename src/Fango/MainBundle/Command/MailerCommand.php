@@ -43,7 +43,7 @@ class MailerCommand extends ContainerAwareCommand
 //        }
 //        exit;
 
-        $mails = $em->getRepository('FangoMainBundle:Mail')->getMails();
+        $mails = $em->getRepository('FangoMainBundle:Mail')->getMails(6);
 
         $versions = [
             'igifgbif' => ['subject' => 'Business inquiry for %s', 'html' => $this->getContainer()->get('templating')->render('@FangoMain/Email/invitation-a.html.twig')],
