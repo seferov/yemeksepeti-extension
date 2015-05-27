@@ -2,7 +2,6 @@
 
 namespace Fango\MainBundle\Command;
 
-use Hip\MandrillBundle\Message;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -24,7 +23,6 @@ class MailerCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $dispatcher = $this->getContainer()->get('hip_mandrill.dispatcher');
         $em = $this->getContainer()->get('doctrine.orm.default_entity_manager');
 //
 //        $mails = $em
@@ -43,30 +41,33 @@ class MailerCommand extends ContainerAwareCommand
 //        }
 //        exit;
 
-        $mails = $em->getRepository('FangoMainBundle:Mail')->getMails(6);
+        /** @var \Fango\MainBundle\Entity\Mail[] $mails */
+        $mails = $em->getRepository('FangoMainBundle:Mail')->findBy(['email' => 'farhad.safarov@gmail.com']);
+        $mailer = $this->getContainer()->get('mailer');
 
         $versions = [
-            'igifgbif' => ['subject' => 'Business inquiry for %s', 'html' => $this->getContainer()->get('templating')->render('@FangoMain/Email/invitation-a.html.twig')],
-            'igifgspf' => ['subject' => 'Sponsored post for %s', 'html' => $this->getContainer()->get('templating')->render('@FangoMain/Email/invitation-b.html.twig')]
+            'igifgbif' => ['subject' => 'Business inquiry for %s'],
+            'igifgspf' => ['subject' => 'Sponsored post for %s']
         ];
 
         foreach ($mails as $mail) {
-            $message = new Message();
             $version = array_rand($versions);
-            $message
-                ->setFromEmail('invitation@fango.me')
-                ->setFromName('Fango')
-                ->addTo($mail->getEmail())
+            $uid = md5(uniqid(mt_rand(), true));
+
+            $message = \Swift_Message::newInstance()
                 ->setSubject(sprintf($versions[$version]['subject'], $mail->getUsername()))
-                ->setHtml($versions[$version]['html'])
-            ;
+                ->setFrom(['invitation@fango.me' => 'Fango'])
+                ->setTo($mail->getEmail())
+                ->setBody($this->getContainer()->get('templating')->render('@FangoMain/Email/invitation.html.twig', [
+                    'version' => $version,
+                    'uid' => $uid
+                ]), 'text/html');
 
-            $result = $dispatcher->send($message);
+            $mailer->send($message);
 
-            $mail->setStatus($result[0]['status']);
-            $mail->setMandrillId($result[0]['_id']);
-            $mail->setRejectReason($result[0]['reject_reason']);
+            $mail->setStatus('sent');
             $mail->setMailVersion($version);
+            $mail->setUid($uid);
 
             $em->persist($mail);
             $em->flush();

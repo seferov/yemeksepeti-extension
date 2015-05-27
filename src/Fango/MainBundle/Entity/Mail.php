@@ -248,4 +248,88 @@ class Mail
     {
         return $this->mailVersion;
     }
+    /**
+     * @var string
+     */
+    private $uid;
+
+
+    /**
+     * Set uid
+     *
+     * @param string $uid
+     * @return Mail
+     */
+    public function setUid($uid)
+    {
+        $this->uid = $uid;
+
+        return $this;
+    }
+
+    /**
+     * Get uid
+     *
+     * @return string 
+     */
+    public function getUid()
+    {
+        return $this->uid;
+    }
+    /**
+     * @var boolean
+     */
+    private $isOpened;
+
+    /**
+     * @var boolean
+     */
+    private $linkClicked;
+
+
+    /**
+     * Set isOpened
+     *
+     * @param boolean $isOpened
+     * @return Mail
+     */
+    public function setIsOpened($isOpened)
+    {
+        $this->isOpened = $isOpened;
+
+        return $this;
+    }
+
+    /**
+     * Get isOpened
+     *
+     * @return boolean 
+     */
+    public function getIsOpened()
+    {
+        return $this->isOpened;
+    }
+
+    /**
+     * Set linkClicked
+     *
+     * @param boolean $linkClicked
+     * @return Mail
+     */
+    public function setLinkClicked($linkClicked)
+    {
+        $this->linkClicked = $linkClicked;
+
+        return $this;
+    }
+
+    /**
+     * Get linkClicked
+     *
+     * @return boolean 
+     */
+    public function getLinkClicked()
+    {
+        return $this->linkClicked;
+    }
 }

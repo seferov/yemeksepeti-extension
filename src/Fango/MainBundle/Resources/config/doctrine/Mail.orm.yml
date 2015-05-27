@@ -9,35 +9,15 @@ Fango\MainBundle\Entity\Mail:
             generator:
                 strategy: AUTO
     fields:
-        email:
-            type: string
-            length: 255
-        activeHour:
-            type: string
-            length: 255
-            column: active_hour
-        username:
-            type: string
-            length: 255
-            nullable: true
-        followerCount:
-            type: integer
-            column: follower_count
-        status:
-            type: string
-            length: '10'
-        mandrillId:
-            type: string
-            length: '100'
-            column: mandrill_id
-        rejectReason:
-            type: string
-            length: 255
-            column: reject_reason
-            nullable: true
-        mailVersion:
-            type: string
-            length: 20
-            column: mail_version
-            nullable: true
+        email:          { type: string, length: 255 }
+        activeHour:     { type: string, length: 255, column: active_hour }
+        username:       { type: string, length: 255, nullable: true }
+        followerCount:  { type: integer, column: follower_count }
+        status:         { type: string, length: '10' }
+        mandrillId:     { type: string, length: '100', column: mandrill_id }
+        rejectReason:   { type: string, length: 255, column: reject_reason, nullable: true }
+        mailVersion:    { type: string, length: 20, column: mail_version, nullable: true }
+        uid:            { type: string, length: 255, nullable: true }
+        isOpened:       { type: boolean, column: is_opened }
+        linkClicked:    { type: boolean, column: link_clicked }
     lifecycleCallbacks: {  }
