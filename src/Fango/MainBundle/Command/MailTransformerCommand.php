@@ -11,13 +11,13 @@ use Symfony\Component\Console\Output\OutputInterface;
  * @author Farhad Safarov <http://ferhad.in>
  * @package Fango\MainBundle\Command
  */
-class MailTransformer extends ContainerAwareCommand
+class MailTransformerCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
         $this
             ->setName('fango:mailer:transform')
-            ->setDescription('Fango mailer');
+            ->setDescription('Fango mailer transformer (Active hours)');
     }
 
     /**
