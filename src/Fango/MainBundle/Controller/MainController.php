@@ -22,7 +22,7 @@ class MainController extends Controller
         if ($request->get('uid')) {
             $em = $this->getDoctrine()->getManager();
             /** @var \Fango\MainBundle\Entity\Mail $mail */
-            $mail = $em->getRepository('FangoMainBundle:Mail')->findOneBy(['uid' => $uid]);
+            $mail = $em->getRepository('FangoMainBundle:Mail')->findOneBy(['uid' => $request->get('uid')]);
 
             if ($mail instanceof Mail) {
                 $mail->setLinkClicked(true);
