@@ -46,3 +46,7 @@ fango_dashboard_networks_index:
 fango_email_tracking_pixel:
     path:     /email.gif
     defaults: { _controller: FangoMainBundle:Tracking:emailOpen }
+
+fnago_email_unsubscribe:
+    path:     /unsubscribe/{uid}
+    defaults: { _controller: FangoMainBundle:Mail:unsubscribe }

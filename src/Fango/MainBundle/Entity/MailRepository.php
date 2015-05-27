@@ -19,9 +19,11 @@ class MailRepository extends EntityRepository
         return $this->createQueryBuilder('m')
             ->where('m.status = :status')
             ->andWhere('m.activeHour = :activeHour')
+            ->andWhere('m.subscribed = :subscribed')
             ->setParameters([
                 'status' => 'new',
-                'activeHour' => date('H')
+                'activeHour' => date('H'),
+                'subscribed' => true
             ])
             ->orderBy('m.followerCount', 'asc')
             ->setMaxResults($limit)

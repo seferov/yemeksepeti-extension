@@ -332,4 +332,60 @@ class Mail
     {
         return $this->linkClicked;
     }
+    /**
+     * @var boolean
+     */
+    private $subscribed;
+
+
+    /**
+     * Set subscribed
+     *
+     * @param boolean $subscribed
+     * @return Mail
+     */
+    public function setSubscribed($subscribed)
+    {
+        $this->subscribed = $subscribed;
+
+        return $this;
+    }
+
+    /**
+     * Get subscribed
+     *
+     * @return boolean 
+     */
+    public function getSubscribed()
+    {
+        return $this->subscribed;
+    }
+    /**
+     * @var \DateTime
+     */
+    private $sentAt;
+
+
+    /**
+     * Set sentAt
+     *
+     * @param \DateTime $sentAt
+     * @return Mail
+     */
+    public function setSentAt($sentAt)
+    {
+        $this->sentAt = $sentAt;
+
+        return $this;
+    }
+
+    /**
+     * Get sentAt
+     *
+     * @return \DateTime 
+     */
+    public function getSentAt()
+    {
+        return $this->sentAt;
+    }
 }
