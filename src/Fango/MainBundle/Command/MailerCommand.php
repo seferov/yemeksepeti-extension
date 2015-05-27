@@ -41,7 +41,7 @@ class MailerCommand extends ContainerAwareCommand
 
             $message = \Swift_Message::newInstance()
                 ->setSubject(sprintf($versions[$version]['subject'], $mail->getUsername()))
-                ->setFrom(['invitation@fango.me' => 'Fango'])
+                ->setFrom(['jessica@fango.me' => 'Fango'])
                 ->setTo($mail->getEmail())
                 ->setBody($templating->render('@FangoMain/Email/invitation.html.twig', [
                     'version' => $version,
