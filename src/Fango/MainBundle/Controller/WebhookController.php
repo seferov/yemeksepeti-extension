@@ -63,4 +63,20 @@ class WebhookController extends Controller
 
         return $response->setData(['success' => true]);
     }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function emailAction(Request $request)
+    {
+        /** @var \Aws\Sns\SnsClient $sns */
+        $sns = $this->get('aws.sns');
+        $sns->confirmSubscription([
+            'TopicArn' => $request->request->get('TopicArn'),
+            'Token' => $request->request->get('Token')
+        ]);
+
+        return new JsonResponse();
+    }
 }

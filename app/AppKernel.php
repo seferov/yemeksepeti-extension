@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new Fango\MainBundle\FangoMainBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new Seferov\DeployerBundle\SeferovDeployerBundle(),
+            new Seferov\AwsBundle\SeferovAwsBundle(),
             new Hip\MandrillBundle\HipMandrillBundle(),
             new Vipx\BotDetectBundle\VipxBotDetectBundle(),
             new Bazinga\Bundle\GeocoderBundle\BazingaGeocoderBundle(),

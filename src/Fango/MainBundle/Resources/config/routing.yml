@@ -3,6 +3,11 @@ fango_main_webhook:
     host:     "webhook.fango.me"
     defaults: { _controller: FangoMainBundle:Webhook:index }
 
+fango_main_webhook_email:
+    path:     /email
+    host:     "webhook.fango.me"
+    defaults: { _controller: FangoMainBundle:Webhook:email }
+
 fango_main_homepage:
     path:     /
     defaults: { _controller: FangoMainBundle:Main:index }

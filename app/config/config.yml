@@ -91,3 +91,8 @@ bazinga_geocoder:
         data_science_toolkit: ~
         ip_info_db:
             api_key: 7515964f3c60f38933aa380b905d1904d6d4c970da02865029ffb1842528bd6a
+
+seferov_aws:
+    key: AKIAIBQSD3VAZPDOVCKQ
+    secret: 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
+    region: us-west-2
