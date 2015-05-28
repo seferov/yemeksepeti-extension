@@ -2,7 +2,10 @@
 
 namespace Fango\MainBundle\Controller;
 
+use Aws\Sns\MessageValidator\Message;
+use Aws\Sns\MessageValidator\MessageValidator;
 use Fango\MainBundle\Entity\WebhookLog;
+use Guzzle\Http\Client;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -70,12 +73,23 @@ class WebhookController extends Controller
      */
     public function emailAction(Request $request)
     {
-        /** @var \Aws\Sns\SnsClient $sns */
-        $sns = $this->get('aws.sns');
-        $sns->confirmSubscription([
-            'TopicArn' => $request->request->get('TopicArn'),
-            'Token' => $request->request->get('Token')
-        ]);
+        if ('POST' !== $request->getMethod()) {
+            return new JsonResponse();
+        }
+
+        try {
+            // Create a message from the post data and validate its signature
+            $message = Message::fromRawPostData();
+            $validator = new MessageValidator();
+            $validator->validate($message);
+        } catch (\Exception $e) {
+            return new JsonResponse(null, 400);
+        }
+
+        if ($message->get('Type') === 'SubscriptionConfirmation') {
+            // Send a request to the SubscribeURL to complete subscription
+            (new Client)->get($message->get('SubscribeURL'))->send();
+        }
 
         return new JsonResponse();
     }
