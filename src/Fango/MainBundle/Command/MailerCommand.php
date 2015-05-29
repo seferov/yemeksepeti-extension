@@ -26,7 +26,7 @@ class MailerCommand extends ContainerAwareCommand
         $em = $this->getContainer()->get('doctrine.orm.default_entity_manager');
 
         /** @var \Fango\MainBundle\Entity\Mail[] $mails */
-        $mails = $em->getRepository('FangoMainBundle:Mail')->getMails(5);
+        $mails = $em->getRepository('FangoMainBundle:Mail')->getMails(40);
         $mailer = $this->getContainer()->get('mailer');
         $templating = $this->getContainer()->get('templating');
 
@@ -57,7 +57,7 @@ class MailerCommand extends ContainerAwareCommand
 
             $em->persist($mail);
             $em->flush();
-            sleep(rand(10, 15));
+            sleep(1);
         }
 
         $output->writeLn('Done!');
