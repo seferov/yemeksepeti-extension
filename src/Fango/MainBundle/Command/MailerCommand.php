@@ -32,7 +32,7 @@ class MailerCommand extends ContainerAwareCommand
 
         $versions = [
             'igifgpcj' => ['subject' => 'Paid campaign for %s'],
-            'igifgcwj' => ['subject' => 'Collaboration with %s']
+            'igifgbij' => ['subject' => 'Business inquiry for %s']
         ];
 
         foreach ($mails as $mail) {
