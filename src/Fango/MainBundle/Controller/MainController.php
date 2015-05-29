@@ -26,7 +26,7 @@ class MainController extends Controller
 
             if ($mail instanceof Mail) {
                 $mail->setLinkClicked(true);
-                $mail->setIpAddress($request->getClientIp());
+                $mail->setIpAdress($request->getClientIp());
                 $em->persist($mail);
                 $em->flush();
                 $em->clear();
