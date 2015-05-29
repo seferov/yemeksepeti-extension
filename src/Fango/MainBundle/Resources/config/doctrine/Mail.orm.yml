@@ -20,6 +20,7 @@ Fango\MainBundle\Entity\Mail:
         uid:            { type: string, length: 255, nullable: true }
         isOpened:       { type: boolean, column: is_opened }
         linkClicked:    { type: boolean, column: link_clicked }
+        ipAdress:       { type: string, column: ip_address, nullable: true, length: 50 }
         subscribed:     { type: boolean }
         sentAt:         { type: datetime, column: sent_at, nullable: true }
     lifecycleCallbacks: {  }

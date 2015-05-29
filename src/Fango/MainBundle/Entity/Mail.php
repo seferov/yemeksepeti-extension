@@ -388,4 +388,32 @@ class Mail
     {
         return $this->sentAt;
     }
+    /**
+     * @var string
+     */
+    private $ipAdress;
+
+
+    /**
+     * Set ipAdress
+     *
+     * @param string $ipAdress
+     * @return Mail
+     */
+    public function setIpAdress($ipAdress)
+    {
+        $this->ipAdress = $ipAdress;
+
+        return $this;
+    }
+
+    /**
+     * Get ipAdress
+     *
+     * @return string 
+     */
+    public function getIpAdress()
+    {
+        return $this->ipAdress;
+    }
 }
