@@ -32,8 +32,9 @@ class MailTransformerCommand extends ContainerAwareCommand
         $mails = $em
             ->getRepository('FangoMainBundle:Mail')
             ->findBy([
-                'status' => 'raw'
-            ], ['followerCount' => 'ASC'], 101);
+                'status' => 'raw',
+                'activeHour' => date('H')
+            ], ['followerCount' => 'ASC'], 200);
 
         foreach ($mails as $mail) {
             preg_match('/(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})/', $mail->getActiveHour(), $matches);

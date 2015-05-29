@@ -86,9 +86,13 @@ class WebhookController extends Controller
             return new JsonResponse(null, 400);
         }
 
-        if ($message->get('Type') === 'SubscriptionConfirmation') {
+        if ($message->get('Type') == 'SubscriptionConfirmation') {
             // Send a request to the SubscribeURL to complete subscription
             (new Client)->get($message->get('SubscribeURL'))->send();
+        }
+        elseif ($message->get('notificationType') == 'Complaint' || $message->get('notificationType') == 'Bounce') {
+            $data = $message->getData()->toArray();
+            $this->get('logger')->info($data);
         }
 
         return new JsonResponse();
