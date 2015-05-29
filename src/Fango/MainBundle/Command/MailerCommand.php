@@ -57,6 +57,7 @@ class MailerCommand extends ContainerAwareCommand
 
             $em->persist($mail);
             $em->flush();
+            sleep(rand(10, 15));
         }
 
         $output->writeLn('Done!');

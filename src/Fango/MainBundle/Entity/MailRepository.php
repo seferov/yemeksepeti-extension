@@ -20,10 +20,12 @@ class MailRepository extends EntityRepository
             ->where('m.status = :status')
             ->andWhere('m.activeHour = :activeHour')
             ->andWhere('m.subscribed = :subscribed')
+            ->andWhere('m.followerCount > :minFollowerCount')
             ->setParameters([
                 'status' => 'new',
                 'activeHour' => date('H'),
-                'subscribed' => true
+                'subscribed' => true,
+                'minFollowerCount' => 1000
             ])
             ->orderBy('m.followerCount', 'asc')
             ->setMaxResults($limit)
