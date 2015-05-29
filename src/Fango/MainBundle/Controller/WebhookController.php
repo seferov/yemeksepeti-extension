@@ -92,7 +92,7 @@ class WebhookController extends Controller
         }
         elseif ($message->get('notificationType') == 'Complaint' || $message->get('notificationType') == 'Bounce') {
             $data = $message->getData()->toArray();
-            $this->get('logger')->info($data);
+            $this->get('logger')->info(json_encode($data));
         }
 
         return new JsonResponse();
