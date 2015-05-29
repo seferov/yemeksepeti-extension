@@ -31,8 +31,8 @@ class MailerCommand extends ContainerAwareCommand
         $templating = $this->getContainer()->get('templating');
 
         $versions = [
-            'igifgbif' => ['subject' => 'Business inquiry for %s'],
-            'igifgspf' => ['subject' => 'Sponsored post for %s']
+            'igifgpcj' => ['subject' => 'Paid campaign for %s'],
+            'igifgcwj' => ['subject' => 'Collaboration with %s']
         ];
 
         foreach ($mails as $mail) {
