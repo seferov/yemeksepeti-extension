@@ -26,13 +26,13 @@ class MailerCommand extends ContainerAwareCommand
         $em = $this->getContainer()->get('doctrine.orm.default_entity_manager');
 
         /** @var \Fango\MainBundle\Entity\Mail[] $mails */
-        $mails = $em->getRepository('FangoMainBundle:Mail')->getMails(30);
+        $mails = $em->getRepository('FangoMainBundle:Mail')->getMails(34);
         $mailer = $this->getContainer()->get('mailer');
         $templating = $this->getContainer()->get('templating');
 
         $versions = [
-            'igifgpcj' => ['subject' => 'Paid campaign for %s'],
-            'igifgbij' => ['subject' => 'Business inquiry for %s']
+            'igifgpcj2' => ['subject' => 'Paid campaign for %s'],
+            'igifgbij2' => ['subject' => 'Business inquiry for %s']
         ];
 
         foreach ($mails as $mail) {
