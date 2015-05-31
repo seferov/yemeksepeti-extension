@@ -26,7 +26,7 @@ class MailerCommand extends ContainerAwareCommand
         $em = $this->getContainer()->get('doctrine.orm.default_entity_manager');
 
         /** @var \Fango\MainBundle\Entity\Mail[] $mails */
-        $mails = $em->getRepository('FangoMainBundle:Mail')->getMails(40);
+        $mails = $em->getRepository('FangoMainBundle:Mail')->getMails(30);
         $mailer = $this->getContainer()->get('mailer');
         $templating = $this->getContainer()->get('templating');
 
