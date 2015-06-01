@@ -1,30 +1,246 @@
 {% extends '@FangoMain/layout.html.twig' %}
 
 {% block main %}
-    <h1>FANGO</h1>
-    <h3>We help social media creators get sponsored by top brands.</h3>
-    <p>&nbsp;</p>
-    <h2>Join over 150,000 creators.</h2>
-    <p>
-      <a href="{{ url('fos_user_registration_register') }}" class="btn btn-lg btn-info">SIGN UP <i class="fa fa-chevron-right" style="text-indent:10px"></i></a>
-      <a href="{{ url('fos_user_security_login') }}" class="btn btn-lg btn-outline-inverse" id="login">LOG IN</a>
-    </p>
-    <div class="row" id="second-row">
-      <div class="col-md-4">
-        <i class="fa fa-star-o fa-5x"></i>
-        <h3>Shine</h3>
-        <p>Get access to great campaigns sponsored by top brands.</p>
+  <!-- Header -->
+  <header>
+      <div class="container">
+          <div class="intro-text">
+              <div class="intro-lead-in">Top brands sponsor social media creators.</div>
+              <div class="intro-heading">Join our network.</div>
+              <a href="{{ url('fos_user_registration_register') }}" class="btn btn-xl btn-info">
+                  Sign Up
+                  <i class="fa fa-chevron-right" style="text-indent:10px"></i>
+              </a>
+          </div>
       </div>
-      <div class="col-md-4">
-        <i class="fa fa-line-chart fa-5x"></i>
-        <h3>Promote</h3>
-        <p>Choose your favorites and share with your followers.</p>
+  </header>
+
+  <!-- How It Works Section -->
+  <section id="howitworks">
+      <div class="container">
+          <div class="row">
+              <div class="col-lg-12 text-center">
+                  <h2 class="section-heading">How It Works</h2>
+                  <h3 class="section-subheading text-muted">Get paid to share brand campaigns.</h3>
+              </div>
+          </div>
+          <div class="row text-center">
+              <div class="col-md-4">
+                  <span class="fa-stack fa-4x">
+                      <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                      <i class="fa fa-star fa-stack-1x fa-inverse"></i>
+                  </span>
+                  <h4 class="service-heading">Access</h4>
+                  <p class="text-muted">Get access to great campaigns by top brands.</p>
+              </div>
+              <div class="col-md-4">
+                  <span class="fa-stack fa-4x">
+                      <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                      <i class="fa fa-line-chart fa-stack-1x fa-inverse"></i>
+                  </span>
+                  <h4 class="service-heading">Promote</h4>
+                  <p class="text-muted">Choose your favorites and share with your followers.</p>
+              </div>
+              <div class="col-md-4">
+                  <span class="fa-stack fa-4x">
+                      <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                      <i class="fa fa-dollar fa-stack-1x fa-inverse"></i>
+                  </span>
+                  <h4 class="service-heading">Monetize</h4>
+                  <p class="text-muted">Get paid easily via Paypal for each campaign shared.</p>
+              </div>
+          </div>
       </div>
-      <div class="col-md-4">
-        <i class="fa fa-dollar fa-5x"></i>
-        <h3>Monetize</h3>
-        <p>Provide value to your followers and monetize easily.</p>
+  </section>
+
+  <!-- Portfolio Grid Section -->
+  <section id="portfolio" class="bg-light-gray">
+      <div class="container">
+          <div class="row">
+              <div class="col-lg-12 text-center">
+                  <h2 class="section-heading">Brands</h2>
+                  <h3 class="section-subheading text-muted">Great campaigns by top brands.</h3>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-md-4 col-sm-6 portfolio-item">
+                  <a href="#portfolioModal1" class="portfolio-link" data-toggle="modal">
+                      <div class="portfolio-hover">
+                          <div class="portfolio-hover-content">
+                              <i class="fa fa-plus fa-3x"></i>
+                          </div>
+                      </div>
+                      <img src="{{ asset('img/portfolio/samsung.jpg') }}" class="img-responsive" alt="">
+                  </a>
+                  <div class="portfolio-caption">
+                      <h4>Samsung Smart Camera</h4>
+                      <p class="text-muted">What Matters Most Campaign</p>
+                  </div>
+              </div>
+              <div class="col-md-4 col-sm-6 portfolio-item">
+                  <a href="#portfolioModal2" class="portfolio-link" data-toggle="modal">
+                      <div class="portfolio-hover">
+                          <div class="portfolio-hover-content">
+                              <i class="fa fa-plus fa-3x"></i>
+                          </div>
+                      </div>
+                      <img src="{{ asset('img/portfolio/coca-cola.jpg') }}" class="img-responsive" alt="">
+                  </a>
+                  <div class="portfolio-caption">
+                      <h4>Coca-Cola</h4>
+                      <p class="text-muted">#MakeItHappy Campaign</p>
+                  </div>
+              </div>
+              <div class="col-md-4 col-sm-6 portfolio-item">
+                  <a href="#portfolioModal3" class="portfolio-link" data-toggle="modal">
+                      <div class="portfolio-hover">
+                          <div class="portfolio-hover-content">
+                              <i class="fa fa-plus fa-3x"></i>
+                          </div>
+                      </div>
+                      <img src="{{ asset('img/portfolio/unroll.jpg') }}" class="img-responsive" alt="">
+                  </a>
+                  <div class="portfolio-caption">
+                      <h4>Unroll.me</h4>
+                      <p class="text-muted">Signup Campaign</p>
+                  </div>
+              </div>                
+          </div>
       </div>
-    </div>
-    <p id="footer-address">934 Howard St, San Francisco, CA, 94103, United States</p>
+  </section>
+
+  <!-- About Section -->
+  <section id="about">
+      <div class="container">
+          <div class="row">
+              <div class="col-lg-12 text-center">
+                  <h2 class="section-heading">About</h2>
+                  <h3 class="section-subheading text-muted">The story of Fango.</h3>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-lg-12">
+                  <ul class="timeline">
+                      <li>
+                          <div class="timeline-image">
+                              <img class="img-circle img-responsive" src="{{ asset('img/about/1.jpg') }}" alt="">
+                          </div>
+                          <div class="timeline-panel">
+                              <div class="timeline-heading">
+                                  <h4>February 2014</h4>
+                                  <h4 class="subheading">Our Humble Beginnings</h4>
+                              </div>
+                              <div class="timeline-body">
+                                  <p class="text-muted">Global Champions Inc, the umbrella company of Fango was found in San Francisco.</p>
+                              </div>
+                          </div>
+                      </li>
+                      <li class="timeline-inverted">
+                          <div class="timeline-image">
+                              <img class="img-circle img-responsive" src="{{ asset('img/about/2.jpg') }}" alt="">
+                          </div>
+                          <div class="timeline-panel">
+                              <div class="timeline-heading">
+                                  <h4>November 2014</h4>
+                                  <h4 class="subheading">Open Beta of WeSnap</h4>
+                              </div>
+                              <div class="timeline-body">
+                                  <p class="text-muted">The first version of WeSnap is released as open beta.</p>
+                              </div>
+                          </div>
+                      </li>
+                      <li>
+                          <div class="timeline-image">
+                              <img class="img-circle img-responsive" src="{{ asset('img/about/3.jpg') }}" alt="">
+                          </div>
+                          <div class="timeline-panel">
+                              <div class="timeline-heading">
+                                  <h4>April 2015</h4>
+                                  <h4 class="subheading">Top Voted on Product Hunt</h4>
+                              </div>
+                              <div class="timeline-body">
+                                  <p class="text-muted">WeSnap's release version becomes top voted on Product Hunt! Thanks for the love.</p>
+                              </div>
+                          </div>
+                      </li>
+                      <li class="timeline-inverted">
+                          <div class="timeline-image">
+                              <img class="img-circle img-responsive" src="{{ asset('img/about/4.jpg') }}" alt="">
+                          </div>
+                          <div class="timeline-panel">
+                              <div class="timeline-heading">
+                                  <h4>May 2015</h4>
+                                  <h4 class="subheading">Marketing Platform</h4>
+                              </div>
+                              <div class="timeline-body">
+                                  <p class="text-muted">When looking for ways to promote WeSnap, we saw a great need for a marketing platform. Hence Fango was born.</p>
+                              </div>
+                          </div>
+                      </li>
+                      <li class="timeline-inverted">
+                          <div class="timeline-image">
+                              <h4>Be Part
+                                  <br>Of Our
+                                  <br>Story!</h4>
+                          </div>
+                      </li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+  </section>
+
+  <!-- Team Section -->
+  <section id="team" class="bg-light-gray">
+      <div class="container">
+          <div class="row">
+              <div class="col-lg-12 text-center">
+                  <h2 class="section-heading">Creators</h2>
+                  <h3 class="section-subheading text-muted">Top creators on social media.</h3>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-sm-4">
+                  <div class="team-member">
+                      <img src="{{ asset('img/team/1.jpg') }}" class="img-responsive img-circle" alt="">
+                      <h4>Nash Grier</h4>
+                      <p class="text-muted">Vine Star</p>
+                  </div>
+              </div>
+              <div class="col-sm-4">
+                  <div class="team-member">
+                      <img src="{{ asset('img/team/2.jpg') }}" class="img-responsive img-circle" alt="">
+                      <h4>Grace Helbig</h4>
+                      <p class="text-muted">Youtube Star</p>
+                  </div>
+              </div>
+              <div class="col-sm-4">
+                  <div class="team-member">
+                      <img src="{{ asset('img/team/3.jpg') }}" class="img-responsive img-circle" alt="">
+                      <h4>PewDiePiew</h4>
+                      <p class="text-muted">Youtube Star</p>
+                  </div>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-lg-8 col-lg-offset-2 text-center">
+                  <p class="large text-muted">If you're a brand and want to advertise on a social media campaign with great creators, feel free to get in touch.</p>
+              </div>
+          </div>
+      </div>
+  </section>
+
+  
+  <!-- Contact Section -->
+  <section id="contact">
+      <div class="container">
+          <div class="row">
+              <div class="col-lg-12 text-center">
+                  <h2 class="section-heading">Contact Us</h2>
+                  <h3 class="section-subheading text-muted">934 Howard St, San Francisco, 94103, CA.</h3>
+                  <a href="https://fango.uservoice.com/" data-uv-trigger data-uv-position="top" class="btn btn-xl btn-info">Send Message <i class="fa fa-chevron-right" style="text-indent:10px"></i></a>﻿﻿﻿
+              </div>
+          </div>
+      </div>
+  </section>
 {% endblock %}
