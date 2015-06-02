@@ -1,5 +1,31 @@
 {% extends '@FangoMain/layout.html.twig' %}
 
 {% block main %}
-    <h1 style="font-size: 60px;">Page not found!</h1>
+
+	<style type="text/css">
+		.btn-xl{
+			margin:10px;
+		}
+	</style>
+
+	<header>
+		<div class="container">
+			<div class="intro-text">
+				<div class="intro-lead-in">Page not found.</div>
+				<a href="javascript:history.go(-1)" class="btn btn-xl btn-warning">
+					<i class="fa fa-chevron-left" style="margin-right:10px"></i>
+					Go back
+				</a>
+				<a href="https://fango.uservoice.com/" data-uv-trigger class="btn btn-xl btn-info">
+					<i class="fa fa-support" style="margin-right:10px"></i>
+					Contact support
+				</a>
+				<a href="http://fango.me/" class="btn btn-xl btn-success">
+					Go home
+					<i class="fa fa-chevron-right" style="text-indent:10px"></i>
+				</a>
+			</div>
+		</div>
+	</header>
+
 {% endblock %}
