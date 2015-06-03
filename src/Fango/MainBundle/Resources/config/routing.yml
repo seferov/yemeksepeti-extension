@@ -28,9 +28,8 @@ fango_dashboard_earnings:
     path:     /earnings
     defaults: { _controller: FangoMainBundle:Dashboard:earnings }
 
-fango_dashboard_networks_index:
-    path:     /networks
-    defaults: { _controller: FangoMainBundle:Network:index }
+fango_network:
+    resource: "@FangoMainBundle/Resources/config/routing/network.yml"
 
 fango_campaign:
     resource: "@FangoMainBundle/Resources/config/routing/campaign.yml"

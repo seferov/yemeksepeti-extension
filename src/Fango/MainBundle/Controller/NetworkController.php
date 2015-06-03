@@ -23,4 +23,27 @@ class NetworkController extends DashboardBaseController
             'networks' => $networks
         ]);
     }
+
+    /**
+     * @param int $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function removeAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $network = $em->getRepository('FangoUserBundle:Network')->findOneBy([
+            'id' => $id,
+            'user' => $this->getUser()
+        ]);
+
+        if (!$network) {
+            throw $this->createNotFoundException();
+        }
+
+        $em->remove($network);
+        $em->flush();
+        $em->clear();
+
+        return $this->redirectToRoute('fango_dashboard_networks_index');
+    }
 }

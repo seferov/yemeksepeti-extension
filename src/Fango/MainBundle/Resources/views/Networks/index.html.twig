@@ -4,6 +4,10 @@
     <link rel="stylesheet" href="{{ asset('css/login.css') }}"/>
 {% endblock %}
 
+{% block js %}
+    <script src="{{ asset('js/bootbox.min.js') }}"></script>
+{% endblock %}
+
 {% block main %}
     <h1>Networks</h1>
 
@@ -14,11 +18,23 @@
             <div>
                 <img src="{{ asset('img/'~network.type~'.png') }}" alt="{{ network.type }}"/>
                 <strong>{{ network.display }}</strong>
+                <a href="#" data-href="{{ url('fango_dashboard_networks_remove', { id: network.id }) }}" class="confirm">Delete</a>
             </div>
         {% endfor %}
         </div>
     </div>
     {% endif %}
+
+    <script type="application/javascript">
+        $('.confirm').click(function() {
+            var url = $(this).data('href');
+            bootbox.confirm('Are you sure?', function(result) {
+                if (result) {
+                    window.location.href = url;
+                }
+            });
+        });
+    </script>
 
     <div class="row omb_row-sm-offset-3 omb_socialButtons">
         <div class="col-xs-4 col-sm-2">

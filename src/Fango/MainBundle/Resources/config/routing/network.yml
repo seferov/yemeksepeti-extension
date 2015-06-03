@@ -1,0 +1,9 @@
+fango_dashboard_networks_index:
+    path:     /networks
+    defaults: { _controller: FangoMainBundle:Network:index }
+
+fango_dashboard_networks_remove:
+    path:     /networks/remove/{id}
+    defaults: { _controller: FangoMainBundle:Network:remove }
+    requirements:
+        id: \d+

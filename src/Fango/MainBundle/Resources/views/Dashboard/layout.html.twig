@@ -25,6 +25,7 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     {% block head %}{% endblock %}
 </head>
 
@@ -106,14 +107,13 @@
 </div>
 <!-- /#wrapper -->
 
-<!-- jQuery -->
-<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
 <!-- Morris Charts JavaScript -->
 <script src="{{ asset('js/plugins/morris/raphael.min.js') }}"></script>
 <script src="{{ asset('js/plugins/morris/morris.min.js') }}"></script>
 <script src="{{ asset('js/plugins/morris/morris-data.js') }}"></script>
+{% block js %}{% endblock %}
 {% include '@FangoMain/Components/_uservoice.html.twig' %}
 </body>
 
