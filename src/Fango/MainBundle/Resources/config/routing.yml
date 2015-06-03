@@ -20,22 +20,6 @@ fango_main_dashboard_account_entermail:
     path:     /account/enter_mail
     defaults: { _controller: FangoMainBundle:Account:enterMail }
 
-fango_main_campaign_list:
-    path:     /campaigns
-    defaults: { _controller: FangoMainBundle:Campaign:list }
-
-fango_main_campaign_show:
-    path:     /campaigns/{id}
-    defaults: { _controller: FangoMainBundle:Campaign:show }
-
-fango_main_campaign_apply:
-    path:     /campaigns/{id}/apply
-    defaults: { _controller: FangoMainBundle:Campaign:apply, status: applied }
-
-fango_main_campaign_preview:
-    path:     /campaigns/{id}/preview
-    defaults: { _controller: FangoMainBundle:Campaign:apply, status: preview }
-
 fango_main_short_link:
     path:     /u/{hash}
     defaults: { _controller: FangoMainBundle:Campaign:shortLink }
@@ -55,3 +39,9 @@ fango_email_tracking_pixel:
 fnago_email_unsubscribe:
     path:     /unsubscribe/{uid}
     defaults: { _controller: FangoMainBundle:Mail:unsubscribe }
+
+fango_campaign:
+    resource: "@FangoMainBundle/Resources/config/routing/campaign.yml"
+
+fango_static:
+    resource: "@FangoMainBundle/Resources/config/routing/static.yml"

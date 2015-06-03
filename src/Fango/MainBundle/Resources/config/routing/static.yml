@@ -1,0 +1,3 @@
+fango_static_privacy:
+    path:     /privacy
+    defaults: { _controller: FangoMainBundle:Static:privacy }
