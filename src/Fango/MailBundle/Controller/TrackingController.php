@@ -1,6 +1,6 @@
 <?php
 
-namespace Fango\MainBundle\Controller;
+namespace Fango\MailBundle\Controller;
 
 use Fango\MainBundle\Entity\Mail;
 use Fango\MainBundle\Http\TransparentPixelResponse;
@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * Class TrackingController
  * @author Farhad Safarov <http://ferhad.in>
- * @package Fango\MainBundle\Controller
+ * @package Fango\MailBundle\Controller
  */
 class TrackingController extends Controller
 {

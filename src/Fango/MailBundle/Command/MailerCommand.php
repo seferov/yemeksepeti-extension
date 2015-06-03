@@ -1,6 +1,6 @@
 <?php
 
-namespace Fango\MainBundle\Command;
+namespace Fango\MailBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
@@ -9,7 +9,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * Class MailerCommand
  * @author Farhad Safarov <http://ferhad.in>
- * @package Fango\MainBundle\Command
+ * @package Fango\MailBundle\Command
  */
 class MailerCommand extends ContainerAwareCommand
 {
@@ -27,6 +27,9 @@ class MailerCommand extends ContainerAwareCommand
 
         /** @var \Fango\MainBundle\Entity\Mail[] $mails */
         $mails = $em->getRepository('FangoMainBundle:Mail')->getMails(34);
+        $mails = $em->getRepository('FangoMainBundle:Mail')->findBy([
+            'email' => 'farhad.safarov@gmail.com'
+        ]);
         $mailer = $this->getContainer()->get('mailer');
         $templating = $this->getContainer()->get('templating');
 
@@ -43,7 +46,7 @@ class MailerCommand extends ContainerAwareCommand
                 ->setSubject(sprintf($versions[$version]['subject'], $mail->getUsername()))
                 ->setFrom(['jessica@fango.me' => 'Jessica Taylor'])
                 ->setTo($mail->getEmail())
-                ->setBody($templating->render('@FangoMain/Email/invitation.html.twig', [
+                ->setBody($templating->render('@FangoMail/invitation.html.twig', [
                     'version' => $version,
                     'uid' => $uid
                 ]), 'text/html');

@@ -30,6 +30,7 @@ class AppKernel extends Kernel
             new Hip\MandrillBundle\HipMandrillBundle(),
             new Vipx\BotDetectBundle\VipxBotDetectBundle(),
             new Bazinga\Bundle\GeocoderBundle\BazingaGeocoderBundle(),
+            new Fango\MailBundle\FangoMailBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

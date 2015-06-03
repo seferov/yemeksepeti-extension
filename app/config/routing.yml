@@ -1,3 +1,7 @@
+fango_mail:
+    resource: "@FangoMailBundle/Resources/config/routing.yml"
+    prefix:   /
+
 fango_main:
     resource: "@FangoMainBundle/Resources/config/routing.yml"
     prefix:   /

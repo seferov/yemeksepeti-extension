@@ -1,6 +1,6 @@
 <?php
 
-namespace Fango\MainBundle\Command;
+namespace Fango\MailBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
@@ -9,7 +9,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * Class MailTransformer
  * @author Farhad Safarov <http://ferhad.in>
- * @package Fango\MainBundle\Command
+ * @package Fango\MailBundle\Command
  */
 class MailTransformerCommand extends ContainerAwareCommand
 {
