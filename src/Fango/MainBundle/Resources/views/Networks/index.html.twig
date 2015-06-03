@@ -18,7 +18,7 @@
             <div>
                 <img src="{{ asset('img/'~network.type~'.png') }}" alt="{{ network.type }}"/>
                 <strong>{{ network.display }}</strong>
-                <a href="#" data-href="{{ url('fango_dashboard_networks_remove', { id: network.id }) }}" class="confirm">Delete</a>
+                <a href="#" data-href="{{ url('fango_dashboard_networks_remove', { id: network.id }) }}" class="confirm"><span class="glyphicon glyphicon-remove" style="color: darkgrey"></span></a>
             </div>
         {% endfor %}
         </div>
