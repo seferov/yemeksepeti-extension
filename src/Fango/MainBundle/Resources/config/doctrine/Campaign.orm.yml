@@ -16,6 +16,7 @@ Fango\MainBundle\Entity\Campaign:
         previewLink:  { type: string, length: 255, column: preview_link }
         cpa:          { type: float, nullable: true }
         status:       { type: string, length: 15, nullable: true }
+        socialText:   { type: string, length: 140, nullable: true, column: social_text }
     oneToMany:
         userCampaigns:
             targetEntity: Fango\MainBundle\Entity\UserCampaign

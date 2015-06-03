@@ -301,4 +301,32 @@ class Campaign
     {
         return $this->previewLink;
     }
+    /**
+     * @var string
+     */
+    private $socialText;
+
+
+    /**
+     * Set socialText
+     *
+     * @param string $socialText
+     * @return Campaign
+     */
+    public function setSocialText($socialText)
+    {
+        $this->socialText = $socialText;
+
+        return $this;
+    }
+
+    /**
+     * Get socialText
+     *
+     * @return string 
+     */
+    public function getSocialText()
+    {
+        return $this->socialText;
+    }
 }
