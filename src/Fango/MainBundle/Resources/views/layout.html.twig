@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -36,6 +34,7 @@
 
     <!-- favicon -->
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
+    {% block head %}{% endblock %}
 </head>
 
 <body id="page-top" class="index">
@@ -99,7 +98,7 @@
                     <span class="copyright">Copyright &copy; Fango</span>
                 </div>
                 <div class="col-md-4">
-                    <!-- 
+                    <!--
                     <ul class="list-inline social-buttons">
                         <li><a href="https://www.twitter.com/fango_me"><i class="fa fa-twitter"></i></a>
                         </li>
@@ -123,7 +122,7 @@
     </footer>
 
     <!-- Portfolio Modals -->
- 
+
     <!-- jQuery -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
 
