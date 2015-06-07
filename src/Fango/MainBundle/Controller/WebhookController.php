@@ -90,9 +90,9 @@ class WebhookController extends Controller
             // Send a request to the SubscribeURL to complete subscription
             (new Client)->get($message->get('SubscribeURL'))->send();
         }
-        elseif ($message->get('notificationType') == 'Complaint' || $message->get('notificationType') == 'Bounce') {
+        else {
             $data = $message->getData()->toArray();
-            $this->get('logger')->info(json_encode($data));
+            $this->get('logger')->info('email_report: '.json_encode($data));
         }
 
         return new JsonResponse();
