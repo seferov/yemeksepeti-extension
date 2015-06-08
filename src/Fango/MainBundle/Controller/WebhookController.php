@@ -77,23 +77,7 @@ class WebhookController extends Controller
             return new JsonResponse();
         }
 
-        try {
-            // Create a message from the post data and validate its signature
-            $message = Message::fromRawPostData();
-            $validator = new MessageValidator();
-            $validator->validate($message);
-        } catch (\Exception $e) {
-            return new JsonResponse(null, 400);
-        }
-
-        if ($message->get('Type') == 'SubscriptionConfirmation') {
-            // Send a request to the SubscribeURL to complete subscription
-            (new Client)->get($message->get('SubscribeURL'))->send();
-        }
-        else {
-            $data = $message->getData()->toArray();
-            $this->get('logger')->info('email_report: '.json_encode($data));
-        }
+        $this->get('logger')->info('email_report: '.json_encode(file_get_contents('php://input')));
 
         return new JsonResponse();
     }
