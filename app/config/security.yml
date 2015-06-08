@@ -24,6 +24,7 @@ security:
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/dashboard, role: IS_AUTHENTICATED_FULLY }
+        - { path: ^/campaigns/\d+/preview, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/campaigns, role: IS_AUTHENTICATED_FULLY }
         - { path: ^/earnings, role: IS_AUTHENTICATED_FULLY }
         - { path: ^/networks, role: IS_AUTHENTICATED_FULLY }
