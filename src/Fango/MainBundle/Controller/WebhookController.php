@@ -89,6 +89,30 @@ class WebhookController extends Controller
         $logger->info('Email report');
         $logger->error(json_encode($message));
 
+        if (!array_key_exists('Message', $message) || !array_key_exists('TopicArn', $message)) {
+            return new JsonResponse();
+        }
+
+        $m = json_decode($message['Message'], true);
+
+        $em = $this->getDoctrine()->getManager();
+        /** @var \Fango\MainBundle\Entity\Mail $email */
+        $email = $em->getRepository('FangoMainBundle:Mail')->findOneBy([
+            'email' => $m['mail']['destination'][0]
+        ]);
+
+        switch ($message['TopicArn']) {
+            case 'arn:aws:sns:us-west-2:008525380933:complaints':
+                $email->setComplaint(true);
+                break;
+            case 'arn:aws:sns:us-west-2:008525380933:bounces':
+                $email->setBounce(true);
+                break;
+        }
+
+        $em->persist($email);
+        $em->flush();
+
         return new JsonResponse();
     }
 }

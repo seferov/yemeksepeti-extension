@@ -22,5 +22,7 @@ Fango\MainBundle\Entity\Mail:
         linkClicked:    { type: boolean, column: link_clicked }
         ipAdress:       { type: string, column: ip_address, nullable: true, length: 50 }
         subscribed:     { type: boolean }
+        complaint:      { type: boolean }
+        bounce:         { type: boolean }
         sentAt:         { type: datetime, column: sent_at, nullable: true }
     lifecycleCallbacks: {  }

@@ -416,4 +416,60 @@ class Mail
     {
         return $this->ipAdress;
     }
+    /**
+     * @var boolean
+     */
+    private $complaint;
+
+    /**
+     * @var boolean
+     */
+    private $bounce;
+
+
+    /**
+     * Set complaint
+     *
+     * @param boolean $complaint
+     * @return Mail
+     */
+    public function setComplaint($complaint)
+    {
+        $this->complaint = $complaint;
+
+        return $this;
+    }
+
+    /**
+     * Get complaint
+     *
+     * @return boolean 
+     */
+    public function getComplaint()
+    {
+        return $this->complaint;
+    }
+
+    /**
+     * Set bounce
+     *
+     * @param boolean $bounce
+     * @return Mail
+     */
+    public function setBounce($bounce)
+    {
+        $this->bounce = $bounce;
+
+        return $this;
+    }
+
+    /**
+     * Get bounce
+     *
+     * @return boolean 
+     */
+    public function getBounce()
+    {
+        return $this->bounce;
+    }
 }
