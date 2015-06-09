@@ -77,7 +77,7 @@ class WebhookController extends Controller
             return new JsonResponse();
         }
 
-        $message = json_decode(file_get_contents('php://input'));
+        $message = json_decode(file_get_contents('php://input'), true);
 
         if ($message['Type'] == 'SubscriptionConfirmation') {
             // Send a request to the SubscribeURL to complete subscription
