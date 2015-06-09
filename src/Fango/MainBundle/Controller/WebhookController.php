@@ -77,7 +77,17 @@ class WebhookController extends Controller
             return new JsonResponse();
         }
 
-        $this->get('logger')->info('email_report: '.json_encode(file_get_contents('php://input')));
+        $message = json_decode(file_get_contents('php://input'));
+
+        if ($message['Type'] == 'SubscriptionConfirmation') {
+            // Send a request to the SubscribeURL to complete subscription
+            (new Client)->get($message['SubscribeURL'])->send();
+            return new JsonResponse();
+        }
+
+        $logger = $this->get('logger');
+        $logger->info('Email report');
+        $logger->error(json_encode($message));
 
         return new JsonResponse();
     }
