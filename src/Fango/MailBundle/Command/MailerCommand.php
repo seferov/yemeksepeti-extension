@@ -27,9 +27,6 @@ class MailerCommand extends ContainerAwareCommand
 
         /** @var \Fango\MainBundle\Entity\Mail[] $mails */
         $mails = $em->getRepository('FangoMainBundle:Mail')->getMails(34);
-        $mails = $em->getRepository('FangoMainBundle:Mail')->findBy([
-            'email' => 'farhad.safarov@gmail.com'
-        ]);
         $mailer = $this->getContainer()->get('mailer');
         $templating = $this->getContainer()->get('templating');
 
