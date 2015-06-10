@@ -26,7 +26,7 @@ class TrackingController extends Controller
             $email = $em->getRepository('FangoMainBundle:Mail')->findOneBy(['uid' => $uid]);
 
             if ($email instanceof Mail) {
-                $email->setIsOpened(true);
+                $email->setSecondIsOpened(true);
                 $em->persist($email);
                 $em->flush();
                 $em->clear();

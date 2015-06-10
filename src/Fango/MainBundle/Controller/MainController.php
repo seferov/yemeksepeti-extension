@@ -25,7 +25,7 @@ class MainController extends Controller
             $mail = $em->getRepository('FangoMainBundle:Mail')->findOneBy(['uid' => $request->get('uid')]);
 
             if ($mail instanceof Mail) {
-                $mail->setLinkClicked(true);
+                $mail->setSecondLinkClicked(true);
                 $mail->setIpAdress($request->getClientIp());
                 $em->persist($mail);
                 $em->flush();
