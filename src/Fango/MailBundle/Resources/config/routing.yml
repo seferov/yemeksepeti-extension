@@ -10,3 +10,7 @@ fango_email_unsubscribe:
 fango_email_resubscribe:
     path:     /resubscribe/{uid}
     defaults: { _controller: FangoMailBundle:Mail:resubscribe }
+
+fango_email_redirect:
+    path:     /redirect
+    defaults: { _controller: FangoMailBundle:Tracking:redirect }

@@ -8,7 +8,7 @@
     <div>
         <br>
     </div>
-    <div>I wanted to reach out because we have a paid social media campaign that you might be interested. <a href="https://fango.me/campaigns/3/preview">One of our clients</a> would like to pay $1 for each person referred. Their service is free for you and your followers.</div>
+    <div>I wanted to reach out because we have a paid social media campaign that you might be interested. <a href="{{ url('fango_email_redirect', {'uid': uid, 'url': 'https://fango.me/campaigns/3/preview' }) }}">One of our clients</a> would like to pay $1 for each person referred. Their service is free for you and your followers.</div>
     <div>
         <br>
     </div>
@@ -32,4 +32,5 @@
         <br>
     </div>
     <div>PS: If you would like to no longer receive an email from me, you can <a href="https://fango.me/unsubscribe/{{ uid }}">click here</a>. We'll be sad to see you go.</div>
+    <img src="http://fango.me/email.gif?uid={{ uid }}" alt=""/>
 </div>

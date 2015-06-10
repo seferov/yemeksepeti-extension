@@ -35,4 +35,28 @@ class TrackingController extends Controller
 
         return new TransparentPixelResponse();
     }
+
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function redirectAction(Request $request)
+    {
+        $uid = $request->query->get('uid');
+        if (null !== $uid) {
+            $em = $this->getDoctrine()->getManager();
+            $email = $em->getRepository('FangoMainBundle:Mail')->findOneBy(['uid' => $uid]);
+
+            if ($email instanceof Mail) {
+                $email->setSecondLinkClicked(true);
+                $em->persist($email);
+                $em->flush();
+                $em->clear();
+            }
+        }
+
+        $url = $request->query->has('url') ? $request->query->get('url') : $this->generateUrl('fango_main_homepage');
+
+        return $this->redirect($url);
+    }
 }
