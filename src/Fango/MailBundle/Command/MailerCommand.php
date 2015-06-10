@@ -3,6 +3,7 @@
 namespace Fango\MailBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -17,6 +18,10 @@ class MailerCommand extends ContainerAwareCommand
     {
         $this
             ->setName('fango:mailer:send')
+            ->addArgument(
+                'batch',
+                InputArgument::REQUIRED
+            )
             ->setDescription('Fango mailer')
         ;
     }
@@ -30,10 +35,23 @@ class MailerCommand extends ContainerAwareCommand
         $mailer = $this->getContainer()->get('mailer');
         $templating = $this->getContainer()->get('templating');
 
-        $versions = [
-            'igifgpcj2' => ['subject' => 'Paid campaign for %s'],
-            'igifgbij2' => ['subject' => 'Business inquiry for %s']
-        ];
+        switch ($input->getArgument('batch')) {
+            case 1:
+                $versions = [
+                    'igifgpcj2' => ['subject' => 'Paid campaign for %s'],
+                    'igifgbij2' => ['subject' => 'Business inquiry for %s']
+                ];
+                $template = '@FangoMail/invitation.html.twig';
+                break;
+            case 2:
+            default:
+                $versions = [
+                    'igifgtcj' => ['subject' => 'Twitter campaign for %s'],
+                    'igifgfcj' => ['subject' => 'Facebook campaign for %s']
+                ];
+                $template = '@FangoMail/invitation2.html.twig';
+                break;
+        }
 
         foreach ($mails as $mail) {
             $version = array_rand($versions);
@@ -43,7 +61,7 @@ class MailerCommand extends ContainerAwareCommand
                 ->setSubject(sprintf($versions[$version]['subject'], $mail->getUsername()))
                 ->setFrom(['jessica@fango.me' => 'Jessica Taylor'])
                 ->setTo($mail->getEmail())
-                ->setBody($templating->render('@FangoMail/invitation.html.twig', [
+                ->setBody($templating->render($template, [
                     'version' => $version,
                     'uid' => $uid
                 ]), 'text/html');
@@ -53,7 +71,13 @@ class MailerCommand extends ContainerAwareCommand
             $mail->setStatus('sent');
             $mail->setMailVersion($version);
             $mail->setUid($uid);
-            $mail->setSentAt(new \DateTime('now'));
+
+            if ($input->getArgument('batch') == 1) {
+                $mail->setSentAt(new \DateTime('now'));
+            }
+            else {
+                $mail->setSecondSentAt(new \DateTime('now'));
+            }
 
             $em->persist($mail);
             $em->flush();

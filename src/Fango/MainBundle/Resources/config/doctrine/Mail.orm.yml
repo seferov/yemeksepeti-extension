@@ -19,10 +19,13 @@ Fango\MainBundle\Entity\Mail:
         mailVersion:    { type: string, length: 20, column: mail_version, nullable: true }
         uid:            { type: string, length: 255, nullable: true }
         isOpened:       { type: boolean, column: is_opened }
+        secondIsOpened: { type: boolean, column: second_is_opened }
         linkClicked:    { type: boolean, column: link_clicked }
+        secondLinkClicked:  { type: boolean, column: second_link_clicked }
         ipAdress:       { type: string, column: ip_address, nullable: true, length: 50 }
         subscribed:     { type: boolean }
         complaint:      { type: boolean }
         bounce:         { type: boolean }
         sentAt:         { type: datetime, column: sent_at, nullable: true }
+        secondSentAt:   { type: datetime, column: second_sent_at, nullable: true }
     lifecycleCallbacks: {  }

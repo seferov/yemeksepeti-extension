@@ -472,4 +472,88 @@ class Mail
     {
         return $this->bounce;
     }
+    /**
+     * @var boolean
+     */
+    private $secondIsOpened;
+
+    /**
+     * @var boolean
+     */
+    private $secondLinkClicked;
+
+    /**
+     * @var \DateTime
+     */
+    private $secondSentAt;
+
+
+    /**
+     * Set secondIsOpened
+     *
+     * @param boolean $secondIsOpened
+     * @return Mail
+     */
+    public function setSecondIsOpened($secondIsOpened)
+    {
+        $this->secondIsOpened = $secondIsOpened;
+
+        return $this;
+    }
+
+    /**
+     * Get secondIsOpened
+     *
+     * @return boolean 
+     */
+    public function getSecondIsOpened()
+    {
+        return $this->secondIsOpened;
+    }
+
+    /**
+     * Set secondLinkClicked
+     *
+     * @param boolean $secondLinkClicked
+     * @return Mail
+     */
+    public function setSecondLinkClicked($secondLinkClicked)
+    {
+        $this->secondLinkClicked = $secondLinkClicked;
+
+        return $this;
+    }
+
+    /**
+     * Get secondLinkClicked
+     *
+     * @return boolean 
+     */
+    public function getSecondLinkClicked()
+    {
+        return $this->secondLinkClicked;
+    }
+
+    /**
+     * Set secondSentAt
+     *
+     * @param \DateTime $secondSentAt
+     * @return Mail
+     */
+    public function setSecondSentAt($secondSentAt)
+    {
+        $this->secondSentAt = $secondSentAt;
+
+        return $this;
+    }
+
+    /**
+     * Get secondSentAt
+     *
+     * @return \DateTime 
+     */
+    public function getSecondSentAt()
+    {
+        return $this->secondSentAt;
+    }
 }
