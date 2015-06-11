@@ -52,7 +52,9 @@ class InstagramController extends Controller
         $user = $em->getRepository('FangoUserBundle:User')->getUserBySocialId($userData['id'], 'instagram');
 
         if (!$user) {
-            $user = $em->getRepository('FangoUserBundle:User')->findByUsername($this->generateUsername($userData));
+            $user = $em->getRepository('FangoUserBundle:User')->findOneBy([
+                'username' => $this->generateUsername($userData)
+            ]);
         }
 
         if (!$user) {
