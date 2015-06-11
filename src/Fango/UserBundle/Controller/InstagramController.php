@@ -52,6 +52,10 @@ class InstagramController extends Controller
         $user = $em->getRepository('FangoUserBundle:User')->getUserBySocialId($userData['id'], 'instagram');
 
         if (!$user) {
+            $user = $em->getRepository('FangoUserBundle:User')->findByUsername($this->generateUsername($userData));
+        }
+
+        if (!$user) {
             if ($this->getUser()) {
                 $user = $this->getUser();
                 $this->createNetwork($userData, $user);
@@ -76,7 +80,7 @@ class InstagramController extends Controller
     private function createUser(array $userData)
     {
         $user = new User();
-        $user->setUsername($userData['username'].$userData['id']);
+        $user->setUsername($this->generateUsername($userData));
         $user->setEmail('none');
         $user->setFullname($userData['full_name']);
 
@@ -113,5 +117,10 @@ class InstagramController extends Controller
     {
         $token = new UsernamePasswordToken($user, $user->getPassword(), 'main', $user->getRoles());
         $this->get('security.token_storage')->setToken($token);
+    }
+
+    private function generateUsername(array $userData)
+    {
+        return $userData['username'].$userData['id'];
     }
 }
