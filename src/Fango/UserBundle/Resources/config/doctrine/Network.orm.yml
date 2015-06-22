@@ -8,11 +8,13 @@ Fango\UserBundle\Entity\Network:
             generator:
                 strategy: AUTO
     fields:
-        type:       { type: string, length: '50' }
-        networkId:  { type: string, column: network_id, length: 100 }
-        display:    { type: string, length: 100, nullable: true }
-        createdAt:  { type: datetime, column: created_at }
-        rest:       { type: text, nullable: true }
+        type:         { type: string, length: '50' }
+        networkId:    { type: string, column: network_id, length: 100 }
+        display:      { type: string, length: 100, nullable: true }
+        createdAt:    { type: datetime, column: created_at }
+        rest:         { type: text, nullable: true }
+        token:        { type: string, length: 255, column: token, nullable: true }
+        tokenSecret:  { type: string, length: 255, column: token_secret, nullable: true }
     manyToOne:
         user:
             targetEntity: Fango\UserBundle\Entity\User

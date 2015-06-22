@@ -51,6 +51,8 @@ class TwitterController extends Controller
         $userData = $connection->get("account/verify_credentials");
 
         $userData = json_decode(json_encode($userData), true);
+        $userData['token'] = $content['oauth_token'];
+        $userData['token_secret'] = $content['oauth_token_secret'];
 
         $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository('FangoUserBundle:User')->getUserBySocialId($userData['id'], 'twitter');
@@ -68,7 +70,7 @@ class TwitterController extends Controller
             $em->flush();
         }
 
-        $this->authenticateUser($user);
+        $this->authenticateUser($user, $userData);
 
         return $this->redirectToRoute('fango_main_dashboard');
     }
@@ -107,15 +109,37 @@ class TwitterController extends Controller
         $network->setRest(serialize($userData));
         $network->setCreatedAt(new \DateTime('now'));
         $network->setDisplay($userData['screen_name']);
+
+        if (array_key_exists('token', $userData)) {
+            $network->setToken($userData['token']);
+        }
+        if (array_key_exists('token', $userData)) {
+            $network->setTokenSecret($userData['token_secret']);
+        }
+
         $this->getDoctrine()->getManager()->persist($network);
     }
 
     /**
      * @param User $user
+     * @param array $userData
      */
-    private function authenticateUser(User $user)
+    private function authenticateUser(User $user, array $userData = [])
     {
         $token = new UsernamePasswordToken($user, $user->getPassword(), 'main', $user->getRoles());
         $this->get('security.token_storage')->setToken($token);
+
+        if (array_key_exists('token', $userData) && array_key_exists('token_secret', $userData)) {
+            foreach ($user->getNetworks() as $network) {
+                if ($network->getType() == 'twitter') {
+                    $network->setToken($userData['token']);
+                    $network->setTokenSecret($userData['token_secret']);
+
+                    $em = $this->getDoctrine()->getManager();
+                    $em->persist($network);
+                    $em->flush();
+                }
+            }
+        }
     }
 }

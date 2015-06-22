@@ -192,4 +192,60 @@ class Network
     {
         return $this->display;
     }
+    /**
+     * @var string
+     */
+    private $token;
+
+    /**
+     * @var string
+     */
+    private $tokenSecret;
+
+
+    /**
+     * Set token
+     *
+     * @param string $token
+     * @return Network
+     */
+    public function setToken($token)
+    {
+        $this->token = $token;
+
+        return $this;
+    }
+
+    /**
+     * Get token
+     *
+     * @return string 
+     */
+    public function getToken()
+    {
+        return $this->token;
+    }
+
+    /**
+     * Set tokenSecret
+     *
+     * @param string $tokenSecret
+     * @return Network
+     */
+    public function setTokenSecret($tokenSecret)
+    {
+        $this->tokenSecret = $tokenSecret;
+
+        return $this;
+    }
+
+    /**
+     * Get tokenSecret
+     *
+     * @return string 
+     */
+    public function getTokenSecret()
+    {
+        return $this->tokenSecret;
+    }
 }
