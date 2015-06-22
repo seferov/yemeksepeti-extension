@@ -32,6 +32,7 @@ class AppKernel extends Kernel
             new Bazinga\Bundle\GeocoderBundle\BazingaGeocoderBundle(),
             new Fango\MailBundle\FangoMailBundle(),
             new Seferov\EmailExtractorBundle\SeferovEmailExtractorBundle(),
+            new Seferov\CrawlerBundle\SeferovCrawlerBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

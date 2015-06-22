@@ -1,0 +1,14 @@
+Seferov\CrawlerBundle\Entity\TwitterQueue:
+    type: entity
+    table: fg_crawler_twitter_queue
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        twitterId:    { type: integer, column: twitter_id, unique: true }
+        followerId:   { type: integer, column: follower_id }
+        isCrawled:    { type: boolean, column: is_crawled }
+    lifecycleCallbacks: {  }

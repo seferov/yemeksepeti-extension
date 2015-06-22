@@ -1,0 +1,18 @@
+Seferov\CrawlerBundle\Entity\Twitter:
+    type: entity
+    table: fg_crawler_twitter
+    repositoryClass: Seferov\CrawlerBundle\Entity\TwitterRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        twitterId:    { type: integer, column: twitter_id }
+        email:        { type: string, length: 255, nullable: true }
+        screenName:   { type: string, length: 255, nullable: true, column: screen_name }
+        fullname:     { type: string, length: 255, nullable: true }
+        createdAt:    { type: datetime, column: created_at }
+        info:         { type: text, nullable: true }
+    lifecycleCallbacks: {  }

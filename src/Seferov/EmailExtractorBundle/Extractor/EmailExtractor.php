@@ -2,8 +2,17 @@
 
 namespace Seferov\EmailExtractorBundle\Extractor;
 
+/**
+ * Class EmailExtractor
+ * @author Farhad Safarov <http://ferhad.in>
+ * @package Seferov\EmailExtractorBundle\Extractor
+ */
 class EmailExtractor
 {
+    /**
+     * @param $text
+     * @return array
+     */
     public function process($text)
     {
         $emails = [];
