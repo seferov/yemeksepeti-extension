@@ -35,7 +35,9 @@
         "facebook/php-sdk-v4": "4.0.0",
         "abraham/twitteroauth": "0.5.2",
         "cosenary/instagram": "^2.3",
-        "seferov/aws-bundle": "^1.1"
+        "seferov/aws-bundle": "^1.1",
+        "predis/predis": "0.8.4",
+        "snc/redis-bundle": "1.1.6"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

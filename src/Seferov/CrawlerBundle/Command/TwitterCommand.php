@@ -3,7 +3,6 @@
 namespace Seferov\CrawlerBundle\Command;
 
 use Abraham\TwitterOAuth\TwitterOAuth;
-use Doctrine\DBAL\DBALException;
 use Seferov\CrawlerBundle\Entity\Twitter;
 use Seferov\CrawlerBundle\Entity\TwitterQueue;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -34,7 +33,7 @@ class TwitterCommand extends ContainerAwareCommand
 
         $queue = $em->getRepository('SeferovCrawlerBundle:TwitterQueue')->findBy([
             'isCrawled' => false
-        ], null, 5);
+        ], null, 10);
 
         foreach ($queue as $q) {
             $user = $connection->get('users/show', ['user_id' => $q->getTwitterId()]);
@@ -56,43 +55,15 @@ class TwitterCommand extends ContainerAwareCommand
 
             $q->setIsCrawled(true);
 
-            $em->persist($twitter, $q);
+            $em->persist($q);
+            $em->persist($twitter);
             $em->flush();
-            $em->clear();
 
-            // Add followings to queue
-            $friends = $connection->get('friends/ids', ['user_id' => $q->getTwitterId()]);
-
-            $output->writeln('Fetching user friends...');
-
-            foreach ($friends->ids as $key => $id) {
-                $queue = new TwitterQueue();
-                $queue->setIsCrawled(0);
-                $queue->setTwitterId($id);
-                $queue->setFollowerId($user->id);
-                $em->persist($queue);
-                $output->writeln($id);
-
-                try {
-                    $em->flush();
-                }
-                catch (DBALException $e) {
-                    // probably duplicate content
-
-                    if (!$em->isOpen()) {
-                        $em = $em->create($em->getConnection(), $em->getConfiguration());
-                    }
-                }
-
-                if ($key  % 5 == 0) {
-                    $em->clear();
-                }
-            }
-
-            $em->flush();
+            $redis = $this->getContainer()->get('snc_redis.crawler');
+            $redis->rpush('twitter_queue', $q->getTwitterId());
 
             // Done
-            $output->writeln('Done');
+            $output->writeln('Done: ' . $user->screen_name);
         }
     }
 }

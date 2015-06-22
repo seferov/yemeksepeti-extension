@@ -96,3 +96,10 @@ seferov_aws:
     key: AKIAIBQSD3VAZPDOVCKQ
     secret: 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
     region: us-west-2
+
+snc_redis:
+    clients:
+        crawler:
+            type: predis
+            alias: crawler
+            dsn: redis://localhost/1
