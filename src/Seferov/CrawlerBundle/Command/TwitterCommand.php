@@ -73,18 +73,18 @@ class TwitterCommand extends ContainerAwareCommand
                 $em->persist($queue);
                 $output->writeln($id);
 
-                if ($key % 5 == 0) {
-                    try {
-                        $em->flush();
-                    }
-                    catch (DBALException $e) {
-                        // probably duplicate content
+                try {
+                    $em->flush();
+                }
+                catch (DBALException $e) {
+                    // probably duplicate content
 
-                        if (!$em->isOpen()) {
-                            $em = $em->create($em->getConnection(), $em->getConfiguration());
-                        }
+                    if (!$em->isOpen()) {
+                        $em = $em->create($em->getConnection(), $em->getConfiguration());
                     }
+                }
 
+                if ($key  % 5 == 0) {
                     $em->clear();
                 }
             }
