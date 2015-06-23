@@ -11,4 +11,5 @@ Seferov\CrawlerBundle\Entity\TwitterQueue:
         twitterId:    { type: integer, column: twitter_id, unique: true }
         followerId:   { type: integer, column: follower_id }
         isCrawled:    { type: boolean, column: is_crawled }
+        hasError:     { type: boolean, column: has_error, nullable: true }
     lifecycleCallbacks: {  }

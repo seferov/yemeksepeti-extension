@@ -1,6 +1,7 @@
 Fango\UserBundle\Entity\Network:
     type: entity
     table: fg_user_network
+    repositoryClass: Fango\UserBundle\Entity\NetworkRepository
     id:
         id:
             type: integer

@@ -108,4 +108,32 @@ class TwitterQueue
     {
         return $this->followerId;
     }
+    /**
+     * @var boolean
+     */
+    private $hasError;
+
+
+    /**
+     * Set hasError
+     *
+     * @param boolean $hasError
+     * @return TwitterQueue
+     */
+    public function setHasError($hasError)
+    {
+        $this->hasError = $hasError;
+
+        return $this;
+    }
+
+    /**
+     * Get hasError
+     *
+     * @return boolean 
+     */
+    public function getHasError()
+    {
+        return $this->hasError;
+    }
 }

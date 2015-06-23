@@ -3,6 +3,7 @@
 namespace Seferov\CrawlerBundle\Command;
 
 use Abraham\TwitterOAuth\TwitterOAuth;
+use Doctrine\DBAL\LockMode;
 use Seferov\CrawlerBundle\Entity\Twitter;
 use Seferov\CrawlerBundle\Entity\TwitterQueue;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -26,20 +27,55 @@ class TwitterCommand extends ContainerAwareCommand
 
     public function execute(InputInterface $input, OutputInterface $output)
     {
-        $connection = new TwitterOAuth($this->getContainer()->getParameter('twitter_client'), $this->getContainer()->getParameter('twitter_secret'));
+        $redis = $this->getContainer()->get('snc_redis.crawler');
 
         /** @var \Doctrine\ORM\EntityManager $em */
         $em = $this->getContainer()->get('doctrine.orm.default_entity_manager');
 
-        $queue = $em->getRepository('SeferovCrawlerBundle:TwitterQueue')->findBy([
-            'isCrawled' => false
-        ], null, 10);
+        if (!$redis->exists('token')) {
+            $this->getAccessToken();
+        }
 
-        foreach ($queue as $q) {
-            $user = $connection->get('users/show', ['user_id' => $q->getTwitterId()]);
+        $connection = new TwitterOAuth($this->getContainer()->getParameter('twitter_client'), $this->getContainer()->getParameter('twitter_secret'), $redis->get('token'), $redis->get('token_secret'));
 
+        for ($i = 0; $i < 100; $i++) {
+            $em->getConnection()->beginTransaction();
+            $queue = $em->createQueryBuilder()
+                ->select('q')
+                ->from('SeferovCrawlerBundle:TwitterQueue', 'q')
+                ->where('q.isCrawled = :isCrawled')
+                ->andWhere('q.hasError is null or q.hasError = :hasError')
+                ->setParameters([
+                    'isCrawled' => false,
+                    'hasError' => false
+                ])
+                ->setMaxResults(1)
+                ->getQuery()
+                ->setLockMode(LockMode::PESSIMISTIC_WRITE)
+                ->getSingleResult();
+
+            $id = $queue->getTwitterId();
+
+            $output->writeln(sprintf('Getting %s...', $id));
+            $user = $connection->get('users/show', ['user_id' => $id]);
+
+            // Error handling
             if (property_exists($user, 'errors') && count($user->errors)) {
+                $queue->setHasError(true);
+                $em->persist($queue);
+                $em->flush();
+                $output->writeln('Aborted');
                 continue;
+            }
+
+            // Check rate limit
+            $xHeader = $connection->getLastXHeaders();
+            if ($xHeader['x_rate_limit_remaining'] < 1) {
+                $output->writeln('<info>Getting new access token...</info>');
+
+                // Get new random access token
+                $this->getAccessToken();
+                $this->execute($input, $output);
             }
 
             $email = $this->getContainer()->get('seferov_extractor.email_extractor')->process($user->description);
@@ -57,17 +93,33 @@ class TwitterCommand extends ContainerAwareCommand
             $twitter->setInfo(json_encode($user));
             $twitter->setCreatedAt(new \DateTime('now'));
 
-            $q->setIsCrawled(true);
+            $queue->setIsCrawled(true);
 
-            $em->persist($q);
+            $em->persist($queue);
             $em->persist($twitter);
             $em->flush();
 
-            $redis = $this->getContainer()->get('snc_redis.crawler');
-            $redis->rpush('twitter_queue', $q->getTwitterId());
+            $em->getConnection()->commit();
+
+            $redis->rpush('twitter_queue', $id);
 
             // Done
             $output->writeln('Done: ' . $user->screen_name);
+        }
+    }
+
+    private function getAccessToken()
+    {
+        $redis = $this->getContainer()->get('snc_redis.crawler');
+
+        /** @var \Doctrine\ORM\EntityManager $em */
+        $em = $this->getContainer()->get('doctrine.orm.default_entity_manager');
+
+        $networks = $em->getRepository('FangoUserBundle:Network')->findRandomToken();
+
+        foreach ($networks as $network) {
+            $redis->set('token', $network->getToken());
+            $redis->set('token_secret', $network->getTokenSecret());
         }
     }
 }
