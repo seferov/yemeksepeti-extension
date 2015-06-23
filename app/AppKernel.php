@@ -31,7 +31,7 @@ class AppKernel extends Kernel
             new Vipx\BotDetectBundle\VipxBotDetectBundle(),
             new Bazinga\Bundle\GeocoderBundle\BazingaGeocoderBundle(),
             new Fango\MailBundle\FangoMailBundle(),
-            new Seferov\EmailExtractorBundle\SeferovEmailExtractorBundle(),
+            new Seferov\ExtractorBundle\SeferovExtractorBundle(),
             new Seferov\CrawlerBundle\SeferovCrawlerBundle(),
             new Snc\RedisBundle\SncRedisBundle(),
         );

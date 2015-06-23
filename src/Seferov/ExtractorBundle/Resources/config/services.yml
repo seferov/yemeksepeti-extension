@@ -1,0 +1,3 @@
+services:
+    seferov_extractor.email_extractor:
+        class: Seferov\ExtractorBundle\Extractor\EmailExtractor

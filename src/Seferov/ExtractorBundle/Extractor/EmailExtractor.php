@@ -1,11 +1,11 @@
 <?php
 
-namespace Seferov\EmailExtractorBundle\Extractor;
+namespace Seferov\ExtractorBundle\Extractor;
 
 /**
  * Class EmailExtractor
  * @author Farhad Safarov <http://ferhad.in>
- * @package Seferov\EmailExtractorBundle\Extractor
+ * @package Seferov\ExtractorBundle\Extractor
  */
 class EmailExtractor
 {
@@ -17,7 +17,7 @@ class EmailExtractor
     {
         $emails = [];
 
-        $pattern = '/([a-zA-Z0-9+._-]+@[a-zA-Z0-9._-]{2,}\.[a-zA-Z._-]{2,10})/';
+        $pattern = '/([a-zA-Z0-9+._-]+@[a-zA-Z0-9._-]{2,}\.[a-zA-Z_-]{2,10})/';
         preg_match_all($pattern, $text, $matches);
         if (count($matches) != 0) {
             foreach ($matches[1] as $item) {

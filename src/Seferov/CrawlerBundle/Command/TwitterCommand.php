@@ -42,7 +42,7 @@ class TwitterCommand extends ContainerAwareCommand
                 continue;
             }
 
-            $email = $this->getContainer()->get('seferov_email_extractor.extractor')->process($user->description);
+            $email = $this->getContainer()->get('seferov_extractor.email_extractor')->process($user->description);
             $email = count($email) ? $email[0] : null;
 
             $twitter = new Twitter();
