@@ -9,10 +9,14 @@ Seferov\CrawlerBundle\Entity\Twitter:
             generator:
                 strategy: AUTO
     fields:
-        twitterId:    { type: integer, column: twitter_id }
-        email:        { type: string, length: 255, nullable: true }
-        screenName:   { type: string, length: 255, nullable: true, column: screen_name }
-        fullname:     { type: string, length: 255, nullable: true }
-        createdAt:    { type: datetime, column: created_at }
-        info:         { type: text, nullable: true }
+        twitterId:      { type: integer, column: twitter_id }
+        email:          { type: string, length: 255, nullable: true }
+        screenName:     { type: string, length: 255, nullable: true, column: screen_name }
+        followerCount:  { type: integer, nullable: true, column: follower_count }
+        friendsCount:   { type: integer, nullable: true, column: friends_count }
+        website:        { type: string, length: 255, nullable: true }
+        lang:           { type: string, length: 20, nullable: true }
+        fullname:       { type: string, length: 255, nullable: true }
+        createdAt:      { type: datetime, column: created_at }
+        info:           { type: text, nullable: true }
     lifecycleCallbacks: {  }

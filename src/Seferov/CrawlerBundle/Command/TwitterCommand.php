@@ -50,6 +50,10 @@ class TwitterCommand extends ContainerAwareCommand
             $twitter->setEmail($email);
             $twitter->setScreenName($user->screen_name);
             $twitter->setFullname($user->name);
+            $twitter->setLang($user->lang);
+            $twitter->setFriendsCount($user->friends_count);
+            $twitter->setFollowerCount($user->followers_count);
+            $twitter->setWebsite($user->url);
             $twitter->setInfo(json_encode($user));
             $twitter->setCreatedAt(new \DateTime('now'));
 
