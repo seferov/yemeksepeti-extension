@@ -64,6 +64,7 @@ class TwitterCommand extends ContainerAwareCommand
                 $queue->setHasError(true);
                 $em->persist($queue);
                 $em->flush();
+                $em->getConnection()->commit();
                 $output->writeln('Aborted');
                 continue;
             }
