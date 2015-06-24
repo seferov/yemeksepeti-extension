@@ -59,16 +59,6 @@ class TwitterCommand extends ContainerAwareCommand
             $output->writeln(sprintf('Getting %s...', $id));
             $user = $connection->get('users/show', ['user_id' => $id]);
 
-            // Error handling
-            if (property_exists($user, 'errors') && count($user->errors)) {
-                $queue->setHasError(true);
-                $em->persist($queue);
-                $em->flush();
-                $em->getConnection()->commit();
-                $output->writeln('Aborted');
-                continue;
-            }
-
             // Check rate limit
             $xHeader = $connection->getLastXHeaders();
             if ($xHeader['x_rate_limit_remaining'] < 1) {
@@ -76,7 +66,19 @@ class TwitterCommand extends ContainerAwareCommand
 
                 // Get new random access token
                 $this->getAccessToken();
+                $em->getConnection()->commit();
                 $this->execute($input, $output);
+            }
+
+            // Error handling
+            if (property_exists($user, 'errors') && count($user->errors)) {
+                var_dump($user);
+                $queue->setHasError(true);
+                $em->persist($queue);
+                $em->flush();
+                $em->getConnection()->commit();
+                $output->writeln('Aborted');
+                continue;
             }
 
             $email = $this->getContainer()->get('seferov_extractor.email_extractor')->process($user->description);
