@@ -81,6 +81,7 @@ class MailerCommand extends ContainerAwareCommand
                 ->setLockMode(LockMode::PESSIMISTIC_WRITE);
 
             try {
+                /** @var \Seferov\MailerBundle\Entity\Mail $email */
                 $email = $query->getSingleResult();
             }
             catch (NoResultException $e) {
@@ -98,7 +99,12 @@ class MailerCommand extends ContainerAwareCommand
                     'uid' => $uid
                 ]), 'text/html');
 
-            $mailer->send($message);
+            try {
+                $mailer->send($message);
+            }
+            catch (\Swift_RfcComplianceException $e) {
+                $email->setProblem(true);
+            }
 
             // Save to DB
             $batch = new Mail\Batch();
