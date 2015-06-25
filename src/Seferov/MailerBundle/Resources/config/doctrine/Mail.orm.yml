@@ -9,7 +9,7 @@ Seferov\MailerBundle\Entity\Mail:
             generator:
                 strategy: AUTO
     fields:
-        mail:             { type: string, length: 255 }
+        mail:             { type: string, length: 255, unique: true }
         followerCount:    { type: integer, column: follower_count, nullable: true }
         lang:             { type: string, length: '20', nullable: true }
         location:         { type: string, length: 255, nullable: true }
