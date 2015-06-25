@@ -73,8 +73,11 @@ class MailerCommand extends ContainerAwareCommand
                 ->where('m.lastBatch != :lastBatch or m.lastBatch is null')
                 ->andWhere('m.unsubscribed = false')
                 ->andWhere('m.problem = false')
+                ->andWhere('m.contacted = false')
+                ->andWhere('m.source = :source')
                 ->setParameters([
-                    'lastBatch' => $batchNumber
+                    'lastBatch' => $batchNumber,
+                    'source' => 'twitter'
                 ])
                 ->setMaxResults(1)
                 ->getQuery()
