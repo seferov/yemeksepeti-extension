@@ -90,16 +90,15 @@ class MailerCommand extends ContainerAwareCommand
             }
 
             // Send mail
-            $message = \Swift_Message::newInstance()
-                ->setSubject(sprintf($versions[$version]['subject'], $email->getUsername()))
-                ->setFrom(['jessica@fango.me' => 'Jessica Taylor'])
-                ->setTo($email->getMail())
-                ->setBody($templating->render($template, [
-                    'version' => $version,
-                    'uid' => $uid
-                ]), 'text/html');
-
             try {
+                $message = \Swift_Message::newInstance()
+                    ->setSubject(sprintf($versions[$version]['subject'], $email->getUsername()))
+                    ->setFrom(['jessica@fango.me' => 'Jessica Taylor'])
+                    ->setTo($email->getMail())
+                    ->setBody($templating->render($template, [
+                        'version' => $version,
+                        'uid' => $uid
+                    ]), 'text/html');
                 $mailer->send($message);
             }
             catch (\Swift_RfcComplianceException $e) {
