@@ -34,6 +34,20 @@ class Mail
      */
     private $location;
 
+    /**
+     * @var boolean
+     */
+    private $problem =  false;
+
+    /**
+     * @var boolean
+     */
+    private $contacted = false;
+
+    /**
+     * @var boolean
+     */
+    private $unsubscribed = false;
 
     /**
      * Get id
@@ -293,11 +307,6 @@ class Mail
     {
         return $this->batches;
     }
-    /**
-     * @var boolean
-     */
-    private $unsubscribed;
-
 
     /**
      * Set unsubscribed
@@ -321,11 +330,6 @@ class Mail
     {
         return $this->unsubscribed;
     }
-    /**
-     * @var boolean
-     */
-    private $problem;
-
 
     /**
      * Set problem
@@ -348,5 +352,28 @@ class Mail
     public function getProblem()
     {
         return $this->problem;
+    }
+
+    /**
+     * Set contacted
+     *
+     * @param boolean $contacted
+     * @return Mail
+     */
+    public function setContacted($contacted)
+    {
+        $this->contacted = $contacted;
+
+        return $this;
+    }
+
+    /**
+     * Get contacted
+     *
+     * @return boolean 
+     */
+    public function getContacted()
+    {
+        return $this->contacted;
     }
 }

@@ -19,6 +19,7 @@ Seferov\MailerBundle\Entity\Mail:
         lastBatch:        { type: smallint, column: last_batch, nullable: true }
         unsubscribed:     { type: boolean }
         problem:          { type: boolean }
+        contacted:        { type: boolean, options: { default: false } }
     oneToMany:
         batches:
             targetEntity: Seferov\MailerBundle\Entity\Mail\Batch
