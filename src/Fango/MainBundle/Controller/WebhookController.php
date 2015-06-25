@@ -100,7 +100,7 @@ class WebhookController extends Controller
 
         /** @var \Seferov\MailerBundle\Entity\Mail $email */
         $email = $em->getRepository('SeferovMailerBundle:Mail')->findOneBy([
-            'email' => $m['mail']['destination'][0]
+            'mail' => $m['mail']['destination'][0]
         ]);
 
         if (!$email instanceof Mail) {
