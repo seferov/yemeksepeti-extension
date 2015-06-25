@@ -30,7 +30,7 @@ class MailTransferCommand extends ContainerAwareCommand
     {
         $em = $this->getContainer()->get('doctrine.orm.default_entity_manager');
 
-        for ($i = 1; $i <= 100; $i++) {
+        for ($i = 1; $i <= 1000; $i++) {
             $mail = $em
                 ->getRepository('FangoMainBundle:Mail')
                 ->findOneBy([
