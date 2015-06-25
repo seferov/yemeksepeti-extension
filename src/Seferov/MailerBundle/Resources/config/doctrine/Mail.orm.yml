@@ -1,0 +1,26 @@
+Seferov\MailerBundle\Entity\Mail:
+    type: entity
+    table: sf_email
+    repositoryClass: Seferov\MailerBundle\Entity\MailRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        mail:             { type: string, length: 255 }
+        followerCount:    { type: integer, column: follower_count, nullable: true }
+        lang:             { type: string, length: '20', nullable: true }
+        location:         { type: string, length: 255, nullable: true }
+        source:           { type: string, lenght: 50, nullable: true }
+        username:         { type: string, lenght: 255, nullable: true }
+        fullname:         { type: string, lenght: 255, nullable: true }
+        lastBatch:        { type: smallint, column: last_batch, nullable: true }
+        unsubscribed:     { type: boolean }
+        problem:          { type: boolean }
+    oneToMany:
+        batches:
+            targetEntity: Seferov\MailerBundle\Entity\Mail\Batch
+            mappedBy: mail
+    lifecycleCallbacks: {  }

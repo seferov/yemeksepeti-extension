@@ -103,3 +103,6 @@ snc_redis:
             type: predis
             alias: crawler
             dsn: redis://localhost/1
+
+seferov_mailer:
+    main_route: fango_main_homepage

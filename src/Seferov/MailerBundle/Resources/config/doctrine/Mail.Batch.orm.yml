@@ -1,0 +1,27 @@
+Seferov\MailerBundle\Entity\Mail\Batch:
+    type: entity
+    table: sf_email_batch
+    repositoryClass: Seferov\MailerBundle\Entity\Mail\BatchRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        version:      { type: string, length: '50' }
+        uid:          { type: string, length: 255 }
+        isOpened:     { type: boolean, column: is_opened, options: {default: false} }
+        linkClicked:  { type: boolean, column: link_clicked, options: {default: false} }
+        complaint:    { type: boolean, options: {default: false} }
+        bounce:       { type: boolean, options: {default: false} }
+        ipAddress:    { type: string, length: '50', column: ip_address, nullable: true }
+        sentAt:       { type: datetime, column: sent_at }
+    manyToOne:
+        mail:
+            targetEntity: Seferov\MailerBundle\Entity\Mail
+            inversedBy: batches
+            joinColumn:
+                name: mail_id
+                referencedColumnName: id
+    lifecycleCallbacks: {  }

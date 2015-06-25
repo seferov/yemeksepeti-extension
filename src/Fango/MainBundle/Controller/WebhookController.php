@@ -6,6 +6,7 @@ use Aws\Sns\MessageValidator\Message;
 use Aws\Sns\MessageValidator\MessageValidator;
 use Fango\MainBundle\Entity\WebhookLog;
 use Guzzle\Http\Client;
+use Seferov\MailerBundle\Entity\Mail;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -96,21 +97,28 @@ class WebhookController extends Controller
         $m = json_decode($message['Message'], true);
 
         $em = $this->getDoctrine()->getManager();
-        /** @var \Fango\MainBundle\Entity\Mail $email */
-        $email = $em->getRepository('FangoMainBundle:Mail')->findOneBy([
+
+        /** @var \Seferov\MailerBundle\Entity\Mail $email */
+        $email = $em->getRepository('SeferovMailerBundle:Mail')->findOneBy([
             'email' => $m['mail']['destination'][0]
         ]);
 
+        if (!$email instanceof Mail) {
+            return new JsonResponse();
+        }
+
+        $lastBatch = $email->getBatches()->last();
+        $email->setProblem(true);
         switch ($message['TopicArn']) {
             case 'arn:aws:sns:us-west-2:008525380933:complaints':
-                $email->setComplaint(true);
+                $lastBatch->setComplaint(true);
                 break;
             case 'arn:aws:sns:us-west-2:008525380933:bounces':
-                $email->setBounce(true);
+                $lastBatch->setBounce(true);
                 break;
         }
 
-        $em->persist($email);
+        $em->persist($lastBatch, $email);
         $em->flush();
 
         return new JsonResponse();

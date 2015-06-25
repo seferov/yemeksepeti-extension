@@ -1,13 +1,13 @@
 <?php
 
-namespace Fango\MainBundle\Http;
+namespace Seferov\MailerBundle\Http;
 
 use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class TransparentPixelResponse
  * @author Farhad Safarov <http://ferhad.in>
- * @package Fango\MainBundle\Http
+ * @package Seferov\MailerBundle\Http
  */
 class TransparentPixelResponse extends Response
 {

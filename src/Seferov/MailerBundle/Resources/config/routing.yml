@@ -1,0 +1,16 @@
+
+seferov_email_tracking_pixel:
+    path:     /email.gif
+    defaults: { _controller: SeferovMailerBundle:Tracking:emailOpen }
+
+seferov_email_redirect:
+    path:     /redirect
+    defaults: { _controller: SeferovMailerBundle:Tracking:redirect }
+
+seferov_email_unsubscribe:
+    path:     /unsubscribe/{uid}
+    defaults: { _controller: SeferovMailerBundle:Mail:unsubscribe }
+
+seferov_email_resubscribe:
+    path:     /resubscribe/{uid}
+    defaults: { _controller: SeferovMailerBundle:Mail:resubscribe }

@@ -1,3 +1,7 @@
+seferov_mailer:
+    resource: "@SeferovMailerBundle/Resources/config/routing.yml"
+    prefix:   /
+
 fango_mail:
     resource: "@FangoMailBundle/Resources/config/routing.yml"
     prefix:   /

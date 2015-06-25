@@ -1,16 +1,16 @@
-
-fango_email_tracking_pixel:
-    path:     /email.gif
-    defaults: { _controller: FangoMailBundle:Tracking:emailOpen }
-
-fango_email_unsubscribe:
-    path:     /unsubscribe/{uid}
-    defaults: { _controller: FangoMailBundle:Mail:unsubscribe }
-
-fango_email_resubscribe:
-    path:     /resubscribe/{uid}
-    defaults: { _controller: FangoMailBundle:Mail:resubscribe }
-
-fango_email_redirect:
-    path:     /redirect
-    defaults: { _controller: FangoMailBundle:Tracking:redirect }
+#
+#fango_email_tracking_pixel:
+#    path:     /email.gif
+#    defaults: { _controller: FangoMailBundle:Tracking:emailOpen }
+#
+#fango_email_unsubscribe:
+#    path:     /unsubscribe/{uid}
+#    defaults: { _controller: FangoMailBundle:Mail:unsubscribe }
+#
+#fango_email_resubscribe:
+#    path:     /resubscribe/{uid}
+#    defaults: { _controller: FangoMailBundle:Mail:resubscribe }
+#
+#fango_email_redirect:
+#    path:     /redirect
+#    defaults: { _controller: FangoMailBundle:Tracking:redirect }

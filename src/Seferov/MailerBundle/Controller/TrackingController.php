@@ -1,16 +1,16 @@
 <?php
 
-namespace Fango\MailBundle\Controller;
+namespace Seferov\MailerBundle\Controller;
 
-use Fango\MainBundle\Entity\Mail;
+use Seferov\MailerBundle\Entity\Mail;
 use Seferov\MailerBundle\Http\TransparentPixelResponse;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**
  * Class TrackingController
  * @author Farhad Safarov <http://ferhad.in>
- * @package Fango\MailBundle\Controller
+ * @package Seferov\MailerBundle\Controller
  */
 class TrackingController extends Controller
 {
@@ -23,11 +23,11 @@ class TrackingController extends Controller
         $uid = $request->query->get('uid');
         if (null !== $uid) {
             $em = $this->getDoctrine()->getManager();
-            $email = $em->getRepository('FangoMainBundle:Mail')->findOneBy(['uid' => $uid]);
+            $batch = $em->getRepository('SeferovMailerBundle:Mail\Batch')->findOneBy(['uid' => $uid]);
 
-            if ($email instanceof Mail) {
-                $email->setSecondIsOpened(true);
-                $em->persist($email);
+            if ($batch instanceof Mail\Batch) {
+                $batch->setIsOpened(true);
+                $em->persist($batch);
                 $em->flush();
                 $em->clear();
             }
@@ -45,17 +45,20 @@ class TrackingController extends Controller
         $uid = $request->query->get('uid');
         if (null !== $uid) {
             $em = $this->getDoctrine()->getManager();
-            $email = $em->getRepository('FangoMainBundle:Mail')->findOneBy(['uid' => $uid]);
+            $batch = $em->getRepository('SeferovMailerBundle:Mail\Batch')->findOneBy(['uid' => $uid]);
 
-            if ($email instanceof Mail) {
-                $email->setSecondLinkClicked(true);
-                $em->persist($email);
+            if ($batch instanceof Mail\Batch) {
+                $batch->setLinkClicked(true);
+                $batch->setIpAddress($request->getClientIp());
+                $em->persist($batch);
                 $em->flush();
                 $em->clear();
             }
         }
 
-        $url = $request->query->has('url') ? $request->query->get('url') : $this->generateUrl($this->container->getParameter('seferov_mailer_config')['main_route']);
+        $url = $request->query->has('url')
+            ? $request->query->get('url')
+            : $this->generateUrl($this->container->getParameter('seferov_mailer_config')['main_route']);
 
         return $this->redirect($url);
     }
