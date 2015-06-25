@@ -72,7 +72,6 @@ class TwitterCommand extends ContainerAwareCommand
 
             // Error handling
             if (property_exists($user, 'errors') && count($user->errors)) {
-                var_dump($user);
                 $queue->setHasError(true);
                 $em->persist($queue);
                 $em->flush();
