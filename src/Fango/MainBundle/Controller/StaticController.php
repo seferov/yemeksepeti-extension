@@ -18,4 +18,12 @@ class StaticController extends Controller
     {
         return $this->render('@FangoMain/Static/privacy.html.twig');
     }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function termsAction()
+    {
+        return $this->render('@FangoMain/Static/terms.html.twig');
+    }
 }

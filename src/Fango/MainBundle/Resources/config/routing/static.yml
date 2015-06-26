@@ -1,3 +1,7 @@
 fango_static_privacy:
     path:     /privacy
     defaults: { _controller: FangoMainBundle:Static:privacy }
+
+fango_static_terms:
+    path:     /terms
+    defaults: { _controller: FangoMainBundle:Static:terms }
