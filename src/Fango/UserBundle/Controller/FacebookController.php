@@ -6,20 +6,22 @@ use Facebook\FacebookRedirectLoginHelper;
 use Facebook\FacebookRequest;
 use Facebook\FacebookSession;
 use Fango\MainBundle\Helper\Utils;
-use Fango\UserBundle\Entity\Network;
 use Fango\UserBundle\Entity\User;
 use Fango\UserBundle\Helper\UserHelper;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 /**
  * Class FacebookController
  * @author Farhad Safarov <http://ferhad.in>
  * @package Fango\UserBundle\Controller
  */
-class FacebookController extends Controller
+class FacebookController extends BaseSocialController
 {
+    public function getType()
+    {
+        return 'facebook';
+    }
+
     /**
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
@@ -75,6 +77,9 @@ class FacebookController extends Controller
         $response = $request->execute();
         $userData = $response->getGraphObject()->asArray();
 
+        $userData['token'] = $session->getToken();
+        $userData['display'] = $userData['first_name'].' '.$userData['last_name'];
+
         $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository('FangoUserBundle:User')->getUserBySocialId($userData['id'], 'facebook');
 
@@ -99,18 +104,9 @@ class FacebookController extends Controller
             $em->flush();
         }
 
-        $this->authenticateUser($user);
+        $this->authenticateUser($user, $userData);
 
         return $this->redirectToRoute('fango_main_dashboard');
-    }
-
-    /**
-     * @param User $user
-     */
-    private function authenticateUser(User $user)
-    {
-        $token = new UsernamePasswordToken($user, $user->getPassword(), 'main', $user->getRoles());
-        $this->get('security.token_storage')->setToken($token);
     }
 
     /**
@@ -132,22 +128,6 @@ class FacebookController extends Controller
         $this->get('fos_user.user_manager')->updateUser($user);
 
         return $user;
-    }
-
-    /**
-     * @param array $userData
-     * @param User $user
-     */
-    private function createNetwork(array $userData, User $user)
-    {
-        $network = new Network();
-        $network->setType('facebook');
-        $network->setUser($user);
-        $network->setNetworkId($userData['id']);
-        $network->setRest(serialize($userData));
-        $network->setCreatedAt(new \DateTime('now'));
-        $network->setDisplay($userData['first_name'].' '.$userData['last_name']);
-        $this->getDoctrine()->getManager()->persist($network);
     }
 
     /**

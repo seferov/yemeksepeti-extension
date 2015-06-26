@@ -2,21 +2,23 @@
 
 namespace Fango\UserBundle\Controller;
 
-use Fango\UserBundle\Entity\Network;
 use Fango\UserBundle\Entity\User;
 use Fango\UserBundle\Helper\UserHelper;
 use MetzWeb\Instagram\Instagram;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 /**
  * Class InstagramController
  * @author Farhad Safarov <http://ferhad.in>
  * @package Fango\UserBundle\Controller
  */
-class InstagramController extends Controller
+class InstagramController extends BaseSocialController
 {
+    public function getType()
+    {
+        return 'instagram';
+    }
+
     public function loginAction()
     {
         $instagram = new Instagram(array(
@@ -43,6 +45,8 @@ class InstagramController extends Controller
         $userData = $instagram->getOAuthToken($code);
         $userData = json_decode(json_encode($userData), true);
         $userData = $userData['user'];
+        $userData['token'] = $code;
+        $userData['display'] = $userData['username'];
 
         if (!array_key_exists('id', $userData)) {
             return $this->redirectToRoute('fos_user_security_login');
@@ -70,7 +74,7 @@ class InstagramController extends Controller
             $em->flush();
         }
 
-        $this->authenticateUser($user);
+        $this->authenticateUser($user, $userData);
 
         return $this->redirectToRoute('fango_main_dashboard');
     }
@@ -94,31 +98,6 @@ class InstagramController extends Controller
         $this->get('fos_user.user_manager')->updateUser($user);
 
         return $user;
-    }
-
-    /**
-     * @param array $userData
-     * @param User $user
-     */
-    private function createNetwork(array $userData, User $user)
-    {
-        $network = new Network();
-        $network->setType('instagram');
-        $network->setUser($user);
-        $network->setNetworkId($userData['id']);
-        $network->setRest(serialize($userData));
-        $network->setCreatedAt(new \DateTime('now'));
-        $network->setDisplay($userData['username']);
-        $this->getDoctrine()->getManager()->persist($network);
-    }
-
-    /**
-     * @param User $user
-     */
-    private function authenticateUser(User $user)
-    {
-        $token = new UsernamePasswordToken($user, $user->getPassword(), 'main', $user->getRoles());
-        $this->get('security.token_storage')->setToken($token);
     }
 
     private function generateUsername(array $userData)

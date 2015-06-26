@@ -3,10 +3,8 @@
 namespace Fango\UserBundle\Controller;
 
 use Abraham\TwitterOAuth\TwitterOAuth;
-use Fango\UserBundle\Entity\Network;
 use Fango\UserBundle\Entity\User;
 use Fango\UserBundle\Helper\UserHelper;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
@@ -16,8 +14,13 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
  * @author Farhad Safarov <http://ferhad.in>
  * @package Fango\UserBundle\Controller
  */
-class TwitterController extends Controller
+class TwitterController extends BaseSocialController
 {
+    public function getType()
+    {
+        return 'twitter';
+    }
+
     /**
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      * @throws \Abraham\TwitterOAuth\TwitterOAuthException
@@ -53,6 +56,7 @@ class TwitterController extends Controller
         $userData = json_decode(json_encode($userData), true);
         $userData['token'] = $content['oauth_token'];
         $userData['token_secret'] = $content['oauth_token_secret'];
+        $userData['display'] = $userData['screen_name'];
 
         $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository('FangoUserBundle:User')->getUserBySocialId($userData['id'], 'twitter');
@@ -94,52 +98,5 @@ class TwitterController extends Controller
         $this->get('fos_user.user_manager')->updateUser($user);
 
         return $user;
-    }
-
-    /**
-     * @param array $userData
-     * @param User $user
-     */
-    private function createNetwork(array $userData, User $user)
-    {
-        $network = new Network();
-        $network->setType('twitter');
-        $network->setUser($user);
-        $network->setNetworkId($userData['id']);
-        $network->setRest(serialize($userData));
-        $network->setCreatedAt(new \DateTime('now'));
-        $network->setDisplay($userData['screen_name']);
-
-        if (array_key_exists('token', $userData)) {
-            $network->setToken($userData['token']);
-        }
-        if (array_key_exists('token', $userData)) {
-            $network->setTokenSecret($userData['token_secret']);
-        }
-
-        $this->getDoctrine()->getManager()->persist($network);
-    }
-
-    /**
-     * @param User $user
-     * @param array $userData
-     */
-    private function authenticateUser(User $user, array $userData = [])
-    {
-        $token = new UsernamePasswordToken($user, $user->getPassword(), 'main', $user->getRoles());
-        $this->get('security.token_storage')->setToken($token);
-
-        if (array_key_exists('token', $userData) && array_key_exists('token_secret', $userData)) {
-            foreach ($user->getNetworks() as $network) {
-                if ($network->getType() == 'twitter') {
-                    $network->setToken($userData['token']);
-                    $network->setTokenSecret($userData['token_secret']);
-
-                    $em = $this->getDoctrine()->getManager();
-                    $em->persist($network);
-                    $em->flush();
-                }
-            }
-        }
     }
 }
