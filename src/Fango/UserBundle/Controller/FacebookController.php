@@ -91,14 +91,13 @@ class FacebookController extends BaseSocialController
             if (!$user) {
                 if ($this->getUser()) {
                     $user = $this->getUser();
+                    $this->createNetwork($userData, $user);
                 }
                 else {
                     $user = $this->createUser($userData);
                     $em->persist($user);
                 }
             }
-
-            $this->createNetwork($userData, $user);
 
             $em->persist($user);
             $em->flush();
