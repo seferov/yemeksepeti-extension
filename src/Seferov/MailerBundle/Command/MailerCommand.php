@@ -104,7 +104,7 @@ class MailerCommand extends ContainerAwareCommand
                     ]), 'text/html');
                 $mailer->send($message);
             }
-            catch (\Swift_RfcComplianceException $e) {
+            catch (\Swift_SwiftException $e) {
                 $email->setProblem(true);
             }
 
