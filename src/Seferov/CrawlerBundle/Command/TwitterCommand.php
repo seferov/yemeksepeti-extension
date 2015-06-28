@@ -61,7 +61,7 @@ class TwitterCommand extends ContainerAwareCommand
 
             // Check rate limit
             $xHeader = $connection->getLastXHeaders();
-            if ($xHeader['x_rate_limit_remaining'] < 1) {
+            if (!array_key_exists('x_rate_limit_remaining', $xHeader) || $xHeader['x_rate_limit_remaining'] < 1) {
                 $output->writeln('<info>Getting new access token...</info>');
 
                 // Get new random access token
