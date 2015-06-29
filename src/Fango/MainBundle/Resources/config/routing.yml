@@ -30,7 +30,7 @@ fango_dashboard_earnings:
 
 fango_dashboard_payment:
     path:     /payment
-    defaults: { _controller: FangoMainBundle:Dashboard:paymentMethod }
+    defaults: { _controller: FangoMainBundle:Dashboard:payment }
 
 fango_network:
     resource: "@FangoMainBundle/Resources/config/routing/network.yml"

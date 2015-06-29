@@ -32,7 +32,7 @@ class DashboardController extends DashboardBaseController
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function paymentMethodAction(Request $request)
+    public function paymentAction(Request $request)
     {
         /** @var \Fango\UserBundle\Entity\User $user */
         $user = $this->getUser();
@@ -52,6 +52,6 @@ class DashboardController extends DashboardBaseController
             }
         }
 
-        return $this->render('@FangoMain/Dashboard/payment_method.html.twig');
+        return $this->render('@FangoMain/Dashboard/payment.html.twig');
     }
 }

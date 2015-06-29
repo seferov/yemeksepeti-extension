@@ -1,7 +1,7 @@
 {% extends 'FangoMainBundle:Dashboard:layout.html.twig' %}
 
 {% block main %}
-    <h1>Payment Method</h1>
+    <h1>Payment</h1>
     {% for errors in app.session.flashbag.get('error') %}
         <div class="alert alert-danger" role="alert">
             <span class="sr-only">Error:</span>
@@ -21,5 +21,12 @@
                 </div>
             </div>
         </form>
+    </div>
+    <div class="row" style="margin-top: 20px;">
+        <div class="alert alert-info" role="alert">
+            <p>Earnings are paid 15th day of next month when they reach $20 threshold.</p>
+            <p>For example, earnings between 1st of June and 30th of June are paid on 15th of August.</p>
+            <p>If the earnings are below $20 for the given month, they will be added to next month's earnings. For example, a user earns $15 between 1st of June and 30th of June. He won't get paid on 15th of August since it's below $20 threshold. She earns $10 between 1st of July and 31st of July. She'll be paid $25 on 15th of September.</p>
+        </div>
     </div>
 {% endblock %}
