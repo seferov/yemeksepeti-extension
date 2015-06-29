@@ -38,7 +38,7 @@ class TwitterCommand extends ContainerAwareCommand
 
         $connection = new TwitterOAuth($this->getContainer()->getParameter('twitter_client'), $this->getContainer()->getParameter('twitter_secret'), $redis->get('token'), $redis->get('token_secret'));
 
-        for ($i = 0; $i < 100; $i++) {
+        for ($i = 0; $i < 1000; $i++) {
             $em->getConnection()->beginTransaction();
             $queue = $em->createQueryBuilder()
                 ->select('q')
