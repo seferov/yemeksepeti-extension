@@ -1,0 +1,25 @@
+{% extends 'FangoMainBundle:Dashboard:layout.html.twig' %}
+
+{% block main %}
+    <h1>Payment Method</h1>
+    {% for errors in app.session.flashbag.get('error') %}
+        <div class="alert alert-danger" role="alert">
+            <span class="sr-only">Error:</span>
+            {% for error in errors %}
+                <li>{{ error.message }}</li>
+            {% endfor %}
+        </div>
+    {% endfor %}
+    <div class="row">
+        <form action="{{ url('fango_dashboard_payment') }}" method="post">
+            <div class="form-group">
+                <div class="col-md-4">
+                    <input type="text" name="paypal" placeholder="Enter your Paypal email address" value="{{ app.user.paypalEmail }}" class="form-control" />
+                </div>
+                <div class="col-md-4">
+                    <input type="submit" class="btn btn-default" />
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

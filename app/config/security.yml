@@ -27,4 +27,5 @@ security:
         - { path: ^/campaigns/\d+/preview, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/campaigns, role: IS_AUTHENTICATED_FULLY }
         - { path: ^/earnings, role: IS_AUTHENTICATED_FULLY }
+        - { path: ^/payment, role: IS_AUTHENTICATED_FULLY }
         - { path: ^/networks, role: IS_AUTHENTICATED_FULLY }

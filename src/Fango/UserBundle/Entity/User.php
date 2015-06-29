@@ -219,4 +219,32 @@ class User extends BaseUser
     {
         return $this->createdAt;
     }
+    /**
+     * @var string
+     */
+    private $paypalEmail;
+
+
+    /**
+     * Set paypalEmail
+     *
+     * @param string $paypalEmail
+     * @return User
+     */
+    public function setPaypalEmail($paypalEmail)
+    {
+        $this->paypalEmail = $paypalEmail;
+
+        return $this;
+    }
+
+    /**
+     * Get paypalEmail
+     *
+     * @return string 
+     */
+    public function getPaypalEmail()
+    {
+        return $this->paypalEmail;
+    }
 }

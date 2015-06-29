@@ -69,11 +69,14 @@
                 <li class="{% if 'campaign' in route %}active{% endif %}">
                     <a href="{{ url('fango_main_campaign_list') }}"><i class="fa fa-fw fa-bullhorn"></i> Campaigns</a>
                 </li>
+                <li class="{% if 'networks' in route %}active{% endif %}">
+                    <a href="{{ url('fango_dashboard_networks_index') }}"><i class="fa fa-fw fa-users"></i> Networks</a>
+                </li>
                 <li class="{% if 'earnings' in route %}active{% endif %}">
                     <a href="{{ url('fango_dashboard_earnings') }}"><i class="fa fa-fw fa-usd"></i> Earnings</a>
                 </li>
-                <li class="{% if 'networks' in route %}active{% endif %}">
-                    <a href="{{ url('fango_dashboard_networks_index') }}"><i class="fa fa-fw fa-users"></i> Networks</a>
+                <li class="{% if 'payment' in route %}active{% endif %}">
+                    <a href="{{ url('fango_dashboard_payment') }}"><i class="fa fa-fw fa-money"></i> Payment Method</a>
                 </li>
             </ul>
         </div>

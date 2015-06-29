@@ -12,6 +12,7 @@ Fango\UserBundle\Entity\User:
         fullname:       { type: string, length: 255, nullable: true }
         earnings:       { type: float }
         paid:           { type: float }
+        paypalEmail:    { type: string, length: 255, nullable: true, column: paypal_email }
         createdAt:      { type: datetime, column: created_at }
     oneToMany:
         userCampaigns:
