@@ -74,7 +74,7 @@ seferov_deployer:
     servers:
         production:
             connection:
-                host: 45.79.76.44
+                host: fango.me
                 username: root
                 password: %server_password%
             git: 'git@bitbucket.org:seferov/fango.git'
