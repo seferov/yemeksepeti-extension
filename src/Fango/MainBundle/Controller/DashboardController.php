@@ -63,15 +63,16 @@ class DashboardController extends DashboardBaseController
     {
         if ('POST' == $request->getMethod()) {
             $em = $this->getDoctrine()->getManager();
+            $id = $request->get('id');
 
-            $user = $em->getRepository('FangoUserBundle:User')->find($request->get('id'));
+            $user = $em->getRepository('FangoUserBundle:User')->find($id);
 
             if ($user) {
                 $user->setLocked(true);
 
                 $stmt = $em->getConnection()->prepare("update fg_transaction t
                     join fg_user_campaign uc on t.`user_campaign_id` = uc.`id`
-                    join fg_user u on u.`id` = uc.`user_id` and u.`id` = 1
+                    join fg_user u on u.`id` = uc.`user_id` and u.`id` = {$id}
                 set t.disabled = 1");
                 $stmt->execute();
 
