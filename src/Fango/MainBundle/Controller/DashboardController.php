@@ -65,9 +65,10 @@ class DashboardController extends DashboardBaseController
             $em = $this->getDoctrine()->getManager();
             $id = $request->get('id');
 
+            /** @var \Fango\UserBundle\Entity\User $user */
             $user = $em->getRepository('FangoUserBundle:User')->find($id);
 
-            if ($user) {
+            if ($user && !$user->isLocked()) {
                 $user->setLocked(true);
 
                 $stmt = $em->getConnection()->prepare("update fg_transaction t
@@ -78,6 +79,15 @@ class DashboardController extends DashboardBaseController
 
                 $em->persist($user);
                 $em->flush();
+
+                $message = \Swift_Message::newInstance()
+                    ->setSubject('Fango account disabled')
+                    ->setFrom(['noreply@fango.me' => 'Fango.me'])
+                    ->setTo($user->getEmail())
+                    ->setBody($this->get('templating')->render('@FangoMain/Dashboard/Email/banned.html.twig'), 'text/html');
+
+                $this->get('mailer')->send($message);
+
                 $this->addFlash('notice', 'User was permanently banned!');
             }
             else {
