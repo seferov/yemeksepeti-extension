@@ -36,8 +36,8 @@
         </div>
     </div>
     {% if userCampaign is not null %}
-    <div class="row">
-        <div class="alert alert-info" role="alert">
+    <div class="block row alert alert-info" role="alert">
+        <div class="col-md-6">
             Share your link:
             <input type="text" value="{{ url('fango_main_short_link', {'hash': userCampaign.uniqueLink}) }}" onClick="this.select();" readonly="readonly">
             <a href="https://www.facebook.com/sharer/sharer.php?u={{ url('fango_main_short_link', {'hash': userCampaign.uniqueLink}) }}" target="_blank" class="btn btn-sm btn-social btn-facebook">
@@ -46,6 +46,10 @@
             <a href="https://twitter.com/intent/tweet?url={{ url('fango_main_short_link', {'hash': userCampaign.uniqueLink}) }}&text={{ campaign.socialText }}&via=fango_me" target="_blank" class="btn btn-sm btn-social btn-twitter">
                 <i class="fa fa-twitter"></i> Tweet
             </a>
+        </div>
+
+        <div class="col-md-6">
+            <p>(You can edit before sharing)</p>
         </div>
     </div>
     {% endif %}
