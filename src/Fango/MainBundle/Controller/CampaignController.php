@@ -131,6 +131,11 @@ class CampaignController extends DashboardBaseController
             throw $this->createNotFoundException();
         }
 
+        // Redirect visitors coming from banned users' URLs to homepage
+        if ($userCampaign->getUser()->isLocked()) {
+            return $this->redirectToRoute('fango_main_homepage');
+        }
+
         $url = $userCampaign->getCampaign()->getActionLink();
 
         // Filter bots
