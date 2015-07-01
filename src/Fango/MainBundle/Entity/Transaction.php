@@ -220,4 +220,32 @@ class Transaction
     {
         return $this->userAgent;
     }
+    /**
+     * @var boolean
+     */
+    private $disabled;
+
+
+    /**
+     * Set disabled
+     *
+     * @param boolean $disabled
+     * @return Transaction
+     */
+    public function setDisabled($disabled)
+    {
+        $this->disabled = $disabled;
+
+        return $this;
+    }
+
+    /**
+     * Get disabled
+     *
+     * @return boolean 
+     */
+    public function getDisabled()
+    {
+        return $this->disabled;
+    }
 }

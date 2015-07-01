@@ -1,0 +1,23 @@
+{% extends 'FangoMainBundle:Dashboard:layout.html.twig' %}
+
+{% block main %}
+    <h1>Ban</h1>
+    {% for error in app.session.flashbag.get('error') %}
+        <div class="alert alert-danger" role="alert">
+            <span class="sr-only">Error:</span>
+            <li>{{ error }}</li>
+        </div>
+    {% endfor %}
+    <div class="row">
+        <form action="{{ url('fango_dashboard_ban') }}" method="post">
+            <div class="form-group">
+                <div class="col-md-4">
+                    <input type="text" name="id" placeholder="Enter user id to ban" class="form-control" />
+                </div>
+                <div class="col-md-4">
+                    <input type="submit" class="btn btn-default" />
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

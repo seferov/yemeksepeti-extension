@@ -78,6 +78,11 @@
                 <li class="{% if 'payment' in route %}active{% endif %}">
                     <a href="{{ url('fango_dashboard_payment') }}"><i class="fa fa-fw fa-money"></i> Payment</a>
                 </li>
+                {% if is_granted('ROLE_SUPER_ADMIN') %}
+                <li class="{% if 'ban' in route %}active{% endif %}">
+                    <a href="{{ url('fango_dashboard_ban') }}"><i class="fa fa-fw fa-ban"></i> Ban</a>
+                </li>
+                {% endif %}
             </ul>
         </div>
         <!-- /.navbar-collapse -->

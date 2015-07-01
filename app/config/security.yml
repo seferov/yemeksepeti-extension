@@ -29,3 +29,4 @@ security:
         - { path: ^/earnings, role: IS_AUTHENTICATED_FULLY }
         - { path: ^/payment, role: IS_AUTHENTICATED_FULLY }
         - { path: ^/networks, role: IS_AUTHENTICATED_FULLY }
+        - { path: ^/ban, role: ROLE_SUPER_ADMIN }

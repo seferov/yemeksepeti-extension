@@ -29,6 +29,9 @@ Fango\MainBundle\Entity\Transaction:
             length: 255
             column: user_agent
             nullable: true
+        disabled:
+            type: boolean
+            nullable: true
     manyToOne:
         userCampaign:
             targetEntity: Fango\MainBundle\Entity\UserCampaign

@@ -24,6 +24,10 @@ fango_main_short_link:
     path:     /u/{hash}
     defaults: { _controller: FangoMainBundle:Campaign:shortLink }
 
+fango_dashboard_ban:
+    path:     /ban
+    defaults: { _controller: FangoMainBundle:Dashboard:ban }
+
 fango_dashboard_earnings:
     path:     /earnings
     defaults: { _controller: FangoMainBundle:Dashboard:earnings }
