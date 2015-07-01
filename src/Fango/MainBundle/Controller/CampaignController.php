@@ -37,10 +37,11 @@ class CampaignController extends DashboardBaseController
     public function showAction($id)
     {
         $em = $this->getDoctrine()->getManager();
-        $campaign = $em->getRepository('FangoMainBundle:Campaign')->findOneBy([
-            'id' => $id,
-            'status' => 'published'
-        ]);
+        $criteria = ['id' => $id];
+        if (!$this->get('security.context')->isGranted('ROLE_SUPER_ADMIN')) {
+            $criteria['status'] = 'published';
+        }
+        $campaign = $em->getRepository('FangoMainBundle:Campaign')->findOneBy($criteria);
 
         if (!$campaign) {
             throw $this->createNotFoundException();
@@ -66,10 +67,11 @@ class CampaignController extends DashboardBaseController
     public function applyAction($id, $status)
     {
         $em = $this->getDoctrine()->getManager();
-        $campaign = $em->getRepository('FangoMainBundle:Campaign')->findOneBy([
-            'id' => $id,
-            'status' => 'published'
-        ]);
+        $criteria = ['id' => $id];
+        if (!$this->get('security.context')->isGranted('ROLE_SUPER_ADMIN')) {
+            $criteria['status'] = 'published';
+        }
+        $campaign = $em->getRepository('FangoMainBundle:Campaign')->findOneBy($criteria);
 
         $user = $status == 'preview'
             ? $em->getRepository('FangoUserBundle:User')->find(11)
