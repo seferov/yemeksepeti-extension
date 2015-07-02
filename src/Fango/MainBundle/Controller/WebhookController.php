@@ -86,10 +86,6 @@ class WebhookController extends Controller
             return new JsonResponse();
         }
 
-        $logger = $this->get('logger');
-        $logger->info('Email report');
-        $logger->error(json_encode($message));
-
         if (!array_key_exists('Message', $message) || !array_key_exists('TopicArn', $message)) {
             return new JsonResponse();
         }
