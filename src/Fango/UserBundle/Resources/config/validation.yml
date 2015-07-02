@@ -2,4 +2,3 @@ Fango\UserBundle\Entity\User:
     properties:
         paypalEmail:
             - Email: ~
-            - NotBlank: ~
