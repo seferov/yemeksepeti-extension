@@ -15,16 +15,16 @@
         <table class="table table-striped">
             <tr>
                 <th>
-                    Network
+                    <span style="min-width: 100px" class="pull-left">Pay Per Post</span>
                 </th>
                 <th>
-                    CPP for 24 hours
+                    PPP for 24 hours
                 </th>
                 <th>
-                    CPP for a week
+                    PPP for a week
                 </th>
                 <th>
-                    CPP for lifetime
+                    PPP for lifetime
                 </th>
                 <th>
                 </th>
@@ -43,29 +43,26 @@
                         <div class="input-group">
                             <div class="input-group-addon">$</div>
                             <input type="text" class="form-control col-sm-3" value="{{ network.cppDay }}" name="day"/>
-                            <div class="input-group-addon">.00</div>
                         </div>
                     </td>
                     <td>
                         <div class="input-group">
                             <div class="input-group-addon">$</div>
                             <input type="text" class="form-control col-sm-3" value="{{ network.cppWeek }}" name="week"/>
-                            <div class="input-group-addon">.00</div>
                         </div>
                     </td>
                     <td>
                         <div class="input-group">
                             <div class="input-group-addon">$</div>
                             <input type="text" class="form-control col-sm-3" value="{{ network.cppLifetime }}" name="lifetime"/>
-                            <div class="input-group-addon">.00</div>
                         </div>
                     </td>
                     <td>
                         <input type="submit" value="Save" class="btn btn-success"/>
                     </td>
                     <td>
-                        <a href="#" data-href="{{ url('fango_dashboard_networks_remove', { id: network.id }) }}" class="confirm btn btn-danger">
-                            Remove
+                        <a href="#" data-href="{{ url('fango_dashboard_networks_remove', { id: network.id }) }}" class="confirm" style="color: #BBB">
+                            <i class="fa fa-times"></i>
                         </a>
                     </td>
                 </tr>

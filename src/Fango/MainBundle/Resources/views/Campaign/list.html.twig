@@ -8,7 +8,9 @@
                 <a href="{{ url('fango_main_campaign_show', {'id': campaign.id}) }}" class="col-md-3 avatar" style="background-image: url('{{ campaign.logo }}');">
                 </a>
                 <div class="col-md-9 description">
-                    <h3>{{ campaign.name }}</h3>
+                    <a href="{{ url('fango_main_campaign_show', {'id': campaign.id}) }}">
+                        <h3>{{ campaign.name }}</h3>
+                    </a>
                 </div>
             </div>
             <div class="col-md-6 stats">
