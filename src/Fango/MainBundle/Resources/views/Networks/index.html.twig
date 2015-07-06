@@ -12,17 +12,66 @@
     <h1>Networks</h1>
 
     {% if networks|length > 0 %}
-    <div class="row">
-        <div class="alert alert-info" role="alert">
-        {% for network in networks %}
-            <div>
-                <img src="{{ asset('img/'~network.type~'.png') }}" alt="{{ network.type }}"/>
-                <strong>{{ network.display }}</strong>
-                <a href="#" data-href="{{ url('fango_dashboard_networks_remove', { id: network.id }) }}" class="confirm"><span class="glyphicon glyphicon-remove" style="color: darkgrey"></span></a>
-            </div>
-        {% endfor %}
-        </div>
-    </div>
+        <table class="table table-striped">
+            <tr>
+                <th>
+                    Network
+                </th>
+                <th>
+                    CPP for 24 hours
+                </th>
+                <th>
+                    CPP for a week
+                </th>
+                <th>
+                    CPP for lifetime
+                </th>
+                <th>
+                </th>
+                <th>
+                </th>
+            </tr>
+            {% for network in networks %}
+                <form action="{{ url('fango_dashboard_networks_index') }}" method="post">
+                <input type="hidden" name="id" value="{{ network.id }}">
+                <tr>
+                    <td>
+                        <img src="{{ asset('img/'~network.type~'.png') }}" alt="{{ network.type }}"/>
+                        <strong>{{ network.display }}</strong>
+                    </td>
+                    <td>
+                        <div class="input-group">
+                            <div class="input-group-addon">$</div>
+                            <input type="text" class="form-control col-sm-3" value="{{ network.cppDay }}" name="day"/>
+                            <div class="input-group-addon">.00</div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="input-group">
+                            <div class="input-group-addon">$</div>
+                            <input type="text" class="form-control col-sm-3" value="{{ network.cppWeek }}" name="week"/>
+                            <div class="input-group-addon">.00</div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="input-group">
+                            <div class="input-group-addon">$</div>
+                            <input type="text" class="form-control col-sm-3" value="{{ network.cppLifetime }}" name="lifetime"/>
+                            <div class="input-group-addon">.00</div>
+                        </div>
+                    </td>
+                    <td>
+                        <input type="submit" value="Save" class="btn btn-success"/>
+                    </td>
+                    <td>
+                        <a href="#" data-href="{{ url('fango_dashboard_networks_remove', { id: network.id }) }}" class="confirm btn btn-danger">
+                            Remove
+                        </a>
+                    </td>
+                </tr>
+                </form>
+            {% endfor %}
+        </table>
     {% endif %}
 
     <script type="application/javascript">
@@ -50,7 +99,7 @@
             </a>
         </div>
         <div class="col-xs-4 col-sm-2">
-            <a href="{{ url('fango_user_instagram_login') }}" class="btn btn-lg btn-block omb_btn-instagram">
+            <a href="{{ url('fango_user_instagram_login', {'redirectUrl': url('fango_dashboard_networks_index') }) }}" class="btn btn-lg btn-block omb_btn-instagram">
                 <i class="fa fa-instagram visible-xs"></i>
                 <span class="hidden-xs">Instagram</span>
             </a>

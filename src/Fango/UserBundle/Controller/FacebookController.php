@@ -103,6 +103,11 @@ class FacebookController extends BaseSocialController
             $em->flush();
         }
 
+        if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            $this->addFlash('notice', 'You\'ve successfully connected your account.');
+            return $this->redirectToRoute('fango_dashboard_networks_index');
+        }
+
         $this->authenticateUser($user, $userData);
 
         return $this->redirectToRoute('fango_main_dashboard');

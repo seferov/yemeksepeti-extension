@@ -1,6 +1,7 @@
 <?php
 
 namespace Fango\MainBundle\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class NetworkController
@@ -10,14 +11,37 @@ namespace Fango\MainBundle\Controller;
 class NetworkController extends DashboardBaseController
 {
     /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        $networks = $this->getDoctrine()
-            ->getManager()
-            ->getRepository('FangoUserBundle:Network')
-            ->findBy(['user' => $this->getUser()]);
+        $em = $this->getDoctrine()->getManager();
+
+        if ('POST' == $request->getMethod()) {
+            /** @var \Fango\UserBundle\Entity\Network $network */
+            $network = $em->getRepository('FangoUserBundle:Network')->find($request->get('id'));
+            if (!$network) {
+                throw $this->createNotFoundException();
+            }
+
+            if ($this->getUser()->getId() != $network->getUser()->getId()) {
+                throw $this->createAccessDeniedException();
+            }
+
+            $network->setCppDay($request->get('day'));
+            $network->setCppWeek($request->get('week'));
+            $network->setCppLifetime($request->get('lifetime'));
+
+            $em->persist($network);
+            $em->flush();
+
+            $this->addFlash('notice', 'Thanks! Your fees have been saved successfully.');
+        }
+
+        $networks = $em->getRepository('FangoUserBundle:Network')->findBy([
+            'user' => $this->getUser()
+        ]);
 
         return $this->render('@FangoMain/Networks/index.html.twig', [
             'networks' => $networks

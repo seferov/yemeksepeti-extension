@@ -16,6 +16,9 @@ Fango\UserBundle\Entity\Network:
         rest:         { type: text, nullable: true }
         token:        { type: string, length: 255, column: token, nullable: true }
         tokenSecret:  { type: string, length: 255, column: token_secret, nullable: true }
+        cppDay:       { type: string, length: 7, column: cpp_day, nullable: true }
+        cppWeek:      { type: string, length: 7, column: cpp_week, nullable: true }
+        cppLifetime:  { type: string, length: 7, column: cpp_lifetime, nullable: true }
     manyToOne:
         user:
             targetEntity: Fango\UserBundle\Entity\User

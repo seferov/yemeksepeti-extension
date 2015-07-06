@@ -248,4 +248,88 @@ class Network
     {
         return $this->tokenSecret;
     }
+    /**
+     * @var string
+     */
+    private $cppDay;
+
+    /**
+     * @var string
+     */
+    private $cppWeek;
+
+    /**
+     * @var string
+     */
+    private $cppLifetime;
+
+
+    /**
+     * Set cppDay
+     *
+     * @param string $cppDay
+     * @return Network
+     */
+    public function setCppDay($cppDay)
+    {
+        $this->cppDay = $cppDay;
+
+        return $this;
+    }
+
+    /**
+     * Get cppDay
+     *
+     * @return string 
+     */
+    public function getCppDay()
+    {
+        return $this->cppDay;
+    }
+
+    /**
+     * Set cppWeek
+     *
+     * @param string $cppWeek
+     * @return Network
+     */
+    public function setCppWeek($cppWeek)
+    {
+        $this->cppWeek = $cppWeek;
+
+        return $this;
+    }
+
+    /**
+     * Get cppWeek
+     *
+     * @return string 
+     */
+    public function getCppWeek()
+    {
+        return $this->cppWeek;
+    }
+
+    /**
+     * Set cppLifetime
+     *
+     * @param string $cppLifetime
+     * @return Network
+     */
+    public function setCppLifetime($cppLifetime)
+    {
+        $this->cppLifetime = $cppLifetime;
+
+        return $this;
+    }
+
+    /**
+     * Get cppLifetime
+     *
+     * @return string 
+     */
+    public function getCppLifetime()
+    {
+        return $this->cppLifetime;
+    }
 }
