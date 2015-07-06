@@ -62,7 +62,7 @@ class MailerCommand extends ContainerAwareCommand
                 break;
         }
 
-        for ($i = 0; $i < 35; $i++) {
+        for ($i = 0; $i < 60; $i++) {
             $version = array_rand($versions);
             $uid = md5(uniqid(mt_rand(), true));
 
