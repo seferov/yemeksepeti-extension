@@ -98,6 +98,9 @@ class FacebookController extends BaseSocialController
                     $em->persist($user);
                 }
             }
+            else {
+                $this->createNetwork($userData, $user);
+            }
 
             $em->persist($user);
             $em->flush();
