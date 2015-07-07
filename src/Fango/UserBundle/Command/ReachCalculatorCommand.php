@@ -70,6 +70,7 @@ class ReachCalculatorCommand extends ContainerAwareCommand
         $newRecord->setFacebook($totalFacebook);
         $newRecord->setTwitter($totalTwitter);
         $newRecord->setInstagram($totalInstagram);
+        $newRecord->setTotal($totalInstagram + $totalFacebook + $totalTwitter);
         $newRecord->setDate($date);
 
         $em->persist($newRecord);
