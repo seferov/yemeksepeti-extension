@@ -31,7 +31,7 @@ class FacebookController extends BaseSocialController
         FacebookSession::setDefaultApplication($this->container->getParameter('facebook_app_id'), $this->container->getParameter('facebook_app_secret'));
         $helper = new FacebookRedirectLoginHelper($this->generateUrl('fango_user_facebook_auth', ['host' => $request->get('site')['host']], true));
 
-        return $this->redirect($helper->getLoginUrl(['email', 'user_friends']));
+        return $this->redirect($helper->getLoginUrl(['email']));
     }
 
     /**
