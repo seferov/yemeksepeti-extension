@@ -1,0 +1,25 @@
+Fango\MainBundle\Entity\LogBan:
+    type: entity
+    table: fg_admin_log_ban
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        createdAt:  { type: datetime, column: created_at }
+    manyToOne:
+        admin:
+            targetEntity: Fango\UserBundle\Entity\User
+            inversedBy: logBan
+            joinColumn:
+                name: admin_id
+                referencedColumnName: id
+        user:
+            targetEntity: Fango\UserBundle\Entity\User
+            inversedBy: logBan
+            joinColumn:
+                name: user_id
+                referencedColumnName: id
+    lifecycleCallbacks: {  }

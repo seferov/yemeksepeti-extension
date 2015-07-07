@@ -2,6 +2,7 @@
 
 namespace Fango\MainBundle\Controller;
 
+use Fango\MainBundle\Entity\LogBan;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -77,7 +78,14 @@ class DashboardController extends DashboardBaseController
                 set t.disabled = 1");
                 $stmt->execute();
 
+                // Log the action
+                $log = new LogBan();
+                $log->setUser($user);
+                $log->setAdmin($this->getUser());
+                $log->setCreatedAt(new \DateTime('now'));
+
                 $em->persist($user);
+                $em->persist($log);
                 $em->flush();
 
                 $message = \Swift_Message::newInstance()
