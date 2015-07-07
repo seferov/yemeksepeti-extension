@@ -9,16 +9,17 @@ Fango\UserBundle\Entity\Network:
             generator:
                 strategy: AUTO
     fields:
-        type:         { type: string, length: '50' }
-        networkId:    { type: string, column: network_id, length: 100 }
-        display:      { type: string, length: 100, nullable: true }
-        createdAt:    { type: datetime, column: created_at }
-        rest:         { type: text, nullable: true }
-        token:        { type: string, length: 255, column: token, nullable: true }
-        tokenSecret:  { type: string, length: 255, column: token_secret, nullable: true }
-        cppDay:       { type: string, length: 7, column: cpp_day, nullable: true }
-        cppWeek:      { type: string, length: 7, column: cpp_week, nullable: true }
-        cppLifetime:  { type: string, length: 7, column: cpp_lifetime, nullable: true }
+        type:           { type: string, length: '50' }
+        networkId:      { type: string, column: network_id, length: 100 }
+        display:        { type: string, length: 100, nullable: true }
+        createdAt:      { type: datetime, column: created_at }
+        followersCount: { type: bigint, column: followers_count, nullable: true }
+        rest:           { type: text, nullable: true }
+        token:          { type: string, length: 255, column: token, nullable: true }
+        tokenSecret:    { type: string, length: 255, column: token_secret, nullable: true }
+        cppDay:         { type: string, length: 7, column: cpp_day, nullable: true }
+        cppWeek:        { type: string, length: 7, column: cpp_week, nullable: true }
+        cppLifetime:    { type: string, length: 7, column: cpp_lifetime, nullable: true }
     manyToOne:
         user:
             targetEntity: Fango\UserBundle\Entity\User

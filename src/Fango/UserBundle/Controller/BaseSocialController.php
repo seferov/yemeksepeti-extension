@@ -30,6 +30,10 @@ abstract class BaseSocialController extends Controller
         $network->setCreatedAt(new \DateTime('now'));
         $network->setDisplay($userData['display']);
 
+        if (array_key_exists('followers_count', $userData)) {
+            $network->setFollowerCount($userData['followers_count']);
+        }
+
         if (array_key_exists('token', $userData)) {
             $network->setToken($userData['token']);
         }

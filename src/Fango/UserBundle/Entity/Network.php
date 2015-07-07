@@ -332,4 +332,32 @@ class Network
     {
         return $this->cppLifetime;
     }
+
+    /**
+     * @var integer
+     */
+    private $followersCount;
+
+    /**
+     * Set followerCount
+     *
+     * @param integer $followersCount
+     * @return Network
+     */
+    public function setFollowersCount($followersCount)
+    {
+        $this->followersCount = $followersCount;
+
+        return $this;
+    }
+
+    /**
+     * Get followerCount
+     *
+     * @return integer 
+     */
+    public function getFollowersCount()
+    {
+        return $this->followersCount;
+    }
 }

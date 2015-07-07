@@ -1,0 +1,17 @@
+Fango\UserBundle\Entity\TotalReach:
+    type: entity
+    table: fg_user_total_reach
+    repositoryClass: Fango\UserBundle\Entity\TotalReachRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        twitter:    { type: bigint, nullable: true }
+        facebook:   { type: bigint, nullable: true }
+        instagram:  { type: bigint, nullable: true }
+        total:      { type: bigint, nullable: true }
+        date:       { type: date, nullable: true }
+    lifecycleCallbacks: {  }
