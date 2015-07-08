@@ -50,13 +50,11 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     <i class="fa fa-user"></i> {{ app.user.fullname }} <b class="caret"></b>
                 </a>
-                <ul class="dropdown-menu">
-                    <!--
+                <ul class="dropdown-menu" style="min-width: 200px">
                     <li>
-                        <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
+                        <a href="{{ url('fos_user_change_password') }}"><i class="fa fa-fw fa-key"></i> Change Password</a>
                     </li>
                     <li class="divider"></li>
-                    -->
                     <li>
                         <a href="{{ url('fos_user_security_logout') }}"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
                     </li>
