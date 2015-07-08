@@ -31,7 +31,7 @@ abstract class BaseSocialController extends Controller
         $network->setDisplay($userData['display']);
 
         if (array_key_exists('followers_count', $userData)) {
-            $network->setFollowerCount($userData['followers_count']);
+            $network->setFollowersCount($userData['followers_count']);
         }
 
         if (array_key_exists('token', $userData)) {
