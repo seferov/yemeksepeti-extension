@@ -15,16 +15,16 @@
         <table class="table table-striped">
             <tr>
                 <th>
-                    <span style="min-width: 100px" class="pull-left">Pay Per Post</span>
+                    <span style="min-width: 120px" class="pull-left">Pay Per Post <i class="fa fa-question-circle" style="color: #333" data-toggle="tooltip" data-placement="top" title="This is the amount of dollars you get paid for sharing a branded post. Please input appropriate numbers since our algorithm decides which campaigns are available for you based on this number."></i></span>
                 </th>
                 <th>
-                    PPP for 24 hours
+                    24 hours <i class="fa fa-question-circle" style="color: #333" data-toggle="tooltip" data-placement="top" title="The post stays on your profile for 24 hours"></i>
                 </th>
                 <th>
-                    PPP for a week
+                    Week <i class="fa fa-question-circle" style="color: #333" data-toggle="tooltip" data-placement="top" title="The post stays on your profile for a week"></i>
                 </th>
                 <th>
-                    PPP for lifetime
+                    Permanent <i class="fa fa-question-circle" style="color: #333" data-toggle="tooltip" data-placement="top" title="The post stays on your profile indefinitely"></i>
                 </th>
                 <th>
                 </th>
@@ -79,6 +79,11 @@
                     window.location.href = url;
                 }
             });
+        });
+
+        // Tooltip
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
         });
     </script>
 
