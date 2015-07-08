@@ -2,6 +2,10 @@ fos_user_registration_confirmed:
     pattern: /register/confirmed
     defaults: { _controller: FrameworkBundle:Redirect:redirect, route: fango_main_dashboard }
 
+fos_user_profile_show:
+    pattern: /profile
+    defaults: { _controller: FrameworkBundle:Redirect:redirect, route: fango_main_dashboard }
+
 fango_user_facebook_login:
     pattern:  /facebook/login
     defaults: { _controller: FangoUserBundle:Facebook:login }

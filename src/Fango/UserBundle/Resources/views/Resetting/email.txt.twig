@@ -1,0 +1,17 @@
+{% trans_default_domain 'FOSUserBundle' %}
+{% block subject %}
+{% autoescape false %}
+{{ 'resetting.email.subject'|trans }}
+{% endautoescape %}
+{% endblock %}
+{% block body_text %}
+{% autoescape false %}
+Hello {{ user.username }}!
+
+To reset your password - please visit {{ confirmationUrl }}
+
+Regards,
+Fango Team.
+{% endautoescape %}
+{% endblock %}
+{% block body_html %}{% endblock %}

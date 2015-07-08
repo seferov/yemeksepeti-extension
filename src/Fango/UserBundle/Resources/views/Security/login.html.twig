@@ -34,11 +34,11 @@
                     <input type="checkbox" id="remember_me" name="_remember_me" value="on" /> Remember Me
                 </label>
             </div>
-            {#<div class="col-xs-12 col-sm-3">#}
-                {#<p class="omb_forgotPwd">#}
-                    {#<a href="#">Forgot password?</a>#}
-                {#</p>#}
-            {#</div>#}
+            <div class="col-xs-12 col-sm-3">
+                <p class="omb_forgotPwd">
+                    <a href="{{ url('fos_user_resetting_request') }}">Forgot password?</a>
+                </p>
+            </div>
         </div>
 
     </div>
