@@ -95,6 +95,7 @@ class MailerCommand extends ContainerAwareCommand
             }
 
             if (!filter_var($email->getMail(), FILTER_VALIDATE_EMAIL)) {
+                $output->writeln($email->getMail() . ' <info>Not valid</info>');
                 $email->setProblem(true);
                 $em->persist($email);
                 $em->getConnection()->commit();
