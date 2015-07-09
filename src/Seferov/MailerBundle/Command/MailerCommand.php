@@ -94,6 +94,13 @@ class MailerCommand extends ContainerAwareCommand
                 break;
             }
 
+            if (!filter_var($email->getMail(), FILTER_VALIDATE_EMAIL)) {
+                $email->setProblem(true);
+                $em->persist($email);
+                $em->getConnection()->commit();
+                continue;
+            }
+
             // Send mail
             try {
                 $message = \Swift_Message::newInstance()
