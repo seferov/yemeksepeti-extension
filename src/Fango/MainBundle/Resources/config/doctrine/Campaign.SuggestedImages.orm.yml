@@ -1,0 +1,20 @@
+Fango\MainBundle\Entity\Campaign\SuggestedImages:
+    type: entity
+    table: fg_campaign_suggested_images
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        link:   { type: string, length: 255 }
+        thumb:  { type: string, length: 255 }
+    manyToOne:
+        campaign:
+            targetEntity: Fango\MainBundle\Entity\Campaign
+            inversedBy: suggestedImages
+            joinColumn:
+                name: campaign_id
+                referencedColumnName: id
+    lifecycleCallbacks: {  }

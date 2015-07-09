@@ -25,4 +25,7 @@ Fango\MainBundle\Entity\Campaign:
         countries:
             targetEntity: Fango\MainBundle\Entity\CampaignCountry
             mappedBy: campaign
+        suggestedImages:
+            targetEntity: Fango\MainBundle\Entity\Campaign\SuggestedImages
+            mappedBy: campaign
     lifecycleCallbacks: {  }

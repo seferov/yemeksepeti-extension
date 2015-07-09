@@ -56,4 +56,22 @@
     <div class="row">
         {{ campaign.description|raw }}
     </div>
+
+    {% set suggestedImages = campaign.suggestedImages %}
+    {% if suggestedImages|length > 0 %}
+        <div class="row">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><i class="fa fa-picture-o fa-fw"></i> Suggested Images</h3>
+                </div>
+                <div class="panel-body">
+                    {% for image in suggestedImages %}
+                        <a href="{{ image.link }}" target="_blank">
+                            <img src="{{ image.thumb }}" alt=""/>
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
 {% endblock %}

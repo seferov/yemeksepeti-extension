@@ -357,4 +357,42 @@ class Campaign
     {
         return $this->userId;
     }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $suggestedImages;
+
+
+    /**
+     * Add suggestedImages
+     *
+     * @param \Fango\MainBundle\Entity\Campaign\SuggestedImages $suggestedImages
+     * @return Campaign
+     */
+    public function addSuggestedImage(\Fango\MainBundle\Entity\Campaign\SuggestedImages $suggestedImages)
+    {
+        $this->suggestedImages[] = $suggestedImages;
+
+        return $this;
+    }
+
+    /**
+     * Remove suggestedImages
+     *
+     * @param \Fango\MainBundle\Entity\Campaign\SuggestedImages $suggestedImages
+     */
+    public function removeSuggestedImage(\Fango\MainBundle\Entity\Campaign\SuggestedImages $suggestedImages)
+    {
+        $this->suggestedImages->removeElement($suggestedImages);
+    }
+
+    /**
+     * Get suggestedImages
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getSuggestedImages()
+    {
+        return $this->suggestedImages;
+    }
 }
