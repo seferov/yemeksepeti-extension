@@ -21,9 +21,15 @@ class CampaignController extends DashboardBaseController
         $campaigns = $this->getDoctrine()
             ->getManager()
             ->getRepository('FangoMainBundle:Campaign')
-            ->findBy([
-                'status' => 'published'
-            ]);
+            ->createQueryBuilder('c')
+            ->where('c.status = :status')
+            ->orWhere('c.userId = :userId')
+            ->setParameters([
+                'status' => 'published',
+                'userId' => $this->getUser()->getId()
+            ])
+            ->getQuery()
+            ->getResult();
 
         return $this->render('@FangoMain/Campaign/list.html.twig', [
             'campaigns' => $campaigns
@@ -37,11 +43,8 @@ class CampaignController extends DashboardBaseController
     public function showAction($id)
     {
         $em = $this->getDoctrine()->getManager();
-        $criteria = ['id' => $id];
-        if (!$this->get('security.context')->isGranted('ROLE_SUPER_ADMIN')) {
-            $criteria['status'] = 'published';
-        }
-        $campaign = $em->getRepository('FangoMainBundle:Campaign')->findOneBy($criteria);
+
+        $campaign = $this->getCampaign($id);
 
         if (!$campaign) {
             throw $this->createNotFoundException();
@@ -67,11 +70,7 @@ class CampaignController extends DashboardBaseController
     public function applyAction($id, $status)
     {
         $em = $this->getDoctrine()->getManager();
-        $criteria = ['id' => $id];
-        if (!$this->get('security.context')->isGranted('ROLE_SUPER_ADMIN')) {
-            $criteria['status'] = 'published';
-        }
-        $campaign = $em->getRepository('FangoMainBundle:Campaign')->findOneBy($criteria);
+        $campaign = $this->getCampaign($id);
 
         $user = $status == 'preview'
             ? $em->getRepository('FangoUserBundle:User')->find(11)
@@ -194,5 +193,29 @@ class CampaignController extends DashboardBaseController
         }
 
         return $this->redirect($url);
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    private function getCampaign($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $qb = $em->getRepository('FangoMainBundle:Campaign')
+            ->createQueryBuilder('c')
+            ->where('c.id = :id')
+            ->setParameter('id', $id)
+        ;
+
+        if (!$this->get('security.context')->isGranted('ROLE_SUPER_ADMIN')) {
+            $qb->andWhere('c.status = :status or c.userId = :userId')
+                ->setParameter('status', 'published')
+                ->setParameter('userId', $this->getUser()->getId());
+        }
+
+        return $qb->getQuery()->getOneOrNullResult();
     }
 }

@@ -17,6 +17,7 @@ Fango\MainBundle\Entity\Campaign:
         cpa:          { type: float, nullable: true }
         status:       { type: string, length: 15, nullable: true }
         socialText:   { type: string, length: 140, nullable: true, column: social_text }
+        userId:       { type: integer, column: user_id, nullable: true }
     oneToMany:
         userCampaigns:
             targetEntity: Fango\MainBundle\Entity\UserCampaign
