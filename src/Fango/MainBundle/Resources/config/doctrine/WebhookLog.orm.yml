@@ -24,4 +24,7 @@ Fango\MainBundle\Entity\WebhookLog:
             type: string
             length: 255
             nullable: true
+        fake:
+            type: boolean
+            nullable: true
     lifecycleCallbacks: {  }
