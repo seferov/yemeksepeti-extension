@@ -18,13 +18,26 @@ class NetworkController extends DashboardBaseController
     {
         $em = $this->getDoctrine()->getManager();
 
-        if ('POST' == $request->getMethod()) {
-            /** @var \Fango\UserBundle\Entity\Network $network */
-            $network = $em->getRepository('FangoUserBundle:Network')->find($request->get('id'));
-            if (!$network) {
-                throw $this->createNotFoundException();
-            }
+        $networks = $em->getRepository('FangoUserBundle:Network')->findBy([
+            'user' => $this->getUser()
+        ]);
 
+        return $this->render('@FangoMain/Networks/index.html.twig', [
+            'networks' => $networks
+        ]);
+    }
+
+    public function editAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        /** @var \Fango\UserBundle\Entity\Network $network */
+        $network = $em->getRepository('FangoUserBundle:Network')->find($request->get('id'));
+        if (!$network) {
+            throw $this->createNotFoundException();
+        }
+
+        if ('POST' == $request->getMethod()) {
             if ($this->getUser()->getId() != $network->getUser()->getId()) {
                 throw $this->createAccessDeniedException();
             }
@@ -38,14 +51,6 @@ class NetworkController extends DashboardBaseController
 
             $this->addFlash('notice', 'Thanks! Your fees have been saved successfully.');
         }
-
-        $networks = $em->getRepository('FangoUserBundle:Network')->findBy([
-            'user' => $this->getUser()
-        ]);
-
-        return $this->render('@FangoMain/Networks/index.html.twig', [
-            'networks' => $networks
-        ]);
     }
 
     /**
