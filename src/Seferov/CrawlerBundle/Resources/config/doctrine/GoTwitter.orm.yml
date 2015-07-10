@@ -1,0 +1,30 @@
+Seferov\CrawlerBundle\Entity\GoTwitter:
+    type: entity
+    table: go_twitter_users
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        twitterId:      { type: integer, column: twitter_id }
+        email:          { type: string, length: 255, nullable: true }
+        screenName:     { type: string, length: 255, nullable: true, column: screen_name }
+        followerCount:  { type: integer, nullable: true, column: follower_count }
+        friendsCount:   { type: integer, nullable: true, column: friends_count }
+        website:        { type: string, length: 255, nullable: true }
+        lang:           { type: string, length: 20, nullable: true }
+        fullname:       { type: string, length: 255, nullable: true }
+        createdAt:      { type: datetime, column: created_at }
+        info:           { type: text, nullable: true }
+        description:    { type: string, length: 255, nullable: true }
+        favouritesCount:    { type: integer, nullable: true, column: favourites_count }
+        listedCount:        { type: integer, nullable: true, column: listed_count }
+        location:           { type: string, length: 255, nullable: true }
+        profileImageUrlHttps:    { type: string, length: 255, nullable: true, column: profile_image_url_https }
+        statusesCount:      { type: integer, nullable: true, column: statuses_count }
+        timezone:           { type: string, length: 255, nullable: true, column: time_zone }
+        verified:           { type: boolean, nullable: true }
+        utcOffset:          { type: integer, nullable: true, column: utc_offset }
+    lifecycleCallbacks: {  }
