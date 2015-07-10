@@ -185,7 +185,7 @@ class CampaignController extends DashboardBaseController
         $url .= (parse_url($url, PHP_URL_QUERY)) ? '&' : '?';
         $url .= http_build_query([
             'trans' => $hash,
-            'utm_content' => $userCampaign->getId()
+            'utm_source' => $userCampaign->getId()
         ]);
 
         if ($userCampaign->getStatus() == 'preview' && !$isLocationSupported) {
