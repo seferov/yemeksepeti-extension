@@ -1,0 +1,4 @@
+fango_adjustio_callback:
+    path:     /
+#    host:     "adjust.fango.me"
+    defaults: { _controller: FangoAdjustioBundle:Callback:index }

@@ -35,6 +35,7 @@ class AppKernel extends Kernel
             new Seferov\CrawlerBundle\SeferovCrawlerBundle(),
             new Snc\RedisBundle\SncRedisBundle(),
             new Seferov\MailerBundle\SeferovMailerBundle(),
+            new Fango\AdjustioBundle\FangoAdjustioBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
