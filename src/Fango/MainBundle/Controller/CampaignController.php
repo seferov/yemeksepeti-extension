@@ -177,7 +177,7 @@ class CampaignController extends DashboardBaseController
         $transaction->setReferer($request->headers->get('referer'));
         $hash = $this->get('fos_user.util.token_generator')->generateToken();
         $transaction->setHash($hash);
-
+        $transaction->setCountry($geoData);
         $em->persist($transaction);
         $em->flush();
         $em->clear();

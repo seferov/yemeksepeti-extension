@@ -11,6 +11,10 @@ Fango\MainBundle\Entity\Transaction:
         hash:
             type: string
             length: 255
+        country:
+            type: string
+            lenght: 5
+            nullable: true
         ipAddress:
             type: string
             length: '50'
