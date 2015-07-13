@@ -32,41 +32,29 @@
                 </th>
             </tr>
             {% for network in networks %}
-                <form action="{{ url('fango_dashboard_networks_index') }}" method="post">
-                <input type="hidden" name="id" value="{{ network.id }}">
-                <tr>
-                    <td>
-                        <img src="{{ asset('img/'~network.type~'.png') }}" alt="{{ network.type }}"/>
-                        <strong>{{ network.display }}</strong>
-                    </td>
-                    <td>
-                        <div class="input-group">
-                            <div class="input-group-addon hidden-xs">$</div>
-                            <input type="text" class="form-control col-sm-3" value="{{ network.cppDay }}" name="day"/>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="input-group">
-                            <div class="input-group-addon hidden-xs">$</div>
-                            <input type="text" class="form-control col-sm-3" value="{{ network.cppWeek }}" name="week"/>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="input-group">
-                            <div class="input-group-addon hidden-xs">$</div>
-                            <input type="text" class="form-control col-sm-3" value="{{ network.cppLifetime }}" name="lifetime"/>
-                        </div>
-                    </td>
-                    <td>
-                        <input type="submit" value="Save" class="btn btn-success"/>
-                    </td>
-                    <td>
-                        <a href="#" data-href="{{ url('fango_dashboard_networks_remove', { id: network.id }) }}" class="confirm" style="color: #BBB">
-                            <i class="fa fa-times"></i>
-                        </a>
-                    </td>
-                </tr>
-                </form>
+            <tr>
+                <td>
+                    <img src="{{ asset('img/'~network.type~'.png') }}" alt="{{ network.type }}"/>
+                    <strong>{{ network.display }}</strong>
+                </td>
+                <td>
+                    ${{ network.cppDay }}
+                </td>
+                <td>
+                    ${{ network.cppWeek }}
+                </td>
+                <td>
+                    ${{ network.cppLifetime }}
+                </td>
+                <td>
+                    <a href="{{ url('fango_dashboard_network_edit', {id: network.id}) }}">edit</a>
+                </td>
+                <td>
+                    <a href="#" data-href="{{ url('fango_dashboard_networks_remove', { id: network.id }) }}" class="confirm" style="color: #BBB">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </td>
+            </tr>
             {% endfor %}
         </table>
     {% endif %}

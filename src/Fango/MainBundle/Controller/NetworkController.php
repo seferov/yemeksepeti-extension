@@ -11,10 +11,9 @@ use Symfony\Component\HttpFoundation\Request;
 class NetworkController extends DashboardBaseController
 {
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction(Request $request)
+    public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -27,6 +26,10 @@ class NetworkController extends DashboardBaseController
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function editAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
@@ -35,6 +38,10 @@ class NetworkController extends DashboardBaseController
         $network = $em->getRepository('FangoUserBundle:Network')->find($request->get('id'));
         if (!$network) {
             throw $this->createNotFoundException();
+        }
+
+        if ($network->getUser()->getId() != $this->getUser()->getId()) {
+            throw $this->createAccessDeniedException();
         }
 
         if ('POST' == $request->getMethod()) {
@@ -50,7 +57,13 @@ class NetworkController extends DashboardBaseController
             $em->flush();
 
             $this->addFlash('notice', 'Thanks! Your fees have been saved successfully.');
+
+            return $this->redirectToRoute('fango_dashboard_networks_index');
         }
+
+        return $this->render('@FangoMain/Networks/edit.html.twig', [
+            'network' => $network
+        ]);
     }
 
     /**

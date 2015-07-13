@@ -6,6 +6,7 @@ use Facebook\FacebookRedirectLoginHelper;
 use Facebook\FacebookRequest;
 use Facebook\FacebookSession;
 use Fango\MainBundle\Helper\Utils;
+use Fango\UserBundle\Entity\Network;
 use Fango\UserBundle\Entity\User;
 use Fango\UserBundle\Helper\UserHelper;
 use Symfony\Component\HttpFoundation\Request;
@@ -91,15 +92,16 @@ class FacebookController extends BaseSocialController
             if (!$user) {
                 if ($this->getUser()) {
                     $user = $this->getUser();
-                    $this->createNetwork($userData, $user);
+                    $network = $this->createNetwork($userData, $user);
                 }
                 else {
                     $user = $this->createUser($userData);
+                    $network = $user->getNetworks()[0];
                     $em->persist($user);
                 }
             }
             else {
-                $this->createNetwork($userData, $user);
+                $network = $this->createNetwork($userData, $user);
             }
 
             $em->persist($user);
@@ -108,6 +110,13 @@ class FacebookController extends BaseSocialController
 
         if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
             $this->addFlash('notice', 'You\'ve successfully connected your account.');
+
+            if (isset($network) && $network instanceof Network) {
+                return $this->redirectToRoute('fango_dashboard_network_edit', [
+                    'id' => $network->getId()
+                ]);
+            }
+
             return $this->redirectToRoute('fango_dashboard_networks_index');
         }
 

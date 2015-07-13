@@ -3,11 +3,11 @@
 namespace Fango\UserBundle\Controller;
 
 use Abraham\TwitterOAuth\TwitterOAuth;
+use Fango\UserBundle\Entity\Network;
 use Fango\UserBundle\Entity\User;
 use Fango\UserBundle\Helper\UserHelper;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 /**
  * Class TwitterController
@@ -64,10 +64,11 @@ class TwitterController extends BaseSocialController
         if (!$user) {
             if ($this->getUser()) {
                 $user = $this->getUser();
-                $this->createNetwork($userData, $user);
+                $network = $this->createNetwork($userData, $user);
             }
             else {
                 $user = $this->createUser($userData);
+                $network = $user->getNetworks()[0];
                 $em->persist($user);
             }
 
@@ -76,6 +77,13 @@ class TwitterController extends BaseSocialController
 
         if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
             $this->addFlash('notice', 'You\'ve successfully connected your account.');
+
+            if (isset($network) && $network instanceof Network) {
+                return $this->redirectToRoute('fango_dashboard_network_edit', [
+                    'id' => $network->getId()
+                ]);
+            }
+
             return $this->redirectToRoute('fango_dashboard_networks_index');
         }
 

@@ -1,0 +1,58 @@
+{% extends 'FangoMainBundle:Dashboard:layout.html.twig' %}
+
+{% block main %}
+    <div class="row col-md-12">
+        <form action="{{ url('fango_dashboard_network_edit', {id: network.id }) }}" method="post">
+            <div class="row mt10">
+                <div class="col-md-3">
+                    <strong>Pay Per Post <i class="fa fa-question-circle" style="color: #999" data-toggle="tooltip" data-placement="top" title="This is the amount of dollars you get paid for sharing a branded post. Please input appropriate numbers since our algorithm decides which campaigns are available for you based on this number."></i></strong>
+                </div>
+                <div class="col-md-6">
+                    <img src="{{ asset('img/'~network.type~'.png') }}" alt="{{ network.type }}"/> <strong>{{ network.display }}</strong>
+                </div>
+            </div>
+            <div class="row mt10">
+                <div class="col-md-3">
+                    <strong>24 hours <i class="fa fa-question-circle" style="color: #999" data-toggle="tooltip" data-placement="top" title="The post stays on your profile for 24 hours"></i></strong>
+                </div>
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <div class="input-group-addon hidden-xs">$</div>
+                        <input type="text" class="form-control col-sm-3" value="{{ network.cppDay }}" name="day"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt10">
+                <div class="col-md-3">
+                    <strong>Week <i class="fa fa-question-circle" style="color: #999" data-toggle="tooltip" data-placement="top" title="The post stays on your profile for a week"></i></strong>
+                </div>
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <div class="input-group-addon hidden-xs">$</div>
+                        <input type="text" class="form-control col-sm-3" value="{{ network.cppWeek }}" name="week"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt10">
+                <div class="col-md-3">
+                    <strong>Permanent <i class="fa fa-question-circle" style="color: #999" data-toggle="tooltip" data-placement="top" title="The post stays on your profile indefinitely"></i></strong>
+                </div>
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <div class="input-group-addon hidden-xs">$</div>
+                        <input type="text" class="form-control col-sm-3" value="{{ network.cppLifetime }}" name="lifetime"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt10 col-md-12">
+                <input type="submit" value="Save" class="btn btn-success col-md-9"/>
+            </div>
+        </form>
+    </div>
+
+    <script type="application/javascript">
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
+{% endblock %}

@@ -19,6 +19,7 @@ abstract class BaseSocialController extends Controller
     /**
      * @param array $userData
      * @param User $user
+     * @return Network
      */
     protected function createNetwork(array $userData, User $user)
     {
@@ -42,6 +43,8 @@ abstract class BaseSocialController extends Controller
         }
 
         $this->getDoctrine()->getManager()->persist($network);
+
+        return $network;
     }
 
     /**
