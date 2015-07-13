@@ -76,7 +76,7 @@ class TwitterController extends BaseSocialController
         }
 
         if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
-            $this->addFlash('notice', 'You\'ve successfully connected your account.');
+            $this->addFlash('notice', 'You\'ve successfully connected your account. Please enter fees per post.');
 
             if (isset($network) && $network instanceof Network) {
                 return $this->redirectToRoute('fango_dashboard_network_edit', [
