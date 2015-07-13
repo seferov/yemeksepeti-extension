@@ -113,3 +113,21 @@ snc_redis:
 
 seferov_mailer:
     main_route: fango_main_homepage
+
+ekino_new_relic:
+    enabled: true
+    application_name: Fango
+    deployment_names: ~
+    api_key: 9f900b28dcf0caf92f3a2115cf4743d1402db7cdcd3f9ea
+    license_key: ab9e90d189481a430798992d8c7a76bebcd3f9ea
+    xmit: false
+    logging: false
+    instrument: false
+    log_exceptions: true
+    log_commands: true
+    using_symfony_cache: false
+    transaction_naming: route
+    transaction_naming_service: ~
+    ignored_routes: []
+    ignored_paths: []
+    ignored_commands: []

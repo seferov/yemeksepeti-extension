@@ -36,6 +36,7 @@ class AppKernel extends Kernel
             new Snc\RedisBundle\SncRedisBundle(),
             new Seferov\MailerBundle\SeferovMailerBundle(),
             new Fango\AdjustioBundle\FangoAdjustioBundle(),
+            new Ekino\Bundle\NewRelicBundle\EkinoNewRelicBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
