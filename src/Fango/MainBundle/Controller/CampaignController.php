@@ -219,7 +219,7 @@ class CampaignController extends DashboardBaseController
             }
             else {
                 $qb->andWhere('c.status = :status')
-                    ->setParameters('status', 'published');
+                    ->setParameter('status', 'published');
             }
         }
 
