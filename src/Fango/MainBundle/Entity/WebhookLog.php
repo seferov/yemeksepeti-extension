@@ -136,4 +136,32 @@ class WebhookLog
     {
         return $this->transaction;
     }
+    /**
+     * @var boolean
+     */
+    private $fake;
+
+
+    /**
+     * Set fake
+     *
+     * @param boolean $fake
+     * @return WebhookLog
+     */
+    public function setFake($fake)
+    {
+        $this->fake = $fake;
+
+        return $this;
+    }
+
+    /**
+     * Get fake
+     *
+     * @return boolean 
+     */
+    public function getFake()
+    {
+        return $this->fake;
+    }
 }

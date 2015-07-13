@@ -10,8 +10,8 @@ Fango\UserBundle\Entity\User:
                 strategy: AUTO
     fields:
         fullname:       { type: string, length: 255, nullable: true }
-        earnings:       { type: float }
-        paid:           { type: float }
+        earnings:       { type: float, nullable: true }
+        paid:           { type: float, nullable: true }
         paypalEmail:    { type: string, length: 255, nullable: true, column: paypal_email }
         createdAt:      { type: datetime, column: created_at }
     oneToMany:

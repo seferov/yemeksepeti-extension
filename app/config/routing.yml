@@ -1,3 +1,7 @@
+fango_adjustio:
+    resource: "@FangoAdjustioBundle/Resources/config/routing.yml"
+    prefix:   /
+
 seferov_mailer:
     resource: "@SeferovMailerBundle/Resources/config/routing.yml"
     prefix:   /

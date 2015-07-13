@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-lg-4 text-center">
             <h2>${{ app.user.earnings|number_format(2) }}</h2>
-            <span>Earnings</span>
+            <span>Estimated Earnings <i class="fa fa-question-circle" style="color: #999" data-toggle="tooltip" data-placement="top" title="At the end of each month, your earnings are adjusted. Funds that don't feed campaign criteria are removed automatically."></i></span>
         </div>
         <div class="col-lg-4 text-center">
             <h2>${{ app.user.paid|number_format(2) }}</h2>
