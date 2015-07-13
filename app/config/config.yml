@@ -83,7 +83,6 @@ seferov_deployer:
             connection:
                 host: fango.me
                 username: root
-                password: %server_password%
             git: 'git@bitbucket.org:seferov/fango.git'
 
 hip_mandrill:
