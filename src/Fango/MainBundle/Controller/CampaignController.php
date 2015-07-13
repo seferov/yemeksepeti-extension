@@ -202,6 +202,7 @@ class CampaignController extends DashboardBaseController
      */
     private function getCampaign($id)
     {
+        /** @var \Doctrine\ORM\EntityManager $em */
         $em = $this->getDoctrine()->getManager();
 
         $qb = $em->getRepository('FangoMainBundle:Campaign')
@@ -211,9 +212,15 @@ class CampaignController extends DashboardBaseController
         ;
 
         if (!$this->get('security.context')->isGranted('ROLE_SUPER_ADMIN')) {
-            $qb->andWhere('c.status = :status or c.userId = :userId')
-                ->setParameter('status', 'published')
-                ->setParameter('userId', $this->getUser()->getId());
+            if ($this->getUser()) {
+                $qb->andWhere('c.status = :status or c.userId = :userId')
+                    ->setParameter('status', 'published')
+                    ->setParameter('userId', $this->getUser()->getId());
+            }
+            else {
+                $qb->andWhere('c.status = :status')
+                    ->setParameters('status', 'published');
+            }
         }
 
         return $qb->getQuery()->getOneOrNullResult();
