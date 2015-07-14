@@ -146,12 +146,27 @@ class CampaignController extends DashboardBaseController
 
         $isLocationSupported = false;
         // Geo location support
-        if (count($userCampaign->getCampaign()->getCountries())) {
-            $geoData = $this->container
-                ->get('bazinga_geocoder.geocoder')
-                ->using('ip_info_db')
-                ->geocode($request->server->get('REMOTE_ADDR'));
+        $geoData = $this->container
+            ->get('bazinga_geocoder.geocoder')
+            ->using('ip_info_db')
+            ->geocode($request->server->get('REMOTE_ADDR'));
 
+        // Add as a new transaction
+        $transaction = new Transaction();
+        $transaction->setCreatedAt(new \DateTime('now'));
+        $transaction->setIpAddress($request->getClientIp());
+        $transaction->setAction(false);
+        $transaction->setUserAgent($request->headers->get('User-Agent'));
+        $transaction->setUserCampaign($userCampaign);
+        $transaction->setReferer($request->headers->get('referer'));
+        $hash = $this->get('fos_user.util.token_generator')->generateToken();
+        $transaction->setHash($hash);
+        $transaction->setCountry($geoData->getCountryCode());
+        $em->persist($transaction);
+        $em->flush();
+        $em->clear();
+
+        if (count($userCampaign->getCampaign()->getCountries())) {
             foreach ($userCampaign->getCampaign()->getCountries() as $country) {
                 if ($country->getCountry() == $geoData->getCountryCode()) {
                     $isLocationSupported = true;
@@ -167,20 +182,8 @@ class CampaignController extends DashboardBaseController
             $isLocationSupported = true;
         }
 
-        // Add as a new transaction
-        $transaction = new Transaction();
-        $transaction->setCreatedAt(new \DateTime('now'));
-        $transaction->setIpAddress($request->getClientIp());
-        $transaction->setAction(false);
-        $transaction->setUserAgent($request->headers->get('User-Agent'));
-        $transaction->setUserCampaign($userCampaign);
-        $transaction->setReferer($request->headers->get('referer'));
-        $hash = $this->get('fos_user.util.token_generator')->generateToken();
-        $transaction->setHash($hash);
 
-        $em->persist($transaction);
-        $em->flush();
-        $em->clear();
+
 
         $url .= (parse_url($url, PHP_URL_QUERY)) ? '&' : '?';
         $url .= http_build_query([

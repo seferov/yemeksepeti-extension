@@ -248,4 +248,34 @@ class Transaction
     {
         return $this->disabled;
     }
+
+    /**
+     * @var string
+     */
+    private $country;
+
+
+    /**
+     * Set country
+     *
+     * @param string $country
+     * @return Transaction
+     */
+    public function setCountry($country)
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    /**
+     * Get country
+     *
+     * @return string 
+     */
+    public function getCountry()
+    {
+        return $this->country;
+    }
 }
+//
