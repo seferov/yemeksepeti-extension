@@ -36,6 +36,10 @@ Fango\MainBundle\Entity\Transaction:
         disabled:
             type: boolean
             nullable: true
+        locationSupported:
+            type: boolean
+            nullable: true
+            column: location_supported
     manyToOne:
         userCampaign:
             targetEntity: Fango\MainBundle\Entity\UserCampaign

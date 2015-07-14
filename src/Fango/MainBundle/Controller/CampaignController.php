@@ -162,9 +162,7 @@ class CampaignController extends DashboardBaseController
         $hash = $this->get('fos_user.util.token_generator')->generateToken();
         $transaction->setHash($hash);
         $transaction->setCountry($geoData->getCountryCode());
-        $em->persist($transaction);
-        $em->flush();
-        $em->clear();
+        $transaction->setLocationSupported(true);
 
         if (count($userCampaign->getCampaign()->getCountries())) {
             foreach ($userCampaign->getCampaign()->getCountries() as $country) {
@@ -175,6 +173,10 @@ class CampaignController extends DashboardBaseController
             }
 
             if (!$isLocationSupported && $userCampaign->getStatus() != 'preview') {
+                $transaction->setLocationSupported(false);
+                $em->persist($transaction);
+                $em->flush();
+                $em->clear();
                 return $this->redirectToRoute('fango_main_homepage');
             }
         }
@@ -182,8 +184,9 @@ class CampaignController extends DashboardBaseController
             $isLocationSupported = true;
         }
 
-
-
+        $em->persist($transaction);
+        $em->flush();
+        $em->clear();
 
         $url .= (parse_url($url, PHP_URL_QUERY)) ? '&' : '?';
         $url .= http_build_query([

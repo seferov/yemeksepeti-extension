@@ -277,4 +277,32 @@ class Transaction
     {
         return $this->country;
     }
+    /**
+     * @var boolean
+     */
+    private $locationSupported;
+
+
+    /**
+     * Set locationSupported
+     *
+     * @param boolean $locationSupported
+     * @return Transaction
+     */
+    public function setLocationSupported($locationSupported)
+    {
+        $this->locationSupported = $locationSupported;
+
+        return $this;
+    }
+
+    /**
+     * Get locationSupported
+     *
+     * @return boolean 
+     */
+    public function getLocationSupported()
+    {
+        return $this->locationSupported;
+    }
 }
