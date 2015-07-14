@@ -160,6 +160,7 @@ class CallbackController extends Controller
         $log->setUserAgent($request->headers->get('User-Agent'));
         $log->setTransaction($trans);
         $log->setFake($fake);
+        $log->setTarget('adjust');
 
         $em->persist($log);
         $em->flush();

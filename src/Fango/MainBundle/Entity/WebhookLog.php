@@ -164,4 +164,32 @@ class WebhookLog
     {
         return $this->fake;
     }
+    /**
+     * @var string
+     */
+    private $target;
+
+
+    /**
+     * Set target
+     *
+     * @param string $target
+     * @return WebhookLog
+     */
+    public function setTarget($target)
+    {
+        $this->target = $target;
+
+        return $this;
+    }
+
+    /**
+     * Get target
+     *
+     * @return string 
+     */
+    public function getTarget()
+    {
+        return $this->target;
+    }
 }

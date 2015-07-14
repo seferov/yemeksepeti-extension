@@ -34,6 +34,7 @@ class WebhookController extends Controller
         $log->setIpAddress($request->getClientIp());
         $log->setUserAgent($request->headers->get('User-Agent'));
         $log->setTransaction($trans);
+        $log->setTarget('webhook');
 
         $em->persist($log);
         $em->flush();
