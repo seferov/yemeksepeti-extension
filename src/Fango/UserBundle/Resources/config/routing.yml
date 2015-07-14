@@ -10,6 +10,10 @@ fango_user_facebook_login:
     pattern:  /facebook/login
     defaults: { _controller: FangoUserBundle:Facebook:login }
 
+fango_user_facebook_page_login:
+    pattern:  /facebook/page-login
+    defaults: { _controller: FangoUserBundle:Facebook:login, scope: ['email', 'manage_pages'] }
+
 fango_user_facebook_auth:
     pattern:  /facebook/auth
     defaults: { _controller: FangoUserBundle:Facebook:auth }

@@ -25,14 +25,15 @@ class FacebookController extends BaseSocialController
 
     /**
      * @param Request $request
+     * @param array $scope
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function loginAction(Request $request)
+    public function loginAction(Request $request, array $scope = ['email'])
     {
         FacebookSession::setDefaultApplication($this->container->getParameter('facebook_app_id'), $this->container->getParameter('facebook_app_secret'));
         $helper = new FacebookRedirectLoginHelper($this->generateUrl('fango_user_facebook_auth', ['host' => $request->get('site')['host']], true));
 
-        return $this->redirect($helper->getLoginUrl(['email', 'manage_pages']));
+        return $this->redirect($helper->getLoginUrl($scope));
     }
 
     /**
@@ -106,6 +107,10 @@ class FacebookController extends BaseSocialController
 
             $em->persist($user);
             $em->flush();
+        }
+        else {
+            $this->authenticateUser($user, $userData);
+            return $this->redirectToRoute('fango_main_dashboard');
         }
 
         if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
