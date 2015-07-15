@@ -8,25 +8,25 @@
             <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
 
                 <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                    <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
                     {{ form_widget(form.username) }}
                 </div>
                 <span class="help-block">{{ form_errors(form.username) }}</span>
 
                 <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                    <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
                     {{ form_widget(form.fullname) }}
                 </div>
                 <span class="help-block">{{ form_errors(form.fullname) }}</span>
 
                 <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                    <span class="input-group-addon"><i class="fa fa-envelope fa-fw"></i></span>
                     {{ form_widget(form.email) }}
                 </div>
                 <span class="help-block">{{ form_errors(form.email) }}</span>
 
                 <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                    <span class="input-group-addon"><i class="fa fa-lock fa-fw"></i></span>
                     {{ form_widget(form.plainPassword) }}
                 </div>
                 <span class="help-block">{{ form_errors(form.plainPassword) }}</span>
