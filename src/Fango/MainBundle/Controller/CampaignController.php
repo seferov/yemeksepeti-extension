@@ -4,6 +4,7 @@ namespace Fango\MainBundle\Controller;
 
 use Fango\MainBundle\Entity\Transaction;
 use Fango\MainBundle\Entity\UserCampaign;
+use GeoIp2\Exception\AddressNotFoundException;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -144,12 +145,16 @@ class CampaignController extends DashboardBaseController
             return $this->redirect($url, 301);
         }
 
-        $isLocationSupported = false;
         // Geo location support
-        $geoData = $this->container
-            ->get('bazinga_geocoder.geocoder')
-            ->using('ip_info_db')
-            ->geocode($request->server->get('REMOTE_ADDR'));
+        $isLocationSupported = false;
+        $geoData = new \GeoIp2\Database\Reader($this->get('kernel')->getRootDir() . '/Resources/data/GeoIP2-Country.mmdb');
+        try {
+            $geoData = $geoData->country($request->server->get('REMOTE_ADDR'));
+            $countryCode = $geoData->country->isoCode;
+        }
+        catch (AddressNotFoundException $e) {
+            $countryCode = null;
+        }
 
         // Add as a new transaction
         $transaction = new Transaction();
@@ -161,12 +166,12 @@ class CampaignController extends DashboardBaseController
         $transaction->setReferer($request->headers->get('referer'));
         $hash = $this->get('fos_user.util.token_generator')->generateToken();
         $transaction->setHash($hash);
-        $transaction->setCountry($geoData->getCountryCode());
+        $transaction->setCountry($countryCode);
         $transaction->setLocationSupported(true);
 
         if (count($userCampaign->getCampaign()->getCountries())) {
             foreach ($userCampaign->getCampaign()->getCountries() as $country) {
-                if ($country->getCountry() == $geoData->getCountryCode()) {
+                if ($country->getCountry() == $countryCode) {
                     $isLocationSupported = true;
                     break;
                 }
