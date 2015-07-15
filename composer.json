@@ -38,7 +38,8 @@
         "seferov/aws-bundle": "^1.1",
         "predis/predis": "0.8.4",
         "snc/redis-bundle": "1.1.6",
-        "ekino/newrelic-bundle": "^1.3"
+        "ekino/newrelic-bundle": "^1.3",
+        "geoip2/geoip2": "~2.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
