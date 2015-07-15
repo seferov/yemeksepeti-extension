@@ -55,14 +55,14 @@ class MailerCommand extends ContainerAwareCommand
             case 3:
             default:
                 $versions = [
-                    'tcfgumj' => ['subject' => 'Twitter campaign for %s'],
-                    'bifgumj' => ['subject' => 'Business inquiry for @%s']
+                    'tcfgsmj' => ['subject' => 'Twitter campaign for %s'],
+                    'bifgsmj' => ['subject' => 'Business inquiry for @%s']
                 ];
                 $template = '@FangoMail/invitation3.html.twig';
                 break;
         }
 
-        for ($i = 0; $i < 40; $i++) {
+        for ($i = 0; $i < 55; $i++) {
             $version = array_rand($versions);
             $uid = md5(uniqid(mt_rand(), true));
 
