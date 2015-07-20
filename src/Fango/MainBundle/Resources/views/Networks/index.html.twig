@@ -34,8 +34,10 @@
             {% for network in networks %}
             <tr>
                 <td>
-                    <img src="{{ asset('img/'~network.type~'.png') }}" alt="{{ network.type }}"/>
-                    <strong>{{ network.display }}</strong>
+                    <a href="{{ url('fango_dashboard_network_edit', {id: network.id}) }}">
+                        <img src="{{ asset('img/'~network.type~'.png') }}" alt="{{ network.type }}"/>
+                        <strong>{{ network.display }}</strong>
+                    </a>
                 </td>
                 <td>
                     {% if network.cppDay %}
