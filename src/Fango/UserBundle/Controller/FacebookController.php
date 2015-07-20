@@ -73,6 +73,7 @@ class FacebookController extends BaseSocialController
      */
     public function checkAction(Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
         $session = new FacebookSession($request->get('access_token'));
 
         $request = new FacebookRequest($session, 'GET', '/me');
@@ -82,7 +83,6 @@ class FacebookController extends BaseSocialController
         $userData['token'] = $session->getToken();
         $userData['display'] = $userData['first_name'].' '.$userData['last_name'];
 
-        $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository('FangoUserBundle:User')->getUserBySocialId($userData['id'], 'facebook');
 
         if (!$user) {
@@ -110,6 +110,32 @@ class FacebookController extends BaseSocialController
         }
         else {
             $this->authenticateUser($user, $userData);
+
+            // Check facebook page
+            $request = new FacebookRequest($session, 'GET', '/'.$userData['id'].'/accounts');
+            $response = $request->execute();
+            $pageData = $response->getGraphObject()->asArray();
+            $pages = $pageData['data'];
+            if (count($pages)) {
+                foreach ($pages as $page) {
+                    $network = $em->getRepository('FangoUserBundle:Network')->findOneBy([
+                        'networkId' => $page->id
+                    ]);
+
+                    if (!$network) {
+                        $networkData['id'] = $page->id;
+                        $networkData['type'] = 'facebook_page';
+                        $networkData['display'] = $page->name;
+                        $networkData['token'] = $page->access_token;
+                        $networkData['category'] = $page->category;
+                        $this->createNetwork($networkData, $user);
+                    }
+                }
+
+                $em->flush();
+                $em->clear();
+            }
+
             return $this->redirectToRoute('fango_main_dashboard');
         }
 

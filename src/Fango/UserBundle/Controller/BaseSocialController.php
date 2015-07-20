@@ -17,29 +17,34 @@ abstract class BaseSocialController extends Controller
     abstract function getType();
 
     /**
-     * @param array $userData
+     * @param array $networkData
      * @param User $user
      * @return Network
      */
-    protected function createNetwork(array $userData, User $user)
+    protected function createNetwork(array $networkData, User $user = null)
     {
+        if (!$user) {
+            $user = $this->getUser();
+        }
+
         $network = new Network();
-        $network->setType($this->getType());
+        $type = array_key_exists('type', $networkData) ? $networkData['type'] : $this->getType();
+        $network->setType($type);
         $network->setUser($user);
-        $network->setNetworkId($userData['id']);
-        $network->setRest(serialize($userData));
+        $network->setNetworkId($networkData['id']);
+        $network->setRest(serialize($networkData));
         $network->setCreatedAt(new \DateTime('now'));
-        $network->setDisplay($userData['display']);
+        $network->setDisplay($networkData['display']);
 
-        if (array_key_exists('followers_count', $userData)) {
-            $network->setFollowersCount($userData['followers_count']);
+        if (array_key_exists('followers_count', $networkData)) {
+            $network->setFollowersCount($networkData['followers_count']);
         }
 
-        if (array_key_exists('token', $userData)) {
-            $network->setToken($userData['token']);
+        if (array_key_exists('token', $networkData)) {
+            $network->setToken($networkData['token']);
         }
-        if (array_key_exists('token_secret', $userData)) {
-            $network->setTokenSecret($userData['token_secret']);
+        if (array_key_exists('token_secret', $networkData)) {
+            $network->setTokenSecret($networkData['token_secret']);
         }
 
         $this->getDoctrine()->getManager()->persist($network);
