@@ -130,6 +130,7 @@ class MailerCommand extends ContainerAwareCommand
                     ->getQuery();
                 $versions = [
                     'tcfgsmj' => ['subject' => 'Twitter campaign for %s'],
+                    'tcfgumj' => ['subject' => 'Twitter campaign for %s'],
                     'bifgsmj' => ['subject' => 'Business inquiry for @%s']
                 ];
                 $template = '@FangoMail/invitation4.html.twig';
