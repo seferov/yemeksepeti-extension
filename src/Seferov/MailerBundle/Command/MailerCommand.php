@@ -39,55 +39,118 @@ class MailerCommand extends ContainerAwareCommand
         // Get random version
         switch ($batchNumber) {
             case 1:
+                $query = $em->createQueryBuilder()
+                    ->select('m')
+                    ->from('SeferovMailerBundle:Mail', 'm')
+                    ->where('m.lastBatch != :lastBatch or m.lastBatch is null')
+                    ->andWhere('m.unsubscribed = false')
+                    ->andWhere('m.lang = :lang')
+                    ->andWhere('m.problem = false')
+                    ->andWhere('m.contacted = false')
+                    ->andWhere('m.source = :source')
+                    ->setParameters([
+                        'lastBatch' => $batchNumber,
+                        'source' => 'twitter',
+                        'lang' => 'en'
+                    ])
+                    ->setMaxResults(1)
+                    ->getQuery();
                 $versions = [
                     'igifgpcj2' => ['subject' => 'Paid campaign for %s'],
                     'igifgbij2' => ['subject' => 'Business inquiry for %s']
                 ];
                 $template = '@FangoMail/invitation.html.twig';
+                $emailPerMinute = 40;
                 break;
             case 2:
+                $query = $em->createQueryBuilder()
+                    ->select('m')
+                    ->from('SeferovMailerBundle:Mail', 'm')
+                    ->where('m.lastBatch != :lastBatch or m.lastBatch is null')
+                    ->andWhere('m.unsubscribed = false')
+                    ->andWhere('m.lang = :lang')
+                    ->andWhere('m.problem = false')
+                    ->andWhere('m.contacted = false')
+                    ->andWhere('m.source = :source')
+                    ->setParameters([
+                        'lastBatch' => $batchNumber,
+                        'source' => 'twitter',
+                        'lang' => 'en'
+                    ])
+                    ->setMaxResults(1)
+                    ->getQuery();
                 $versions = [
                     'igifgtcj' => ['subject' => 'Twitter campaign for %s'],
                     'igifgfcj' => ['subject' => 'Facebook campaign for %s']
                 ];
                 $template = '@FangoMail/invitation2.html.twig';
+                $emailPerMinute = 50;
                 break;
             case 3:
             default:
+                $query = $em->createQueryBuilder()
+                    ->select('m')
+                    ->from('SeferovMailerBundle:Mail', 'm')
+                    ->where('m.lastBatch != :lastBatch or m.lastBatch is null')
+                    ->andWhere('m.unsubscribed = false')
+                    ->andWhere('m.lang = :lang')
+                    ->andWhere('m.problem = false')
+                    ->andWhere('m.contacted = false')
+                    ->andWhere('m.source = :source')
+                    ->setParameters([
+                        'lastBatch' => $batchNumber,
+                        'source' => 'twitter',
+                        'lang' => 'en'
+                    ])
+                    ->setMaxResults(1)
+                    ->getQuery();
                 $versions = [
                     'tcfgsmj' => ['subject' => 'Twitter campaign for %s'],
                     'bifgsmj' => ['subject' => 'Business inquiry for @%s']
                 ];
                 $template = '@FangoMail/invitation3.html.twig';
+                $emailPerMinute = 50;
+                break;
+            case 4:
+                $query = $em->createQueryBuilder()
+                    ->select('m')
+                    ->from('SeferovMailerBundle:Mail', 'm')
+                    ->where('m.lastBatch = :lastBatch')
+                    ->andWhere('m.unsubscribed = false')
+                    ->andWhere('m.lang = :lang')
+                    ->andWhere('m.problem = false')
+                    ->andWhere('m.contacted = false')
+                    ->andWhere('m.source = :source')
+                    ->setParameters([
+                        'lastBatch' => 3,
+                        'source' => 'twitter',
+                        'lang' => 'en'
+                    ])
+                    ->setMaxResults(1)
+                    ->getQuery();
+                $versions = [
+                    'tcfgsmj' => ['subject' => 'Twitter campaign for %s'],
+                    'bifgsmj' => ['subject' => 'Business inquiry for @%s']
+                ];
+                $template = '@FangoMail/invitation4.html.twig';
+                $emailPerMinute = 40;
                 break;
         }
 
-        for ($i = 0; $i < 55; $i++) {
+        for ($i = 0; $i < $emailPerMinute; $i++) {
             $version = array_rand($versions);
             $uid = md5(uniqid(mt_rand(), true));
 
             $em->getConnection()->beginTransaction();
-            $query = $em->createQueryBuilder()
-                ->select('m')
-                ->from('SeferovMailerBundle:Mail', 'm')
-                ->where('m.lastBatch != :lastBatch or m.lastBatch is null')
-                ->andWhere('m.unsubscribed = false')
-                ->andWhere('m.lang = :lang')
-                ->andWhere('m.problem = false')
-                ->andWhere('m.contacted = false')
-                ->andWhere('m.source = :source')
-                ->setParameters([
-                    'lastBatch' => $batchNumber,
-                    'source' => 'twitter',
-                    'lang' => 'en'
-                ])
-                ->setMaxResults(1)
-                ->getQuery()
-                ->setLockMode(LockMode::PESSIMISTIC_WRITE);
 
             try {
                 /** @var \Seferov\MailerBundle\Entity\Mail $email */
-                $email = $query->getSingleResult();
+                $email = $query->setLockMode(LockMode::PESSIMISTIC_WRITE)->getSingleResult();
+
+                // Get the last version sent and overwrite version accordingly
+                if (in_array($batchNumber, [4]) && count($email->getBatches())) {
+                    $version = $email->getBatches()->last()->getVersion();
+                }
             }
             catch (NoResultException $e) {
                 $em->getConnection()->close();
