@@ -131,7 +131,8 @@ class MailerCommand extends ContainerAwareCommand
                 $versions = [
                     'tcfgsmj' => ['subject' => 'Twitter campaign for %s'],
                     'tcfgumj' => ['subject' => 'Twitter campaign for %s'],
-                    'bifgsmj' => ['subject' => 'Business inquiry for @%s']
+                    'bifgsmj' => ['subject' => 'Business inquiry for @%s'],
+                    'bifgumj' => ['subject' => 'Business inquiry for @%s']
                 ];
                 $template = '@FangoMail/invitation4.html.twig';
                 $emailPerMinute = 40;
