@@ -5,7 +5,7 @@
         <form action="{{ url('fango_dashboard_network_edit', {id: network.id }) }}" method="post">
             <div class="row mt10">
                 <div class="col-md-3">
-                    <strong>Pay Per Post <i class="fa fa-question-circle" style="color: #999" data-toggle="tooltip" data-placement="top" title="This is the amount of dollars you get paid for sharing a branded post. Please input appropriate numbers since our algorithm decides which campaigns are available for you based on this number."></i></strong>
+                    <strong>Pay Per Post <i class="fa fa-question-circle" style="color: #999" data-toggle="tooltip" data-placement="bottom" title="This is the amount of dollars you get paid for sharing a branded post. Please input appropriate numbers since our algorithm decides which campaigns are available for you based on this number."></i></strong>
                 </div>
                 <div class="col-md-6">
                     <img src="{{ asset('img/'~network.type~'.png') }}" alt="{{ network.type }}"/> <strong>{{ network.display }}</strong>
@@ -48,6 +48,12 @@
                 <input type="submit" value="Save" class="btn btn-success col-md-9"/>
             </div>
         </form>
+    </div>
+
+    <div class="col-md-12 mt10">
+        <div class="row col-md-9 alert alert-info" role="alert">
+            <strong>Pay Per Post:</strong> This is the amount of dollars you get paid for sharing a branded post. Please input appropriate numbers since our algorithm decides which campaigns are available for you based on this number.
+        </div>
     </div>
 
     <script type="application/javascript">
