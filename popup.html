@@ -11,6 +11,9 @@
       .strong {
         font-weight: bold;
       }
+      table tr {
+        cursor: pointer;
+      }
       .row {
         border-top: 1px solid #CCC;
         padding: 10px 0;
@@ -67,7 +70,13 @@
     <script src="js/popup.js"></script>
   </head>
   <body>
-    <div class="result"></div>
+    <div style="margin-bottom: 5px;" class="duration-holder">
+      Kalan süre <span id="duration" class="strong">00:00</span>
+    </div>
+
+    <div class="result row">
+      <img src="img/loading.gif">
+    </div>
 
     <div class="row">
       <div class="onoffswitch">

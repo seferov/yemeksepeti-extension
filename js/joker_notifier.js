@@ -1,4 +1,4 @@
-// (c) 2015 Farhad Safarov <http://ferhad.in>
+// (c) 2015 Farhad Safarov <http://farhadsafarov.com>
 
 var jokerNotifier = {
 
@@ -9,6 +9,10 @@ var jokerNotifier = {
     chrome.storage.local.get('check', function(data) {
       if (data.check) {
         _this._check();
+      }
+      else {
+        $('.result').hide();
+        $('.duration-holder').hide();
       }
     });
   },
@@ -57,18 +61,11 @@ var jokerNotifier = {
 
   displayResult: function(data) {
     var resultArea = $('.result');
+    resultArea.html('');
 
     if (data.OfferItems && data.OfferItems.length) {
       if (typeof(startTimer) === typeof(Function)) {
-        // Remaining duration
-        var duration = $('<div/>', {
-          'id': 'duration',
-          'class': 'strong'
-        });
-
-        resultArea.append(duration);
-
-        startTimer(data.RemainingDuration/1000, duration);
+        startTimer(data.RemainingDuration/1000, $('#duration'));
       }
 
       var table = $('<table/>');
@@ -93,7 +90,8 @@ var jokerNotifier = {
       chrome.browserAction.setBadgeText ( { text: data.OfferItems.length.toString() } );
     }
     else {
-      resultArea.html(data.IsValid ? 'Joker yok :(' : data.Message);
+      // resultArea.html(data.IsValid ? 'Joker yok :(' : data.Message);
+      resultArea.html('Joker yok :(');
       chrome.browserAction.setBadgeText ( { text: '' } );
     }
   }

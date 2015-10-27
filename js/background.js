@@ -1,4 +1,4 @@
-// (c) 2015 Farhad Safarov <http://ferhad.in>
+// (c) 2015 Farhad Safarov <http://farhadsafarov.com>
 
 document.addEventListener('DOMContentLoaded', function () {
   jokerNotifier.checkJoker();
