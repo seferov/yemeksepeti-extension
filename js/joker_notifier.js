@@ -3,9 +3,11 @@
 var jokerNotifier = {
 
   _jokerUrl: 'https://www.yemeksepeti.com/basket/GetNewJokerOffer',
+  _showNotification: false,
 
-  checkJoker: function() {
+  checkJoker: function(showNotification) {
     var _this = this;
+    _this._showNotification = showNotification;
     chrome.storage.local.get('check', function(data) {
       if (data.check) {
         _this._check();
@@ -54,7 +56,11 @@ var jokerNotifier = {
       },
       dataType: 'json',
       success: function (data) {
-        _this.showNotification(data);
+        if(_this._showNotification) {
+          _this.showNotification(data);
+        } else {
+          _this._showNotification = true;
+        }
         _this.displayResult(data);
       }
     });
