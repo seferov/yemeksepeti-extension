@@ -54,6 +54,7 @@ var jokerNotifier = {
       },
       dataType: 'json',
       success: function (data) {
+        _this.showNotification(data);
         _this.displayResult(data);
       }
     });
@@ -94,5 +95,24 @@ var jokerNotifier = {
       resultArea.html('Joker yok :(');
       chrome.browserAction.setBadgeText ( { text: '' } );
     }
+  },
+
+  history: Array(8).fill(""), // Aynı notification tekrar çıkmasın diye son 8 jokeri tutuyor
+  showNotification: function(data) {
+    var _this = this;
+    $.each(data.OfferItems, function(index, offer) {
+      if(_this.history.indexOf(offer.Restaurant.DisplayName) == -1) {
+        var options = {
+          type: 'basic',
+          title: 'Joker İndirimi!',
+          message: offer.Restaurant.DisplayName + '('+ offer.Restaurant.AveragePoint +')',
+          iconUrl: 'http:'+ offer.Restaurant.JokerImageUrl,
+        }
+
+        _this.history.shift();
+        _this.history.push(offer.Restaurant.DisplayName);
+        chrome.notifications.create(options);
+      }
+    });
   }
 };
