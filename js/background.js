@@ -1,7 +1,7 @@
-// (c) 2015 Farhad Safarov <http://farhadsafarov.com>
+// (c) 2015-2016 Farhad Safarov <http://farhadsafarov.com>
 
 document.addEventListener('DOMContentLoaded', function () {
-    jokerNotifier.checkJoker();
+  jokerNotifier.checkJoker();
 });
 
 // Check every 2 minutes

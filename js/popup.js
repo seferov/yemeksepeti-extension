@@ -1,4 +1,4 @@
-// (c) 2015 Farhad Safarov <http://farhadsafarov.com>
+// (c) 2015-2016 Farhad Safarov <http://farhadsafarov.com>
 
 $(document).ready(function($) {
   jokerNotifier.checkJoker();

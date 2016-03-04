@@ -1,4 +1,4 @@
-// (c) 2015 Farhad Safarov <http://farhadsafarov.com>
+// (c) 2015-2016 Farhad Safarov <http://farhadsafarov.com>
 
 var jokerNotifier = {
 
@@ -103,7 +103,9 @@ var jokerNotifier = {
     }
   },
 
-  history: Array(8).fill(""), // Aynı notification tekrar çıkmasın diye son 8 jokeri tutuyor
+  // Aynı notification tekrar çıkmasın diye son 8 jokeri tutuyor
+  history: Array(8).fill(''),
+
   showNotification: function(data) {
     var _this = this;
     $.each(data.OfferItems, function(index, offer) {
@@ -112,7 +114,7 @@ var jokerNotifier = {
           type: 'basic',
           title: 'Joker İndirimi!',
           message: offer.Restaurant.DisplayName + '('+ offer.Restaurant.AveragePoint +')',
-          iconUrl: 'http:'+ offer.Restaurant.JokerImageUrl,
+          iconUrl: 'http:'+ offer.Restaurant.JokerImageUrl
         }
 
         _this.history.shift();
