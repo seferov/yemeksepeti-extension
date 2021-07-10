@@ -83,7 +83,7 @@ var jokerNotifier = {
         });
 
         row.append($('<td/>').html($('<img />', {
-          src: 'http:'+offer.Restaurant.JokerImageUrl,
+          src: offer.Restaurant.JokerImageUrl,
           alt: offer.Restaurant.DisplayName,
           width: 60
         })));
